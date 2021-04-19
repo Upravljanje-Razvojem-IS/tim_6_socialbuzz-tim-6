@@ -69,7 +69,6 @@ namespace TheSocialBaz.Data
 
         public void UpdateComment(Comment comment)
         {
-            var a = context.Update(comment);
             context.Update(comment);
         }
     }

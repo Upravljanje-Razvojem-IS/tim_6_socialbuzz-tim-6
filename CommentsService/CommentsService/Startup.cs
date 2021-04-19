@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 using TheSocialBaz.Data;
 using TheSocialBaz.Data.PostMock;
 using TheSocialBaz.FakeLoggerService;
-//using TheSocialBaz.FakeLoggerService;
 
 namespace TheSocialBaz
 {
@@ -59,7 +58,7 @@ namespace TheSocialBaz
                          {
                              Name = "Pavle Marinkovic",
                              Email = "pavle019@live.com",
-                             Url = new Uri("https://pavlemarinkovic.com")
+                             Url = new Uri(Configuration.GetValue<string>("WebsiteUrl:url"))
                          },
                          License = new Microsoft.OpenApi.Models.OpenApiLicense
                          {

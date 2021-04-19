@@ -22,7 +22,6 @@ namespace TheSocialBaz.Controllers
     [Produces("application/json")]
     public class CommentingController : ControllerBase
     {
-        private readonly IMapper mapper;
         private readonly IHttpContextAccessor contextAccessor;
         private readonly ICommentingRepository commentRepository;
         private readonly IPostMockRepository postRepository;
@@ -31,7 +30,6 @@ namespace TheSocialBaz.Controllers
 
         public CommentingController(IPostMockRepository postRepository, IHttpContextAccessor contextAccessor, IMapper mapper, ICommentingRepository commentRepository, Logger logger, IConfiguration configuration)
         {
-            this.mapper = mapper;
             this.contextAccessor = contextAccessor;
             this.commentRepository = commentRepository;
             this.postRepository = postRepository;
