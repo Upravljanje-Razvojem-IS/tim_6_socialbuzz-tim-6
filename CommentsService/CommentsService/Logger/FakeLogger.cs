@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
@@ -17,7 +18,12 @@ namespace TheSocialBaz.FakeLoggerService
 
         public override void Log(LogLevel logLevel, string requestId, string previousRequestId, string message, Exception exception)
         {
-            Thread.Sleep(500);
+            string directory = System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString() + "\\FakeLogs\\logs.txt";
+            var log = logLevel + " " + requestId + " " + previousRequestId + " " + message + " " + exception;
+            using (StreamWriter writer = System.IO.File.AppendText(directory))
+            {
+                writer.WriteLine(log);
+            }
         }
     }
 }

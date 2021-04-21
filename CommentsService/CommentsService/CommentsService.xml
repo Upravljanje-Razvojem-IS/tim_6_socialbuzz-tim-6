@@ -44,7 +44,7 @@
             <response code="400">There is no comment with provided ID</response>
             <response code="401">Authorization error</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.GetCommentsByPostID(System.String,System.Int32,System.Int32)">
+        <member name="M:TheSocialBaz.Controllers.CommentingController.GetCommentsByPostID(System.String,System.Int32)">
             <summary>
             Return comments from the specified post 
             </summary>
@@ -54,19 +54,37 @@
                 Example of successful request \
                     --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
                     --param  'postID = 1' \
-                    --param  'accountID = 1' \
                 Example of a failed request \
                     --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
                     --param  'postID = 3' \
-                    --param  'accountID = 4'
             </remarks>
             <param name="postID">Post ID</param>
-            <param name="accountID">Account ID who is sending a request</param>
             <param name="key">Authorization header</param>
             <response code="200">Return list of comments for given post</response>
             <response code="400">Post with provided ID does not exist</response>
             <response code="401">Authorization error</response>
             <response code="404">There is no comment with provided post ID</response>
+        </member>
+        <member name="M:TheSocialBaz.Controllers.CommentingController.GetCommentsByAccountID(System.String,System.Int32)">
+            <summary>
+            Return all coments that account posted 
+            </summary>
+            <returns>List of comments from the specified Account</returns>
+            <remarks>
+            GET 'https://localhost:49877/api/comments/byAccountID' \
+                Example of successful request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'accountID = 2' \
+                Example of a failed request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'accountID = 5'
+            </remarks>
+            <param name="accountID">Account ID</param>
+            <param name="key">Authorization header</param>
+            <response code="200">Return list of comments for given account</response>
+            <response code="400">Account with provided ID does not exist</response>
+            <response code="401">Authorization error</response>
+            <response code="404">There is still no created comments with provided account ID</response>
         </member>
         <member name="M:TheSocialBaz.Controllers.CommentingController.CreateComment(System.String,TheSocialBaz.Model.CommentingCreateDto,System.Int32)">
             <summary>
@@ -167,6 +185,11 @@
             Account ID that posted comment
             </summary>
         </member>
+        <member name="P:TheSocialBaz.Model.CommentingDto.Username">
+            <summary>
+            Account username that posted comment
+            </summary>
+        </member>
         <member name="P:TheSocialBaz.Model.CommentingDto.CommentText">
             <summary>
             Comment content
@@ -215,6 +238,11 @@
         <member name="P:TheSocialBaz.Model.Enteties.Comment.AccountID">
             <summary>
             Account ID that posted comment
+            </summary>
+        </member>
+        <member name="P:TheSocialBaz.Model.Enteties.Comment.Account">
+            <summary>
+            Account username that posted comment
             </summary>
         </member>
         <member name="P:TheSocialBaz.Model.Enteties.Comment.CommentText">
@@ -275,6 +303,51 @@
         <member name="P:TheSocialBaz.Model.Mock.PostDto.PublicationDate">
             <summary>
             Post creation date
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.AccountID">
+            <summary>
+            Account ID
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Surname">
+            <summary>
+            Surname
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Phone_number">
+            <summary>
+            Phone number
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Address">
+            <summary>
+            Address
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.RoleID">
+            <summary>
+            Role ID
             </summary>
         </member>
     </members>

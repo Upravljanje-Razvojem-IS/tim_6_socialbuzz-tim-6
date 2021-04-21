@@ -26,7 +26,7 @@ namespace TheSocialBaz.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //this is empty method
+            modelBuilder.Entity<Comment>().OwnsOne(e => e.Account);
         }
     }
 }

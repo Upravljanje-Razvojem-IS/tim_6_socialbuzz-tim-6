@@ -15,16 +15,6 @@ namespace TheSocialBaz.Data
             context = DBcontext;
         }
 
-        public bool CheckDidIBlockedSeller(int userId, int sellerID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CheckDoIFollowSeller(int userID, int sellerID)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CreateComment(Comment comment)
         {
             context.Comments.Add(comment);
@@ -38,13 +28,6 @@ namespace TheSocialBaz.Data
 
         public List<Comment> GetAllComments()
         {
-            if (context.Database.CanConnect())
-            {
-                Console.WriteLine("Bravo");
-            } else
-            {
-                Console.WriteLine("Sranje");
-            }
             return context.Comments.ToList();
         }
 
@@ -53,10 +36,19 @@ namespace TheSocialBaz.Data
             return context.Comments.FirstOrDefault(e => e.CommentID == commentID);
         }
 
-        public List<Comment> GetCommentsByPostID(int postID, int userID)
+        public List<Comment> GetCommentsByPostID(int postID)
         {
             var query = from comment in context.Comments
                         where comment.PostID == postID
+                        select comment;
+
+            return query.ToList();
+        }
+
+        public List<Comment> GetCommentsByAccountID(int accountID)
+        {
+            var query = from comment in context.Comments
+                        where comment.AccountID == accountID
                         select comment;
 
             return query.ToList();

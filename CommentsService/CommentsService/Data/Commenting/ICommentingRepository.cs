@@ -10,7 +10,9 @@ namespace TheSocialBaz.Data
     {
         List<Comment> GetAllComments();
 
-        List<Comment> GetCommentsByPostID(int postID, int userID);
+        List<Comment> GetCommentsByPostID(int postID);
+
+        List<Comment> GetCommentsByAccountID(int accountID);
 
         Comment GetCommentByID(Guid commentID);
 
@@ -20,10 +22,6 @@ namespace TheSocialBaz.Data
 
         void DeleteComment(Guid commentID);
 
-        bool CheckDoIFollowSeller(int userID, int sellerID); //
-
-        bool CheckDidIBlockedSeller(int userId, int sellerID); //
-
-        public bool SaveChanges(); //
+        public bool SaveChanges(); 
     }
 }

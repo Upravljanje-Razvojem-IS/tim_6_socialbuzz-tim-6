@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommentsService.Model.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,6 +28,11 @@ namespace TheSocialBaz.Model
         /// Account ID that posted comment
         /// </summary>
         public int AccountID { get; set; }
+
+        /// <summary>
+        /// Account username that posted comment
+        /// </summary>
+        public Account Username { get; }
 
         /// <summary>
         /// Comment content

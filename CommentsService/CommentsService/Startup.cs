@@ -1,4 +1,5 @@
-﻿using LoggingClassLibrary;
+﻿using CommentsService.Data.Mocks.AccountMock;
+using LoggingClassLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -36,6 +37,7 @@ namespace TheSocialBaz
 
             services.AddScoped<ICommentingRepository, CommentingRepository>();
             services.AddScoped<IPostMockRepository, PostMockRepository>();
+            services.AddScoped<IAccountMockRepository, AccountMockRepository>();
 
             services.AddSingleton<Logger, FakeLogger>();
             services.AddSingleton<ILogger, FakeLogger>();
