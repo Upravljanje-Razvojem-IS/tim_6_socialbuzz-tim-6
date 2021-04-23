@@ -138,7 +138,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("{evaluationID}")]
         public ActionResult<Evaluation> GetEvaluationByID([FromHeader(Name = "Authorization")] string key, [FromRoute] Guid evaluationID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -183,7 +183,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byPostID")]
         public ActionResult<List<Evaluation>> GetEvaluationsByPostID([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -235,7 +235,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byMark")]
         public ActionResult<List<Evaluation>> GetEvaluationsOnPostByMark([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID, [FromQuery] int mark)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -290,7 +290,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byAccountID")]
         public ActionResult<List<Evaluation>> GetEvaluationsByAccountID([FromHeader(Name = "Authorization")] string key, [FromQuery] int accountID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -344,7 +344,7 @@ namespace EvaluationsService.Controllers
         [HttpPost]
         public IActionResult CreateEvaluation([FromHeader(Name = "Authorization")] string key, [FromBody] EvaluationCreateDto evaluationDto, [FromQuery] int accountID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -423,7 +423,7 @@ namespace EvaluationsService.Controllers
         [HttpPut]
         public IActionResult UpdateEvaluation([FromHeader(Name = "Authorization")] string key, [FromBody] EvaluationUpdateDto newEvaluation)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -483,7 +483,7 @@ namespace EvaluationsService.Controllers
         [HttpDelete]
         public IActionResult DeleteEvaluation([FromHeader(Name = "Authorization")] string key, [FromQuery] Guid evaluationID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
