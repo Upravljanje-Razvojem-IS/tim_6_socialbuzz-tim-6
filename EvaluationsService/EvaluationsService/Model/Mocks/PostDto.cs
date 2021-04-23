@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TheSocialBaz.Model.Mock
+namespace EvaluationsService.Model.Mock
 {
     /// <summary>
     /// DTO Post model

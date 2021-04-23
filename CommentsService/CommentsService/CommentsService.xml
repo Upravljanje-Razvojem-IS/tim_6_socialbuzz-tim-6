@@ -4,7 +4,7 @@
         <name>CommentsService</name>
     </assembly>
     <members>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.GetCommentsOpstions">
+        <member name="M:CommentingService.Controllers.CommentingController.GetCommentsOpstions">
             <summary>
             Return implemented options for API   
             </summary>
@@ -15,7 +15,7 @@
             </remarks>
             <response code="200">Return header key 'Allow' with allowed requests</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.GetAllComments(System.String)">
+        <member name="M:CommentingService.Controllers.CommentingController.GetAllComments(System.String)">
             <summary>
             Return all comments    
             </summary>
@@ -30,7 +30,7 @@
             <response code="404">There is no comments</response>
             <response code="401">Authorization error</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.GetCommentByID(System.String,System.Guid)">
+        <member name="M:CommentingService.Controllers.CommentingController.GetCommentByID(System.String,System.Guid)">
             <summary>
             Return comment for provided comment ID    
             </summary>
@@ -44,7 +44,7 @@
             <response code="400">There is no comment with provided ID</response>
             <response code="401">Authorization error</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.GetCommentsByPostID(System.String,System.Int32)">
+        <member name="M:CommentingService.Controllers.CommentingController.GetCommentsByPostID(System.String,System.Int32)">
             <summary>
             Return comments from the specified post 
             </summary>
@@ -65,7 +65,7 @@
             <response code="401">Authorization error</response>
             <response code="404">There is no comment with provided post ID</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.GetCommentsByAccountID(System.String,System.Int32)">
+        <member name="M:CommentingService.Controllers.CommentingController.GetCommentsByAccountID(System.String,System.Int32)">
             <summary>
             Return all coments that account posted 
             </summary>
@@ -86,7 +86,7 @@
             <response code="401">Authorization error</response>
             <response code="404">There is still no created comments with provided account ID</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.CreateComment(System.String,TheSocialBaz.Model.CommentingCreateDto,System.Int32)">
+        <member name="M:CommentingService.Controllers.CommentingController.CreateComment(System.String,CommentingService.Model.CommentingCreateDto,System.Int32)">
             <summary>
             Creates new comment
             </summary>
@@ -110,7 +110,7 @@
             <response code="401">Authorization error</response>
             <response code="500">Server Error while saving comment</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.UpdateComment(System.String,TheSocialBaz.Model.CommentingUpdateDto)">
+        <member name="M:CommentingService.Controllers.CommentingController.UpdateComment(System.String,CommentingService.Model.CommentingUpdateDto)">
             <summary>
             Update comment with provied ID
             </summary>
@@ -123,9 +123,8 @@
              --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw=='  \
              --body \
             { \
-                "commentID": "1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5", \
-                "postID": 1, \
-                "content": "Updated succ!" \
+                "CommentID": "1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5", \
+                "CommentText": "Updated succ!" \
             } 
             </remarks>
             <response code="200">Return confirmation that comment is updated</response>
@@ -133,7 +132,7 @@
             <response code="404">Comment with provied ID not found</response>
             <response code="500">Server Error while updating comment</response>
         </member>
-        <member name="M:TheSocialBaz.Controllers.CommentingController.DeleteComment(System.String,System.Guid)">
+        <member name="M:CommentingService.Controllers.CommentingController.DeleteComment(System.String,System.Guid)">
             <summary>
             Delete comment with provied ID
             </summary>
@@ -150,157 +149,152 @@
             <response code="404">Comment with provided ID does not exist</response>
             <response code="500">Server Error while deleting comment</response>
         </member>
-        <member name="T:TheSocialBaz.Model.CommentingCreateDto">
+        <member name="T:CommentingService.Model.CommentingCreateDto">
             <summary>
             DTO for comment creation
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingCreateDto.PostID">
+        <member name="P:CommentingService.Model.CommentingCreateDto.PostID">
             <summary>
             Post ID to which the comment was added
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingCreateDto.CommentText">
+        <member name="P:CommentingService.Model.CommentingCreateDto.CommentText">
             <summary>
             Comment content
             </summary>
         </member>
-        <member name="T:TheSocialBaz.Model.CommentingDto">
+        <member name="T:CommentingService.Model.CommentingDto">
             <summary>
             DTO comment model
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingDto.CommentID">
+        <member name="P:CommentingService.Model.CommentingDto.CommentID">
             <summary>
             Comment ID
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingDto.PostID">
+        <member name="P:CommentingService.Model.CommentingDto.PostID">
             <summary>
             Post ID to which the comment refers
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingDto.AccountID">
+        <member name="P:CommentingService.Model.CommentingDto.AccountID">
             <summary>
             Account ID that posted comment
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingDto.Username">
+        <member name="P:CommentingService.Model.CommentingDto.Username">
             <summary>
             Account username that posted comment
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingDto.CommentText">
+        <member name="P:CommentingService.Model.CommentingDto.CommentText">
             <summary>
             Comment content
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingDto.CommentDate">
+        <member name="P:CommentingService.Model.CommentingDto.CommentDate">
             <summary>
             Date when comment was posted
             </summary>
         </member>
-        <member name="T:TheSocialBaz.Model.CommentingUpdateDto">
+        <member name="T:CommentingService.Model.CommentingUpdateDto">
             <summary>
             DTO for comment modification
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingUpdateDto.CommentID">
+        <member name="P:CommentingService.Model.CommentingUpdateDto.CommentID">
             <summary>
             Comment ID
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.CommentingUpdateDto.PostID">
-            <summary>
-            Post ID to which the comment was added
-            </summary>
-        </member>
-        <member name="P:TheSocialBaz.Model.CommentingUpdateDto.CommentText">
+        <member name="P:CommentingService.Model.CommentingUpdateDto.CommentText">
             <summary>
             Comment content
             </summary>
         </member>
-        <member name="T:TheSocialBaz.Model.Enteties.Comment">
+        <member name="T:CommentingService.Model.Enteties.Comment">
             <summary>
             Comments model
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Enteties.Comment.CommentID">
+        <member name="P:CommentingService.Model.Enteties.Comment.CommentID">
             <summary>
             Comment ID
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Enteties.Comment.PostID">
+        <member name="P:CommentingService.Model.Enteties.Comment.PostID">
             <summary>
             Post ID to which the comment refers
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Enteties.Comment.AccountID">
+        <member name="P:CommentingService.Model.Enteties.Comment.AccountID">
             <summary>
             Account ID that posted comment
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Enteties.Comment.Account">
+        <member name="P:CommentingService.Model.Enteties.Comment.Account">
             <summary>
             Account username that posted comment
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Enteties.Comment.CommentText">
+        <member name="P:CommentingService.Model.Enteties.Comment.CommentText">
             <summary>
             Comment content
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Enteties.Comment.CommentDate">
+        <member name="P:CommentingService.Model.Enteties.Comment.CommentDate">
             <summary>
             Date when comment was posted
             </summary>
         </member>
-        <member name="T:TheSocialBaz.Model.Mock.PostDto">
+        <member name="T:CommentingService.Model.Mock.PostDto">
             <summary>
             DTO Post model
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.PostID">
+        <member name="P:CommentingService.Model.Mock.PostDto.PostID">
             <summary>
             Post ID
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.AccountID">
+        <member name="P:CommentingService.Model.Mock.PostDto.AccountID">
             <summary>
             Account ID
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.PostName">
+        <member name="P:CommentingService.Model.Mock.PostDto.PostName">
             <summary>
             Post name
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.PostImage">
+        <member name="P:CommentingService.Model.Mock.PostDto.PostImage">
             <summary>
             Post picture
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.Description">
+        <member name="P:CommentingService.Model.Mock.PostDto.Description">
             <summary>
             Post Description
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.Price">
+        <member name="P:CommentingService.Model.Mock.PostDto.Price">
             <summary>
             Post price
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.Currency">
+        <member name="P:CommentingService.Model.Mock.PostDto.Currency">
             <summary>
             Post price currency
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.Category">
+        <member name="P:CommentingService.Model.Mock.PostDto.Category">
             <summary>
             Post category
             </summary>
         </member>
-        <member name="P:TheSocialBaz.Model.Mock.PostDto.PublicationDate">
+        <member name="P:CommentingService.Model.Mock.PostDto.PublicationDate">
             <summary>
             Post creation date
             </summary>

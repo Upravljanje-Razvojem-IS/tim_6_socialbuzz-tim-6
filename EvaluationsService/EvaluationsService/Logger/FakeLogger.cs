@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 
 
-namespace CommentingService.FakeLoggerService
+namespace EvaluationsService.FakeLoggerService
 {
     public class FakeLogger : Logger
     {

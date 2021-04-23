@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EvaluationsService.Model.Enteties;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CommentingService.Model.Enteties;
 
-namespace CommentingService.Data
+namespace EvaluationsService.Data
 {
-    // ENTITY FRAMEWORK PODESAVANJA BAZE!
     public class DBContext : DbContext
     {
         private readonly IConfiguration configuration;
@@ -18,7 +17,7 @@ namespace CommentingService.Data
             this.configuration = configuration;
         }
 
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Evaluation> Evaluations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,7 +25,7 @@ namespace CommentingService.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>().OwnsOne(e => e.Account);
+            modelBuilder.Entity<Evaluation>().OwnsOne(e => e.Account);
         }
     }
 }

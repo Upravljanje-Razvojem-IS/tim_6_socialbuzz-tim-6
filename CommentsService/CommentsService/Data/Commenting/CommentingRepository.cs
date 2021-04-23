@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheSocialBaz.Model.Enteties;
+using CommentingService.Model.Enteties;
 
-namespace TheSocialBaz.Data
+namespace CommentingService.Data
 {
     public class CommentingRepository : ICommentingRepository
     {

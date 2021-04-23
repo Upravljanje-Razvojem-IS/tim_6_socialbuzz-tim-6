@@ -1,10 +1,9 @@
-﻿using CommentsService.Data.Mocks.AccountMock;
+using EvaluationsService.Data.PostMock;
+using EvaluationsService.Data;
 using LoggingClassLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,11 +14,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using CommentingService.Data;
-using CommentingService.Data.PostMock;
-using CommentingService.FakeLoggerService;
+using EvaluationsService.Data;
+using EvaluationsService.FakeLoggerService;
+using EvaluationsService.Data.Mocks.AccountMock;
 
-namespace CommentingService
+namespace EvaluationsService
 {
     public class Startup
     {
@@ -29,13 +28,11 @@ namespace CommentingService
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            services.AddScoped<ICommentingRepository, CommentingRepository>();
+            services.AddScoped<IEvaluationsRepository, EvaluationsRepository>();
             services.AddScoped<IPostMockRepository, PostMockRepository>();
             services.AddScoped<IAccountMockRepository, AccountMockRepository>();
 
@@ -46,16 +43,14 @@ namespace CommentingService
 
             services.AddDbContext<DBContext>();
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddSwaggerGen(setupAction =>
             {
-                setupAction.SwaggerDoc("CommentingApiSpecification",
+                setupAction.SwaggerDoc("EvaluationsApiSpecification",
                      new Microsoft.OpenApi.Models.OpenApiInfo()
                      {
-                         Title = "Comments API",
+                         Title = "Evaluations API",
                          Version = "1.0",
-                         Description = "With this API you can list all coments, all coments on some post, one comment, add new comment, update and delete comments that exists",
+                         Description = "With this API you can list all evaluations, all coments on some post, one comment, add new comment, update and delete comments that exists",
                          Contact = new Microsoft.OpenApi.Models.OpenApiContact
                          {
                              Name = "Pavle Marinkovic",
@@ -71,7 +66,7 @@ namespace CommentingService
                 var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name }.xml";
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-                setupAction.IncludeXmlComments(xmlCommentsPath); //da bi swagger mogao citati xml komenatare
+                setupAction.IncludeXmlComments(xmlCommentsPath);
             });
         }
 
@@ -81,7 +76,7 @@ namespace CommentingService
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            } 
+            }
             else
             {
                 app.UseExceptionHandler(appBuilder =>
@@ -97,7 +92,7 @@ namespace CommentingService
             app.UseSwagger();
 
             app.UseSwaggerUI(setupAction => {
-                setupAction.SwaggerEndpoint("/swagger/CommentingApiSpecification/swagger.json", "Commenting API");
+                setupAction.SwaggerEndpoint("/swagger/EvaluationsApiSpecification/swagger.json", "Evaluations API");
             });
 
             app.UseHttpsRedirection();

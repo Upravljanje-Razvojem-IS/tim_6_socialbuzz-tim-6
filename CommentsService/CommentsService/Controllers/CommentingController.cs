@@ -11,12 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheSocialBaz.Data;
-using TheSocialBaz.Data.PostMock;
-using TheSocialBaz.Model;
-using TheSocialBaz.Model.Enteties;
+using CommentingService.Data;
+using CommentingService.Data.PostMock;
+using CommentingService.Model;
+using CommentingService.Model.Enteties;
 
-namespace TheSocialBaz.Controllers
+namespace CommentingService.Controllers
 {
     [ApiController]
     [Route("api/comments")]
@@ -63,6 +63,7 @@ namespace TheSocialBaz.Controllers
             {
                 return false;
             }
+
             return true;
         }
 
@@ -341,9 +342,8 @@ namespace TheSocialBaz.Controllers
         ///  --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw=='  \
         ///  --body \
         /// { \
-        ///     "commentID": "1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5", \
-        ///     "postID": 1, \
-        ///     "content": "Updated succ!" \
+        ///     "CommentID": "1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5", \
+        ///     "CommentText": "Updated succ!" \
         /// } 
         /// </remarks>
         /// <response code="200">Return confirmation that comment is updated</response>
@@ -372,11 +372,6 @@ namespace TheSocialBaz.Controllers
             }
 
             var commentToUpdate = commentRepository.GetCommentByID(newComment.CommentID);
-
-            if (commentToUpdate.PostID != newComment.PostID)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, new { status = "Post ID can not be changed!", content = "" });
-            }
 
             commentToUpdate.CommentText = newComment.CommentText;
 

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TheSocialBaz.Model
+namespace CommentingService.Model
 {
     /// <summary>
     /// DTO for comment creation
@@ -19,7 +19,7 @@ namespace TheSocialBaz.Model
         /// <summary>
         /// Comment content
         /// </summary>
-        [Required(ErrorMessage = "Tekst komentara je obavezno uneti!")]
+        [Required(ErrorMessage = "Comment text is required!")]
         public String CommentText { get; set; }
 
     }

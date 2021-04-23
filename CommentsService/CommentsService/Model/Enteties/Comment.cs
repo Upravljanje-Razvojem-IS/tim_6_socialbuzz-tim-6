@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TheSocialBaz.Model.Enteties
+namespace CommentingService.Model.Enteties
 {
     /// <summary>
     /// Comments model
@@ -39,13 +39,13 @@ namespace TheSocialBaz.Model.Enteties
         /// <summary>
         /// Comment content
         /// </summary>
-        [Required(ErrorMessage = "Sadržaj komentara je obavezan.")]
+        [Required(ErrorMessage = "Comment text is required.")]
         public String CommentText { get; set; }
 
         /// <summary>
         /// Date when comment was posted
         /// </summary>
-        [Required(ErrorMessage = "Datum je obavezan.")]
+        [Required(ErrorMessage = "Date is required.")]
         public DateTime CommentDate { get; set; }
     }
 }
