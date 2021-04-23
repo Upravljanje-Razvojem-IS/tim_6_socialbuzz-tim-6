@@ -73,7 +73,7 @@ namespace CommentingService.Controllers
         /// <returns>Header key 'Allow' with allowed requests</returns>
         /// <remarks>
         /// Example of successful request \
-        /// OPTIONS 'https://localhost:49877/api/comments' \
+        /// OPTIONS 'https://localhost:49877/api/comments'
         /// </remarks>
         /// <response code="200">Return header key 'Allow' with allowed requests</response>
         [ProducesResponseType(StatusCodes.Status200OK)]

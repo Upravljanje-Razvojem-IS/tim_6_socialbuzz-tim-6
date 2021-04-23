@@ -11,7 +11,7 @@
             <returns>Header key 'Allow' with allowed requests</returns>
             <remarks>
             Example of successful request \
-            OPTIONS 'https://localhost:49877/api/comments' \
+            OPTIONS 'https://localhost:49877/api/comments'
             </remarks>
             <response code="200">Return header key 'Allow' with allowed requests</response>
         </member>
@@ -342,6 +342,16 @@
         <member name="P:CommentsService.Model.Mock.AccountDto.RoleID">
             <summary>
             Role ID
+            </summary>
+        </member>
+        <member name="T:CommentsService.Model.ValueObjects.Account">
+            <summary>
+            Account Value Object
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.ValueObjects.Account.Username">
+            <summary>
+            Account username that submited evaluation
             </summary>
         </member>
     </members>
