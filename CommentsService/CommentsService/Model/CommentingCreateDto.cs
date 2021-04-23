@@ -14,11 +14,13 @@ namespace CommentingService.Model
         /// <summary>
         /// Post ID to which the comment was added
         /// </summary>
+        ///  <example>1</example>
         public int PostID { get; set; }
 
         /// <summary>
         /// Comment content
         /// </summary>
+        /// <example>All best.</example>
         [Required(ErrorMessage = "Comment text is required!")]
         public String CommentText { get; set; }
 

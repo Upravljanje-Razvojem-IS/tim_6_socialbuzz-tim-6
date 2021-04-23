@@ -15,6 +15,7 @@ namespace EvaluationsService.Model.ValueObjects
         /// <summary>
         /// Account username that submited evaluation
         /// </summary>
+        /// <example>flowzy1</example>
         [Required(ErrorMessage = "Account username is required.")]
         public string Username { get; set; }
 

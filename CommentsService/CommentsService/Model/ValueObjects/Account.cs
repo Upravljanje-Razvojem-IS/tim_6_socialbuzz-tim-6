@@ -16,6 +16,7 @@ namespace CommentsService.Model.ValueObjects
         /// <summary>
         /// Account username that submited evaluation
         /// </summary>
+        /// <example>crash019</example>
         [Required(ErrorMessage = "Account username is required.")]
         public string Username { get; set; }
 

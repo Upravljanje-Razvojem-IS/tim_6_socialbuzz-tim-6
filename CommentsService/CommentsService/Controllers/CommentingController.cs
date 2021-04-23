@@ -53,18 +53,25 @@ namespace CommentingService.Controllers
                 return false;
             }
 
-            var keyOnly = key.Substring(key.IndexOf("Bearer") + 7);
-            var username = configuration.GetValue<string>("Authorization:Username");
-            var password = configuration.GetValue<string>("Authorization:Password");
-            var base64EncodedBytes = System.Convert.FromBase64String(keyOnly);
-            var user = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
- 
-            if ((username+":"+password) != user)
+            try
+            {
+                var keyOnly = key.Substring(key.IndexOf("Bearer") + 7);
+                var username = configuration.GetValue<string>("Authorization:Username");
+                var password = configuration.GetValue<string>("Authorization:Password");
+                var base64EncodedBytes = System.Convert.FromBase64String(keyOnly);
+                var user = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+
+                if ((username + ":" + password) != user)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (System.FormatException ex)
             {
                 return false;
             }
-
-            return true;
         }
 
         /// <summary>

@@ -183,26 +183,31 @@
             <summary>
             Evaluation ID
             </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
         </member>
         <member name="P:EvaluationsService.Model.Enteties.Evaluation.Mark">
             <summary>
             Evaluation mark
             </summary>
+            <example>5</example>
         </member>
         <member name="P:EvaluationsService.Model.Enteties.Evaluation.Description">
             <summary>
             Evaluation description
             </summary>
+            <example>All went excelent, my recomendations for user.</example>
         </member>
         <member name="P:EvaluationsService.Model.Enteties.Evaluation.PostID">
             <summary>
             Post ID to which the evaluation refers
             </summary>
+            <example>1</example>
         </member>
         <member name="P:EvaluationsService.Model.Enteties.Evaluation.AccountID">
             <summary>
             Account ID that submited evaluation
             </summary>
+            <example>1</example>
         </member>
         <member name="P:EvaluationsService.Model.Enteties.Evaluation.Account">
             <summary>
@@ -213,41 +218,49 @@
             <summary>
             Evaluation mark
             </summary>
+            <example>4</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationCreateDto.Description">
             <summary>
             Evaluation description
             </summary>
+            <example>All went fine.</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationCreateDto.PostID">
             <summary>
             Post ID to which the evaluation refers
             </summary>
+            <example>1</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationsDto.EvaluationID">
             <summary>
             Evaluation ID
             </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationsDto.Mark">
             <summary>
             Evaluation mark
             </summary>
+            <example>5</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationsDto.Description">
             <summary>
             Evaluation description
             </summary>
+            <example>5+. Recommendations.</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationsDto.PostID">
             <summary>
             Post ID to which the evaluation refers
             </summary>
+            <example>1</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationsDto.AccountID">
             <summary>
             Account ID that submited evaluation
             </summary>
+            <example>1</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationsDto.Account">
             <summary>
@@ -258,16 +271,19 @@
             <summary>
             Evaluation ID
             </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationUpdateDto.Mark">
             <summary>
             Evaluation mark
             </summary>
+            <example>2</example>
         </member>
         <member name="P:EvaluationsService.Model.EvaluationUpdateDto.Description">
             <summary>
             Evaluation description
             </summary>
+            <example>I don't recommend this user.</example>
         </member>
         <member name="P:EvaluationsService.Model.Mock.AccountDto.AccountID">
             <summary>
@@ -373,6 +389,7 @@
             <summary>
             Account username that submited evaluation
             </summary>
+            <example>flowzy1</example>
         </member>
     </members>
 </doc>

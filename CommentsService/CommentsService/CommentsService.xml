@@ -158,11 +158,13 @@
             <summary>
             Post ID to which the comment was added
             </summary>
+             <example>1</example>
         </member>
         <member name="P:CommentingService.Model.CommentingCreateDto.CommentText">
             <summary>
             Comment content
             </summary>
+            <example>All best.</example>
         </member>
         <member name="T:CommentingService.Model.CommentingDto">
             <summary>
@@ -173,16 +175,19 @@
             <summary>
             Comment ID
             </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
         </member>
         <member name="P:CommentingService.Model.CommentingDto.PostID">
             <summary>
             Post ID to which the comment refers
             </summary>
+            <example>1</example>
         </member>
         <member name="P:CommentingService.Model.CommentingDto.AccountID">
             <summary>
             Account ID that posted comment
             </summary>
+            <example>1</example>
         </member>
         <member name="P:CommentingService.Model.CommentingDto.Username">
             <summary>
@@ -193,11 +198,13 @@
             <summary>
             Comment content
             </summary>
+            <example>Good stuff.</example>
         </member>
         <member name="P:CommentingService.Model.CommentingDto.CommentDate">
             <summary>
             Date when comment was posted
             </summary>
+            <example>2021-04-21T00:00:00</example>
         </member>
         <member name="T:CommentingService.Model.CommentingUpdateDto">
             <summary>
@@ -208,11 +215,13 @@
             <summary>
             Comment ID
             </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
         </member>
         <member name="P:CommentingService.Model.CommentingUpdateDto.CommentText">
             <summary>
             Comment content
             </summary>
+            <example>Good stuff.</example>
         </member>
         <member name="T:CommentingService.Model.Enteties.Comment">
             <summary>
@@ -223,16 +232,19 @@
             <summary>
             Comment ID
             </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
         </member>
         <member name="P:CommentingService.Model.Enteties.Comment.PostID">
             <summary>
             Post ID to which the comment refers
             </summary>
+            <example>1</example>
         </member>
         <member name="P:CommentingService.Model.Enteties.Comment.AccountID">
             <summary>
             Account ID that posted comment
             </summary>
+            <example>1</example>
         </member>
         <member name="P:CommentingService.Model.Enteties.Comment.Account">
             <summary>
@@ -243,11 +255,13 @@
             <summary>
             Comment content
             </summary>
+            <example>I used this before, it was good.</example>
         </member>
         <member name="P:CommentingService.Model.Enteties.Comment.CommentDate">
             <summary>
             Date when comment was posted
             </summary>
+            <example>2021-04-21T00:00:00</example>
         </member>
         <member name="T:CommentingService.Model.Mock.PostDto">
             <summary>
@@ -353,6 +367,7 @@
             <summary>
             Account username that submited evaluation
             </summary>
+            <example>crash019</example>
         </member>
     </members>
 </doc>
