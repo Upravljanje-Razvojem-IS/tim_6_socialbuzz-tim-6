@@ -7,3 +7,6 @@ Information 800016b7-0001-ff00-b63f-84710c7967bb  Successfully deleted evaluatio
 Information 800003db-0006-fe00-b63f-84710c7967bb  Successfully updated evaluation with ID e48da32e-f8d3-4b2e-aaff-2a3a4827188b in database 
 Information 800003f6-0000-fd00-b63f-84710c7967bb  Successfully updated evaluation with ID e48da32e-f8d3-4b2e-aaff-2a3a4827188b in database 
 Information 800003fa-0000-fd00-b63f-84710c7967bb  Successfully updated evaluation with ID da0fdb58-6b1f-43e1-97d5-55d1089f5142 in database 
+Information   User admin succesfully authorized. 
+Information   User admin succesfully authorized. 
+Evaluations Service - Information   User admin succesfully authorized. 

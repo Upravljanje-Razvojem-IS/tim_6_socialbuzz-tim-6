@@ -40,33 +40,6 @@ namespace EvaluationsService.Controllers
             this.logger = logger;
         }
 
-
-        private bool Authorize(string key)
-        {
-            if (key == null)
-            {
-                return false;
-            }
-
-            if (!key.StartsWith("Bearer"))
-            {
-                return false;
-            }
-
-            var keyOnly = key.Substring(key.IndexOf("Bearer") + 7);
-            var username = configuration.GetValue<string>("Authorization:Username");
-            var password = configuration.GetValue<string>("Authorization:Password");
-            var base64EncodedBytes = System.Convert.FromBase64String(keyOnly);
-            var user = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-
-            if ((username + ":" + password) != user)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         /// <summary>
         /// Return implemented options for API   
         /// </summary>
@@ -103,7 +76,7 @@ namespace EvaluationsService.Controllers
         [HttpGet]
         public ActionResult<List<Evaluation>> GetAllEvaluations([FromHeader(Name = "Authorization")] string key)
         {
-            if (!Authorization.Authorize(key,configuration))
+            if (!Authorization.Authorize(key,configuration,logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -138,7 +111,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("{evaluationID}")]
         public ActionResult<Evaluation> GetEvaluationByID([FromHeader(Name = "Authorization")] string key, [FromRoute] Guid evaluationID)
         {
-            if (!Authorization.Authorize(key, configuration))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -183,7 +156,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byPostID")]
         public ActionResult<List<Evaluation>> GetEvaluationsByPostID([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID)
         {
-            if (!Authorization.Authorize(key, configuration))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -235,7 +208,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byMark")]
         public ActionResult<List<Evaluation>> GetEvaluationsOnPostByMark([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID, [FromQuery] int mark)
         {
-            if (!Authorization.Authorize(key, configuration))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -290,7 +263,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byAccountID")]
         public ActionResult<List<Evaluation>> GetEvaluationsByAccountID([FromHeader(Name = "Authorization")] string key, [FromQuery] int accountID)
         {
-            if (!Authorization.Authorize(key, configuration))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -344,7 +317,7 @@ namespace EvaluationsService.Controllers
         [HttpPost]
         public IActionResult CreateEvaluation([FromHeader(Name = "Authorization")] string key, [FromBody] EvaluationCreateDto evaluationDto, [FromQuery] int accountID)
         {
-            if (!Authorization.Authorize(key, configuration))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -423,7 +396,7 @@ namespace EvaluationsService.Controllers
         [HttpPut]
         public IActionResult UpdateEvaluation([FromHeader(Name = "Authorization")] string key, [FromBody] EvaluationUpdateDto newEvaluation)
         {
-            if (!Authorization.Authorize(key, configuration))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -483,7 +456,7 @@ namespace EvaluationsService.Controllers
         [HttpDelete]
         public IActionResult DeleteEvaluation([FromHeader(Name = "Authorization")] string key, [FromQuery] Guid evaluationID)
         {
-            if (!Authorization.Authorize(key, configuration))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {

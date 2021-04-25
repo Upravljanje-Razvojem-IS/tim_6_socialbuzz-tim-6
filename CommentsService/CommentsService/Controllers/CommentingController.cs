@@ -15,6 +15,7 @@ using CommentingService.Data;
 using CommentingService.Data.PostMock;
 using CommentingService.Model;
 using CommentingService.Model.Enteties;
+using EvaluationsService.Auth;
 
 namespace CommentingService.Controllers
 {
@@ -39,39 +40,6 @@ namespace CommentingService.Controllers
             this.accountRepository = accountRepository;
             this.configuration = configuration;
             this.logger = logger;
-        }
-
-        private bool Authorize(string key)
-        {
-            if (key == null)
-            {
-                return false;
-            }
-
-            if (!key.StartsWith("Bearer"))
-            {
-                return false;
-            }
-
-            try
-            {
-                var keyOnly = key.Substring(key.IndexOf("Bearer") + 7);
-                var username = configuration.GetValue<string>("Authorization:Username");
-                var password = configuration.GetValue<string>("Authorization:Password");
-                var base64EncodedBytes = System.Convert.FromBase64String(keyOnly);
-                var user = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-
-                if ((username + ":" + password) != user)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-            catch (System.FormatException ex)
-            {
-                return false;
-            }
         }
 
         /// <summary>
@@ -110,7 +78,7 @@ namespace CommentingService.Controllers
         [HttpGet]
         public ActionResult<List<Comment>> GetAllComments([FromHeader(Name = "Authorization")] string key)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -145,7 +113,7 @@ namespace CommentingService.Controllers
         [HttpGet("{commentID}")]
         public ActionResult<Comment> GetCommentByID([FromHeader(Name = "Authorization")] string key, [FromRoute] Guid commentID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -190,7 +158,7 @@ namespace CommentingService.Controllers
         [HttpGet("byPostID")]
         public ActionResult<List<Comment>> GetCommentsByPostID([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -240,7 +208,7 @@ namespace CommentingService.Controllers
         [HttpGet("byAccountID")]
         public ActionResult<List<Comment>> GetCommentsByAccountID([FromHeader(Name = "Authorization")] string key, [FromQuery] int accountID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -294,7 +262,7 @@ namespace CommentingService.Controllers
         [HttpPost]
         public IActionResult CreateComment([FromHeader(Name = "Authorization")] string key, [FromBody] CommentingCreateDto commentDto, [FromQuery] int accountID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -364,7 +332,7 @@ namespace CommentingService.Controllers
         [HttpPut]
         public IActionResult UpdateComment([FromHeader(Name = "Authorization")] string key, [FromBody] CommentingUpdateDto newComment)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -424,7 +392,7 @@ namespace CommentingService.Controllers
         [HttpDelete]
         public IActionResult DeleteComment([FromHeader(Name = "Authorization")] string key, [FromQuery] Guid commentID)
         {
-            if (!Authorize(key))
+            if (!Authorization.Authorize(key, configuration, logger))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
