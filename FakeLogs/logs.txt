@@ -10,3 +10,5 @@ Information 800003fa-0000-fd00-b63f-84710c7967bb  Successfully updated evaluatio
 Information   User admin succesfully authorized. 
 Information   User admin succesfully authorized. 
 Evaluations Service - Information   User admin succesfully authorized. 
+Evaluations Service - Information   User admin succesfully authorized. 
+Evaluations Service - 26-04-2021 08:58 AM - Information   User admin succesfully authorized. 

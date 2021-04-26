@@ -14,13 +14,13 @@ namespace EvaluationsService.Auth
         {
             if (key == null)
             {
-                logger.Log(LogLevel.Error, "", "", String.Format("User not authorized, authorization missing in header."), null);
+                logger.Log(LogLevel.Error, "", "", "User not authorized, authorization missing in header.", null);
                 return false;
             }
 
             if (!key.StartsWith("Bearer"))
             {
-                logger.Log(LogLevel.Error, "", "", String.Format("User not authorized, Bearer missing in header."), null);
+                logger.Log(LogLevel.Error, "", "", "User not authorized, Bearer missing in header.", null);
                 return false;
             }
 
@@ -34,7 +34,7 @@ namespace EvaluationsService.Auth
 
                 if ((username + ":" + password) != user)
                 {
-                    logger.Log(LogLevel.Error, "", "", String.Format("User not authorized, wrong credentials."), null);
+                    logger.Log(LogLevel.Error, "", "", "User not authorized, wrong credentials.", null);
                     return false;
                 }
 
