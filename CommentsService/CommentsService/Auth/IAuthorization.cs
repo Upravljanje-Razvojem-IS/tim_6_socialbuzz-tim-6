@@ -7,6 +7,6 @@ namespace CommentsService.Auth
 {
     public interface IAuthorization
     {
-        public bool Authorize(string key);
+        bool Authorize(string key);
     }
 }

@@ -17,6 +17,7 @@ using CommentingService.Model.Enteties;
 using EvaluationsService.Auth;
 using CommentsService.Auth;
 using CommentsService.Logger;
+using CommentsService.Data.Mocks.BlockMock;
 
 namespace CommentingService.Controllers
 {
@@ -30,16 +31,18 @@ namespace CommentingService.Controllers
         private readonly ICommentingRepository commentRepository;
         private readonly IAccountMockRepository accountRepository;
         private readonly IPostMockRepository postRepository;
+        private readonly IBlockMockRepository blockRepository;
         private readonly IConfiguration configuration;
         private readonly IAuthorization authorization;
         private readonly IFakeLogger logger;
 
-        public CommentingController(IAuthorization authorization, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IHttpContextAccessor contextAccessor, ICommentingRepository commentRepository, IFakeLogger logger, IConfiguration configuration)
+        public CommentingController(IAuthorization authorization, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IBlockMockRepository blockRepository, IHttpContextAccessor contextAccessor, ICommentingRepository commentRepository, IFakeLogger logger, IConfiguration configuration)
         {
             this.contextAccessor = contextAccessor;
             this.commentRepository = commentRepository;
             this.postRepository = postRepository;
             this.accountRepository = accountRepository;
+            this.blockRepository = blockRepository;
             this.configuration = configuration;
             this.logger = logger;
             this.authorization = authorization;
@@ -143,12 +146,15 @@ namespace CommentingService.Controllers
         /// GET 'https://localhost:49877/api/comments/byPostID' \
         ///     Example of successful request \
         ///         --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
-        ///         --param  'postID = 1' \
+        ///         --param  'postID = 3' \
+        ///         --param  'accountID = 1' \
         ///     Example of a failed request \
         ///         --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
         ///         --param  'postID = 3' \
+        ///         --param  'accountID = 2' \
         /// </remarks>
         /// <param name="postID">Post ID</param>
+        /// <param name="accountID">Account ID</param>
         /// <param name="key">Authorization header</param>
         /// <response code="200">Return list of comments for given post</response>
         /// <response code="400">Post with provided ID does not exist</response>
@@ -159,7 +165,7 @@ namespace CommentingService.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("byPostID")]
-        public ActionResult<List<Comment>> GetCommentsByPostID([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID)
+        public ActionResult<List<Comment>> GetCommentsByPostID([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID, [FromQuery] int accountID)
         {
             if (!authorization.Authorize(key))
             {
@@ -173,6 +179,13 @@ namespace CommentingService.Controllers
             if (postRepository.GetPostByID(postID) == null)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, new { status = "Post with given ID does not exist", content = "" });
+            }
+
+            var accountIDThatPostedPost = postRepository.GetPostByID(postID).AccountID;
+
+            if (blockRepository.CheckIfUserBlocked(accountID, accountIDThatPostedPost))
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "You cannot see this user's posts or comments.", content = "" });
             }
 
             var comments = commentRepository.GetCommentsByPostID(postID);

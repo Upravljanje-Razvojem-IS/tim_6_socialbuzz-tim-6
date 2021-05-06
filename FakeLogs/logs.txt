@@ -25,3 +25,7 @@ Evaluations Service - 06-05-2021 02:53 PM - Information   User admin succesfully
 Evaluations Service - 06-05-2021 02:53 PM - Information   User admin succesfully authorized. 
 Evaluations Service - 06-05-2021 02:53 PM - Information 80000003-0004-fc00-b63f-84710c7967bb  Successfully created new evaluation with ID d76239c4-398b-4929-bba9-427742d61a89 in database 
 Evaluations Service - 06-05-2021 02:53 PM - Information   User admin succesfully authorized. 
+Commenting Service - 06-05-2021 03:55 PM - Information   User admin succesfully authorized. 
+Commenting Service - 06-05-2021 03:57 PM - Information   User admin succesfully authorized. 
+Commenting Service - 06-05-2021 04:00 PM - Information   User admin succesfully authorized. 
+Commenting Service - 06-05-2021 04:00 PM - Information   User admin succesfully authorized. 

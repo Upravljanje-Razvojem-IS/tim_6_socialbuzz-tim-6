@@ -8,6 +8,6 @@ namespace CommentsService.Logger
 {
     public interface IFakeLogger
     {
-        public void Log(LogLevel logLevel, string requestId, string previousRequestId, string message, Exception exception);
+        void Log(LogLevel logLevel, string requestId, string previousRequestId, string message, Exception exception);
     }
 }

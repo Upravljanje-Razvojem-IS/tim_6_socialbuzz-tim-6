@@ -49,6 +49,21 @@
             Role ID
             </summary>
         </member>
+        <member name="T:CommentsService.Model.Mocks.BlockDto">
+             <summary>
+            DTO block model
+             </summary>
+        </member>
+        <member name="F:CommentsService.Model.Mocks.BlockDto.blockerID">
+            <summary>
+            ID of blocking user
+            </summary>
+        </member>
+        <member name="F:CommentsService.Model.Mocks.BlockDto.blockedID">
+            <summary>
+            ID of blocked user
+            </summary>
+        </member>
         <member name="T:CommentsService.Model.ValueObjects.Account">
             <summary>
             Account Value Object
@@ -100,7 +115,7 @@
             <response code="400">There is no comment with provided ID</response>
             <response code="401">Authorization error</response>
         </member>
-        <member name="M:CommentingService.Controllers.CommentingController.GetCommentsByPostID(System.String,System.Int32)">
+        <member name="M:CommentingService.Controllers.CommentingController.GetCommentsByPostID(System.String,System.Int32,System.Int32)">
             <summary>
             Return comments from the specified post 
             </summary>
@@ -109,12 +124,15 @@
             GET 'https://localhost:49877/api/comments/byPostID' \
                 Example of successful request \
                     --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
-                    --param  'postID = 1' \
+                    --param  'postID = 3' \
+                    --param  'accountID = 1' \
                 Example of a failed request \
                     --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
                     --param  'postID = 3' \
+                    --param  'accountID = 2' \
             </remarks>
             <param name="postID">Post ID</param>
+            <param name="accountID">Account ID</param>
             <param name="key">Authorization header</param>
             <response code="200">Return list of comments for given post</response>
             <response code="400">Post with provided ID does not exist</response>

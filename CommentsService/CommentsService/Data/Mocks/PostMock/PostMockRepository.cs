@@ -46,7 +46,7 @@ namespace CommentingService.Data.PostMock
                 new PostDto
                 {
                     PostID = 3,
-                    AccountID = 5,
+                    AccountID = 1,
                     PostName = "Sony playstation 5",
                     PostImage = "https://www.gizmochina.com/wp-content/uploads/2020/09/PlayStation-5.jpg",
                     Description = "Playstation 5 sa 4 dzoistika.",

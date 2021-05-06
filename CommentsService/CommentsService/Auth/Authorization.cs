@@ -1,6 +1,5 @@
 ﻿using CommentsService.Auth;
 using CommentsService.Logger;
-using LoggingClassLibrary;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;

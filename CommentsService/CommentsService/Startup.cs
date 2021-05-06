@@ -20,6 +20,7 @@ using CommentingService.FakeLoggerService;
 using CommentsService.Auth;
 using EvaluationsService.Auth;
 using CommentsService.Logger;
+using CommentsService.Data.Mocks.BlockMock;
 
 namespace CommentingService
 {
@@ -42,6 +43,7 @@ namespace CommentingService
             services.AddScoped<ICommentingRepository, CommentingRepository>();
             services.AddScoped<IPostMockRepository, PostMockRepository>();
             services.AddScoped<IAccountMockRepository, AccountMockRepository>();
+            services.AddScoped<IBlockMockRepository, BlockMockRepository>();
 
             services.AddSingleton<IFakeLogger, FakeLogger>();
 
