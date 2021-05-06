@@ -1,5 +1,4 @@
 ﻿using CommentsService.Data.Mocks.AccountMock;
-using LoggingClassLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +17,9 @@ using System.Threading.Tasks;
 using CommentingService.Data;
 using CommentingService.Data.PostMock;
 using CommentingService.FakeLoggerService;
+using CommentsService.Auth;
+using EvaluationsService.Auth;
+using CommentsService.Logger;
 
 namespace CommentingService
 {
@@ -35,18 +37,17 @@ namespace CommentingService
         {
             services.AddControllers();
 
+            services.AddScoped<IAuthorization, Authorization>();
+
             services.AddScoped<ICommentingRepository, CommentingRepository>();
             services.AddScoped<IPostMockRepository, PostMockRepository>();
             services.AddScoped<IAccountMockRepository, AccountMockRepository>();
 
-            services.AddSingleton<Logger, FakeLogger>();
-            services.AddSingleton<ILogger, FakeLogger>();
+            services.AddSingleton<IFakeLogger, FakeLogger>();
 
             services.AddHttpContextAccessor();
 
             services.AddDbContext<DBContext>();
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddSwaggerGen(setupAction =>
             {
@@ -71,7 +72,7 @@ namespace CommentingService
                 var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name }.xml";
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-                setupAction.IncludeXmlComments(xmlCommentsPath); //da bi swagger mogao citati xml komenatare
+                setupAction.IncludeXmlComments(xmlCommentsPath); 
             });
         }
 

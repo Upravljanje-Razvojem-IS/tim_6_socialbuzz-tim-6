@@ -12,3 +12,16 @@ Information   User admin succesfully authorized.
 Evaluations Service - Information   User admin succesfully authorized. 
 Evaluations Service - Information   User admin succesfully authorized. 
 Evaluations Service - 26-04-2021 08:58 AM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 11:28 AM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 11:29 AM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 11:29 AM - Information   User admin succesfully authorized. 
+Commenting Service - 06-05-2021 11:51 AM - Information   User admin succesfully authorized. 
+Commenting Service - 06-05-2021 02:18 PM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 02:22 PM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 02:22 PM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 02:27 PM - Information   User admin succesfully authorized. 
+Commenting Service - 06-05-2021 02:49 PM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 02:53 PM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 02:53 PM - Information   User admin succesfully authorized. 
+Evaluations Service - 06-05-2021 02:53 PM - Information 80000003-0004-fc00-b63f-84710c7967bb  Successfully created new evaluation with ID d76239c4-398b-4929-bba9-427742d61a89 in database 
+Evaluations Service - 06-05-2021 02:53 PM - Information   User admin succesfully authorized. 

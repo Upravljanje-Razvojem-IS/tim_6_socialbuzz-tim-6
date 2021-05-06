@@ -4,6 +4,62 @@
         <name>CommentsService</name>
     </assembly>
     <members>
+        <member name="P:CommentsService.Model.Mock.AccountDto.AccountID">
+            <summary>
+            Account ID
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Surname">
+            <summary>
+            Surname
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Phone_number">
+            <summary>
+            Phone number
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.Address">
+            <summary>
+            Address
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.Mock.AccountDto.RoleID">
+            <summary>
+            Role ID
+            </summary>
+        </member>
+        <member name="T:CommentsService.Model.ValueObjects.Account">
+            <summary>
+            Account Value Object
+            </summary>
+        </member>
+        <member name="P:CommentsService.Model.ValueObjects.Account.Username">
+            <summary>
+            Account username that submited evaluation
+            </summary>
+            <example>crash019</example>
+        </member>
         <member name="M:CommentingService.Controllers.CommentingController.GetCommentsOpstions">
             <summary>
             Return implemented options for API   
@@ -312,62 +368,6 @@
             <summary>
             Post creation date
             </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.AccountID">
-            <summary>
-            Account ID
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.Username">
-            <summary>
-            Username
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.Name">
-            <summary>
-            Name
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.Surname">
-            <summary>
-            Surname
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.Password">
-            <summary>
-            Password
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.Email">
-            <summary>
-            Email
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.Phone_number">
-            <summary>
-            Phone number
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.Address">
-            <summary>
-            Address
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.Mock.AccountDto.RoleID">
-            <summary>
-            Role ID
-            </summary>
-        </member>
-        <member name="T:CommentsService.Model.ValueObjects.Account">
-            <summary>
-            Account Value Object
-            </summary>
-        </member>
-        <member name="P:CommentsService.Model.ValueObjects.Account.Username">
-            <summary>
-            Account username that submited evaluation
-            </summary>
-            <example>crash019</example>
         </member>
     </members>
 </doc>

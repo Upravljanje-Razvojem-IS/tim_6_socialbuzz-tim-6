@@ -1,4 +1,5 @@
-﻿using LoggingClassLibrary;
+﻿using EvaluationsService.Auth;
+using EvaluationsService.Logger;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,9 +9,18 @@ using System.Threading.Tasks;
 
 namespace EvaluationsService.Auth
 {
-    public static class Authorization
+    public class Authorization : IAuthorization
     {
-        public static bool Authorize(string key, IConfiguration configuration, Logger logger)
+        private readonly IConfiguration configuration;
+        private readonly IFakeLogger logger;
+
+
+        public Authorization(IConfiguration configuration, IFakeLogger logger)
+        {
+            this.configuration = configuration;
+            this.logger = logger;
+        }
+        public bool Authorize(string key)
         {
             if (key == null)
             {

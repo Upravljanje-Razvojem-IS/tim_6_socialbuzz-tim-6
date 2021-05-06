@@ -1,6 +1,5 @@
 ﻿using EvaluationsService.Data.PostMock;
 using EvaluationsService.Model.Enteties;
-using LoggingClassLibrary;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +13,7 @@ using EvaluationsService.Data.Mocks.AccountMock;
 using EvaluationsService.Model.ValueObjects;
 using EvaluationsService.Model;
 using Microsoft.Extensions.Logging;
+using EvaluationsService.Logger;
 
 namespace EvaluationsService.Controllers
 {
@@ -28,9 +28,10 @@ namespace EvaluationsService.Controllers
         private readonly IAccountMockRepository accountRepository;
         private readonly IPostMockRepository postRepository;
         private readonly IConfiguration configuration;
-        private readonly Logger logger;
+        private readonly IAuthorization authorization;
+        private readonly IFakeLogger logger;
 
-        public EvaluationsController(IHttpContextAccessor contextAccessor, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IEvaluationsRepository evaluationRepository, Logger logger, IConfiguration configuration)
+        public EvaluationsController(IAuthorization authorization, IHttpContextAccessor contextAccessor, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IEvaluationsRepository evaluationRepository, IFakeLogger logger, IConfiguration configuration)
         {
             this.contextAccessor = contextAccessor;
             this.evaluationRepository = evaluationRepository;
@@ -38,6 +39,7 @@ namespace EvaluationsService.Controllers
             this.accountRepository = accountRepository;
             this.configuration = configuration;
             this.logger = logger;
+            this.authorization = authorization;
         }
 
         /// <summary>
@@ -51,7 +53,7 @@ namespace EvaluationsService.Controllers
         /// <response code="200">Return header key 'Allow' with allowed requests</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpOptions]
-        public IActionResult GetCommentsOpstions()
+        public IActionResult GetEvaluationsOpstions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
@@ -76,7 +78,7 @@ namespace EvaluationsService.Controllers
         [HttpGet]
         public ActionResult<List<Evaluation>> GetAllEvaluations([FromHeader(Name = "Authorization")] string key)
         {
-            if (!Authorization.Authorize(key,configuration,logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -111,7 +113,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("{evaluationID}")]
         public ActionResult<Evaluation> GetEvaluationByID([FromHeader(Name = "Authorization")] string key, [FromRoute] Guid evaluationID)
         {
-            if (!Authorization.Authorize(key, configuration, logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -156,7 +158,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byPostID")]
         public ActionResult<List<Evaluation>> GetEvaluationsByPostID([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID)
         {
-            if (!Authorization.Authorize(key, configuration, logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -208,7 +210,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byMark")]
         public ActionResult<List<Evaluation>> GetEvaluationsOnPostByMark([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID, [FromQuery] int mark)
         {
-            if (!Authorization.Authorize(key, configuration, logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -263,7 +265,7 @@ namespace EvaluationsService.Controllers
         [HttpGet("byAccountID")]
         public ActionResult<List<Evaluation>> GetEvaluationsByAccountID([FromHeader(Name = "Authorization")] string key, [FromQuery] int accountID)
         {
-            if (!Authorization.Authorize(key, configuration, logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -317,7 +319,7 @@ namespace EvaluationsService.Controllers
         [HttpPost]
         public IActionResult CreateEvaluation([FromHeader(Name = "Authorization")] string key, [FromBody] EvaluationCreateDto evaluationDto, [FromQuery] int accountID)
         {
-            if (!Authorization.Authorize(key, configuration, logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -396,7 +398,7 @@ namespace EvaluationsService.Controllers
         [HttpPut]
         public IActionResult UpdateEvaluation([FromHeader(Name = "Authorization")] string key, [FromBody] EvaluationUpdateDto newEvaluation)
         {
-            if (!Authorization.Authorize(key, configuration, logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -456,7 +458,7 @@ namespace EvaluationsService.Controllers
         [HttpDelete]
         public IActionResult DeleteEvaluation([FromHeader(Name = "Authorization")] string key, [FromQuery] Guid evaluationID)
         {
-            if (!Authorization.Authorize(key, configuration, logger))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {

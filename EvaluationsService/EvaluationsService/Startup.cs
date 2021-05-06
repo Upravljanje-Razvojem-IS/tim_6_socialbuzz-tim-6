@@ -1,6 +1,5 @@
 using EvaluationsService.Data.PostMock;
 using EvaluationsService.Data;
-using LoggingClassLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +15,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using EvaluationsService.FakeLoggerService;
 using EvaluationsService.Data.Mocks.AccountMock;
+using EvaluationsService.Auth;
+using EvaluationsService.Logger;
 
 namespace EvaluationsService
 {
@@ -31,12 +32,13 @@ namespace EvaluationsService
         {
             services.AddControllers();
 
+            services.AddScoped<IAuthorization, Authorization>();
+
             services.AddScoped<IEvaluationsRepository, EvaluationsRepository>();
             services.AddScoped<IPostMockRepository, PostMockRepository>();
             services.AddScoped<IAccountMockRepository, AccountMockRepository>();
 
-            services.AddSingleton<Logger, FakeLogger>();
-            services.AddSingleton<ILogger, FakeLogger>();
+            services.AddSingleton<IFakeLogger, FakeLogger>();
 
             services.AddHttpContextAccessor();
 
@@ -49,7 +51,7 @@ namespace EvaluationsService
                      {
                          Title = "Evaluations API",
                          Version = "1.0",
-                         Description = "With this API you can list all evaluations, all coments on some post, one comment, add new comment, update and delete comments that exists",
+                         Description = "With this API you can list all evaluations, all evaluations for some post, one specific evaluation, add new evaluation, update and delete evaluations that exists",
                          Contact = new Microsoft.OpenApi.Models.OpenApiContact
                          {
                              Name = "Pavle Marinkovic",
@@ -62,10 +64,10 @@ namespace EvaluationsService
                          }
                      });
 
-                var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name }.xml";
-                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+                var xmlEvaluations = $"{Assembly.GetExecutingAssembly().GetName().Name }.xml";
+                var xmlEvaluationsPath = Path.Combine(AppContext.BaseDirectory, xmlEvaluations);
 
-                setupAction.IncludeXmlComments(xmlCommentsPath);
+                setupAction.IncludeXmlComments(xmlEvaluationsPath);
             });
         }
 

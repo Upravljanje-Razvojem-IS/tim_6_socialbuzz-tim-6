@@ -4,7 +4,7 @@
         <name>EvaluationsService</name>
     </assembly>
     <members>
-        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetCommentsOpstions">
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetEvaluationsOpstions">
             <summary>
             Return implemented options for API   
             </summary>
