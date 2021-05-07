@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CommentingService.Model.Enteties;
+using CommentsService.Data.Mocks.BlockMock;
 
 namespace CommentingService.Data
 {
     public class CommentingRepository : ICommentingRepository
     {
         private readonly DBContext context;
+        private readonly IBlockMockRepository blockRepository;
 
-        public CommentingRepository(DBContext DBcontext)
+        public CommentingRepository(DBContext DBcontext, IBlockMockRepository blockRepository)
         {
             context = DBcontext;
+            this.blockRepository = blockRepository;
         }
 
         public void CreateComment(Comment comment)
@@ -62,6 +65,11 @@ namespace CommentingService.Data
         public void UpdateComment(Comment comment)
         {
             context.Update(comment);
+        }
+
+        public bool CheckIfUserBlocked(int accountID, int blockedAccountID)
+        {
+            return blockRepository.CheckIfUserBlocked(accountID, blockedAccountID);
         }
     }
 }

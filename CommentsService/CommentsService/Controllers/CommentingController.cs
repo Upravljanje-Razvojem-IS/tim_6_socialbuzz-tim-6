@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using CommentsService.Data.Mocks.AccountMock;
+﻿using CommentsService.Data.Mocks.AccountMock;
 using CommentsService.Model.ValueObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -17,7 +15,6 @@ using CommentingService.Model.Enteties;
 using EvaluationsService.Auth;
 using CommentsService.Auth;
 using CommentsService.Logger;
-using CommentsService.Data.Mocks.BlockMock;
 
 namespace CommentingService.Controllers
 {
@@ -31,19 +28,15 @@ namespace CommentingService.Controllers
         private readonly ICommentingRepository commentRepository;
         private readonly IAccountMockRepository accountRepository;
         private readonly IPostMockRepository postRepository;
-        private readonly IBlockMockRepository blockRepository;
-        private readonly IConfiguration configuration;
         private readonly IAuthorization authorization;
         private readonly IFakeLogger logger;
 
-        public CommentingController(IAuthorization authorization, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IBlockMockRepository blockRepository, IHttpContextAccessor contextAccessor, ICommentingRepository commentRepository, IFakeLogger logger, IConfiguration configuration)
+        public CommentingController(IAuthorization authorization, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IHttpContextAccessor contextAccessor, ICommentingRepository commentRepository, IFakeLogger logger)
         {
             this.contextAccessor = contextAccessor;
             this.commentRepository = commentRepository;
             this.postRepository = postRepository;
             this.accountRepository = accountRepository;
-            this.blockRepository = blockRepository;
-            this.configuration = configuration;
             this.logger = logger;
             this.authorization = authorization;
         }
@@ -183,7 +176,7 @@ namespace CommentingService.Controllers
 
             var accountIDThatPostedPost = postRepository.GetPostByID(postID).AccountID;
 
-            if (blockRepository.CheckIfUserBlocked(accountID, accountIDThatPostedPost))
+            if (commentRepository.CheckIfUserBlocked(accountID, accountIDThatPostedPost))
             {
                 return StatusCode(StatusCodes.Status400BadRequest, new { status = "You cannot see this user's posts or comments.", content = "" });
             }

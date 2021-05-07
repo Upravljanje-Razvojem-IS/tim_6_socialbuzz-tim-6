@@ -60,7 +60,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:49877/api/comments/byPostID?postID=3",
+					"raw": "http://localhost:49877/api/comments/byPostID?postID=3&accountID=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -77,9 +77,8 @@
 							"value": "3"
 						},
 						{
-							"key": "",
-							"value": "",
-							"disabled": true
+							"key": "accountID",
+							"value": "2"
 						}
 					]
 				}
@@ -191,6 +190,27 @@
 							"key": "accountID",
 							"value": "2"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OptionsComments",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:49877/api/comments/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "49877",
+					"path": [
+						"api",
+						"comments",
+						""
 					]
 				}
 			},

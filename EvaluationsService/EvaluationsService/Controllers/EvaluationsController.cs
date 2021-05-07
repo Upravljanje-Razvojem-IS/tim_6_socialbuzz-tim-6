@@ -2,7 +2,6 @@
 using EvaluationsService.Model.Enteties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,17 +26,15 @@ namespace EvaluationsService.Controllers
         private readonly IEvaluationsRepository evaluationRepository;
         private readonly IAccountMockRepository accountRepository;
         private readonly IPostMockRepository postRepository;
-        private readonly IConfiguration configuration;
         private readonly IAuthorization authorization;
         private readonly IFakeLogger logger;
 
-        public EvaluationsController(IAuthorization authorization, IHttpContextAccessor contextAccessor, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IEvaluationsRepository evaluationRepository, IFakeLogger logger, IConfiguration configuration)
+        public EvaluationsController(IAuthorization authorization, IHttpContextAccessor contextAccessor, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IEvaluationsRepository evaluationRepository, IFakeLogger logger)
         {
             this.contextAccessor = contextAccessor;
             this.evaluationRepository = evaluationRepository;
             this.postRepository = postRepository;
             this.accountRepository = accountRepository;
-            this.configuration = configuration;
             this.logger = logger;
             this.authorization = authorization;
         }

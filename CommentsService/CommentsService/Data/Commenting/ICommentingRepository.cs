@@ -22,6 +22,9 @@ namespace CommentingService.Data
 
         void DeleteComment(Guid commentID);
 
-        public bool SaveChanges(); 
+        bool SaveChanges();
+
+        bool CheckIfUserBlocked(int accountID, int blockedAccountID);
+
     }
 }

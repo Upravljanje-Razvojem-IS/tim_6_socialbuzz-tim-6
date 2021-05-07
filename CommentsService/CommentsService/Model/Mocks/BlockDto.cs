@@ -13,11 +13,21 @@ namespace CommentsService.Model.Mocks
         /// <summary>
         /// ID of blocking user
         /// </summary>
-        public int blockerID;
+        private int blockerID;
+        public int BlockerID
+        {
+            get { return blockerID; }
+            set { blockerID = value; }
+        }
 
         /// <summary>
         /// ID of blocked user
         /// </summary>
-        public int blockedID;
+        private int blockedID;
+        public int BlockedID
+        {
+            get { return blockedID; }
+            set { blockedID = value; }
+        }
     }
 }

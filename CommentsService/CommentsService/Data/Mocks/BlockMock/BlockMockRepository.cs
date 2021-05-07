@@ -21,18 +21,18 @@ namespace CommentsService.Data.Mocks.BlockMock
             {
                 new BlockDto
                 {
-                    blockerID = 1,
-                    blockedID = 2
+                    BlockerID = 1,
+                    BlockedID = 2
                 },
                 new BlockDto
                 {
-                    blockerID = 1,
-                    blockedID = 3
+                    BlockerID = 1,
+                    BlockedID = 3
                 },
                 new BlockDto
                 {
-                    blockerID = 2,
-                    blockedID = 4
+                    BlockerID = 2,
+                    BlockedID = 4
                 }
             });
         }
@@ -44,11 +44,11 @@ namespace CommentsService.Data.Mocks.BlockMock
 
             foreach (var v in query)
             {
-                if (v.blockedID == accountID && v.blockerID == blockedAccountID)
+                if (v.BlockedID == accountID && v.BlockerID == blockedAccountID)
                 {
                     return true;
                 }
-                else if (v.blockerID == accountID && v.blockedID == blockedAccountID)
+                else if (v.BlockerID == accountID && v.BlockedID == blockedAccountID)
                 {
                     return true;
                 }
@@ -60,8 +60,8 @@ namespace CommentsService.Data.Mocks.BlockMock
         public List<int> GetListOfBlockedAccounts(int accountID)
         {
             var query = from block in Blocks
-                        where block.blockerID == accountID
-                        select block.blockedID;
+                        where block.BlockerID == accountID
+                        select block.BlockedID;
 
             return query.ToList();
         }
