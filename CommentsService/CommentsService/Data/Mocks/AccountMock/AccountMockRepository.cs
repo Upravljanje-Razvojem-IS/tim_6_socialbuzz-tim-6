@@ -26,7 +26,6 @@ namespace CommentsService.Data.Mocks.AccountMock
                     Name = "Darko",
                     Surname = "Mitrovic",
                     Email = "dareda@gmail.com",
-                    Password = "564900a8b5efdd5ed7a26ed1a9cb70bc",
                     Address = "Puskinova 14",
                     Phone_number = "066012534",
                     RoleID = 1
@@ -38,7 +37,6 @@ namespace CommentsService.Data.Mocks.AccountMock
                     Name = "Milica",
                     Surname = "Milanovic",
                     Email = "milicar@gmail.com",
-                    Password = "2ff79a1bbe1d98ea9aacde888169d2f1",
                     Address = "Cara Dusana 15",
                     Phone_number = "064012534",
                     RoleID = 2
