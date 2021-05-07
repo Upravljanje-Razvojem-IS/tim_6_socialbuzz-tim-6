@@ -285,7 +285,19 @@ namespace CommentingService.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, new { status = "Post with given ID does not exist", content = "" });
             }
 
+            var accountIDThatPostedPost = postRepository.GetPostByID(commentDto.PostID).AccountID;
+
+            if (commentRepository.CheckIfUserBlocked(accountID, accountIDThatPostedPost))
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "You cannot post comment to this post.", content = "" });
+            }
+
             Account accVO = new Account(accountRepository.getUsernameByID(accountID));
+
+            if (accVO.Username == null) //because of AccountMock, if we dont have account with provided id in params
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "Account with that ID does not exist.", content = "" });
+            }
 
             var newComment = new Comment
             {

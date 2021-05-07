@@ -46,6 +46,10 @@ namespace EvaluationsService.Data.Mocks.AccountMock
         public String getUsernameByID(int ID)
         {
             var Acc = Accounts.Find(e => e.AccountID == ID);
+            if (Acc == null)
+            {
+                return null;
+            }
             return Acc.Username;
         }
 
