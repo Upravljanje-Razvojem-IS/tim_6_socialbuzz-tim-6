@@ -11,3 +11,45 @@ Post Service - 24/07/2021 11:00 AM - Information 8000002c-0002-ff00-b63f-84710c7
 Post Service - 24/07/2021 11:01 AM - Error 8000002f-0002-ff00-b63f-84710c7967bb  Error while updating post history with ID 9, message: Foreign key constraint violated 
 Post Service - 24/07/2021 11:01 AM - Information 80000030-0002-ff00-b63f-84710c7967bb  Successfully updated post history with ID 9 
 Post Service - 24/07/2021 11:07 AM - Information 80000033-0002-ff00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 24/07/2021 01:14 PM - Information 80000048-0003-fe00-b63f-84710c7967bb  Successfully created new post history with ID 971c3efc-d9bc-4ce7-bac0-08d94e943517 in database 
+Post Service - 24/07/2021 01:14 PM - Error 80000048-0003-fe00-b63f-84710c7967bb  Error while creating product, message: Error mapping types.
+ 
+Post Service - 24/07/2021 01:16 PM - Information 80000034-0003-fd00-b63f-84710c7967bb  Successfully created new post history with ID 302805ea-c200-4ef8-57c8-08d94e94745f in database 
+Post Service - 24/07/2021 01:16 PM - Error 80000034-0003-fd00-b63f-84710c7967bb  Error while creating product, message: Value cannot be null. (Parameter 'uri') 
+Post Service - 24/07/2021 01:20 PM - Information 80000036-0003-fd00-b63f-84710c7967bb  Successfully created new post history with ID 2430b97c-d78d-4498-57c9-08d94e94745f in database 
+Post Service - 24/07/2021 01:21 PM - Error 80000036-0003-fd00-b63f-84710c7967bb  Error while creating product, message: Value cannot be null. (Parameter 'uri') 
+Post Service - 24/07/2021 01:27 PM - Information 8000002d-0000-f900-b63f-84710c7967bb  Successfully created new post history with ID 40c62d86-7c5d-4505-fbe2-08d94e95fe6c in database 
+Post Service - 24/07/2021 01:27 PM - Error 8000002d-0000-f900-b63f-84710c7967bb  Error while creating product, message: Value cannot be null. (Parameter 'uri') 
+Post Service - 24/07/2021 01:28 PM - Information 8000002f-0000-f900-b63f-84710c7967bb  Successfully created new post history with ID 54f9baf6-271e-40cb-8d80-a27980fc8b63 in database 
+Post Service - 24/07/2021 01:43 PM - Information 8000004e-0001-fd00-b63f-84710c7967bb  Successfully created new post history with ID 56f1591f-640d-4a0c-c5bf-08d94e9850fe in database 
+Post Service - 24/07/2021 01:43 PM - Error 8000004e-0001-fd00-b63f-84710c7967bb  Error while creating product, message: Value cannot be null. (Parameter 'uri') 
+Post Service - 24/07/2021 01:45 PM - Information 80000052-0001-fd00-b63f-84710c7967bb  Successfully created new post history with ID f0816a19-1b1d-4ba8-c5c0-08d94e9850fe in database 
+Post Service - 24/07/2021 01:45 PM - Error 80000052-0001-fd00-b63f-84710c7967bb  Error while creating product, message: Value cannot be null. (Parameter 'uri') 
+Post Service - 24/07/2021 01:56 PM - Information 8000002f-0003-ff00-b63f-84710c7967bb  Successfully created new post history with ID 8810749d-3c77-4e4e-5af3-08d94e9a17f0 in database 
+Post Service - 24/07/2021 01:59 PM - Information 8000003a-0000-f900-b63f-84710c7967bb  Successfully created new post history with ID cdb94768-6b58-434c-bcdf-08d94e9a7667 in database 
+Post Service - 24/07/2021 02:01 PM - Information 80000057-0001-fd00-b63f-84710c7967bb  Successfully created new post history with ID ca1e8889-0b31-4ae7-de0c-08d94e9ad265 in database 
+Post Service - 24/07/2021 02:08 PM - Information 80000059-0001-fd00-b63f-84710c7967bb  Successfully created new post history with ID b6c93b6d-402a-49ef-a9f2-08d94e9bbc40 in database 
+Post Service - 24/07/2021 02:08 PM - Error 80000059-0001-fd00-b63f-84710c7967bb  Error while creating product, message: Error mapping types.
+
+Mapping types:
+Product -> ProductConfirmationDto
+PostService.Entities.Posts.Product -> PostService.Models.DTOs.Post.ProductConfirmationDto
+
+Type Map configuration:
+Product -> ProductConfirmationDto
+PostService.Entities.Posts.Product -> PostService.Models.DTOs.Post.ProductConfirmationDto
+
+Destination Member:
+Price
+ 
+Post Service - 24/07/2021 02:20 PM - Information 80000039-0000-fc00-b63f-84710c7967bb  Successfully created new post history with ID 61774145-7aef-4d97-71de-08d94e9d74db in database 
+Post Service - 24/07/2021 02:47 PM - Information 80000087-0002-fe00-b63f-84710c7967bb  Successfully created new post history with ID 4aff559c-1f7f-4361-f6b3-08d94ea12d3f in database 
+Post Service - 24/07/2021 02:52 PM - Information 8000004e-0003-fe00-b63f-84710c7967bb  Successfully created new post history with ID 4aff559c-1f7f-4361-f6b3-08d94ea12d3f in database 
+Post Service - 24/07/2021 04:33 PM - Error 80000093-0002-fe00-b63f-84710c7967bb  Error while updating post history with ID 25, message: Foreign key constraint violated. Post with that ID doesn't exist! 
+Post Service - 24/07/2021 04:52 PM - Information 80000052-0003-fe00-b63f-84710c7967bb  Successfully created new post history with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe in database 
+Post Service - 24/07/2021 04:54 PM - Information 80000054-0003-fe00-b63f-84710c7967bb  Successfully updated post history with ID 26 
+Post Service - 24/07/2021 04:55 PM - Information 80000055-0003-fe00-b63f-84710c7967bb  Successfully created new post history with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe in database 
+Post Service - 24/07/2021 04:56 PM - Error 80000057-0003-fe00-b63f-84710c7967bb  Error while deleting product with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe, message: Value of product is referenced in another table 
+Post Service - 24/07/2021 04:59 PM - Error 8000005b-0003-fe00-b63f-84710c7967bb  Error while creating postHistory, message: Foreign key constraint violated. Post with that ID doesn't exist! 
+Post Service - 24/07/2021 05:56 PM - Information 80000065-0001-fd00-b63f-84710c7967bb  Successfully updated product with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe 
+Post Service - 24/07/2021 06:02 PM - Information 80000046-0002-ff00-b63f-84710c7967bb  Successfully updated product with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe 

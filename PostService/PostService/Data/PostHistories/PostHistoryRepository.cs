@@ -33,6 +33,17 @@ namespace PostService.Data.PostHistories
 
         public void CreatePostHistory(PostHistory postHistory)
         {
+            postHistory.DateFrom = DateTime.Now;
+            //setujem DateTo na trenutni datum i vreme kako bih oznacio da tada prestaje vazenje cene koja je do tad vazila
+            //za post sa tim id-jem, i da se sad primenjuje nova cena ciji je DateFrom trenutni datum i vreme
+            var histories = GetPostHistoryByPostId(postHistory.PostId);
+            foreach (PostHistory ph in histories)
+            {
+                if (ph.DateTo == null)
+                {
+                    ph.DateTo = DateTime.Now;
+                }
+            }
             _context.PostHistories.Add(postHistory);
         }
 

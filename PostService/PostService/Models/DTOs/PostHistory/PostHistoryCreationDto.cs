@@ -15,11 +15,6 @@ namespace PostService.Models.DTOs.PostHistory
         public Double Price { get; set; }
 
         /// <summary>
-        /// Date to which a certain post's price applies
-        /// </summary>
-        public DateTime? DateTo { get; set; }
-
-        /// <summary>
         /// Id of the post to which a certain price applies
         /// </summary>
         [Required]

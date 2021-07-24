@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace PostService.Models.DTOs.Post
 {
-    public class ServiceCreationDto
+    public class ProductUpdateDto
     {
         /// <summary>
-        /// Name of the post(service)
+        /// Name of the post(product)
         /// </summary>
         [Required(ErrorMessage = "PostName is required.")]
         public String PostName { get; set; }
 
         /// <summary>
-        /// Image of the post(service)
+        /// Image of the post(product)
         /// </summary>
         public String PostImage { get; set; }
 
         /// <summary>
-        /// Description of the post(service)
+        /// Description of the post(product)
         /// </summary>
         public String Description { get; set; }
 
         /// <summary>
-        /// Price of the post(service)
+        /// Price of the post(product)
         /// </summary>
         [Required(ErrorMessage = "Price is required.")]
         [Range(1, int.MaxValue, ErrorMessage = "Price must be greater then 0")]
@@ -38,7 +38,7 @@ namespace PostService.Models.DTOs.Post
         public String Currency { get; set; }
 
         /// <summary>
-        /// Category to which the post(service) belongs
+        /// Category to which the post(product) belongs
         /// </summary>
         [Required(ErrorMessage = "Category is required.")]
         public String Category { get; set; }
@@ -48,5 +48,10 @@ namespace PostService.Models.DTOs.Post
         /// </summary>
         [Required(ErrorMessage = "AccountId is required.")]
         public Guid AccountId { get; set; }
+
+        /// <summary>
+        /// Weight of the product
+        /// </summary>
+        public String Weight { get; set; }
     }
 }

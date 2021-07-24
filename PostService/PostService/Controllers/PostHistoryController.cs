@@ -148,16 +148,18 @@ namespace PostService.Controllers
         ///  --header 'Authorization: TODO - dodati jwt' \
         /// {     \
         ///  "Price": 600, \
-        ///  "DateTo": "2021-11-15T09:00:00"\
+        ///  "DateTo": "2021-11-15T09:00:00"\                     BOLJE BEZ PA SETOVATI KASNIJE
         ///  "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
         /// } 
         /// </remarks>
         /// <response code="201">Returns the created post history</response>
         /// <response code="401">Unauthorized user</response>
+        /// <response code="409">Conflict - Foreign key constraint violation</response>
         /// <response code="500">There was an error on the server</response>
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public ActionResult<PostHistory> CreatePostHistory([FromBody] PostHistoryCreationDto postHistoryDto)
@@ -165,7 +167,14 @@ namespace PostService.Controllers
             try
             {
                 PostHistory postHistory = _mapper.Map<PostHistory>(postHistoryDto);
-                postHistory.DateFrom = DateTime.Now;
+
+                Product product = _productRepository.GetProductById(postHistory.PostId);
+                Service service = _serviceRepository.GetServiceById(postHistory.PostId);
+                if (product == null && service == null)
+                {
+                    throw new ForeignKeyConstraintException("Foreign key constraint violated. Post with that ID doesn't exist!");
+                }
+
                 _postHistoryRepository.CreatePostHistory(postHistory);
                 _postHistoryRepository.SaveChanges();
                 _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully created new post history with ID {0} in database", postHistory.PostId), null);
@@ -175,6 +184,10 @@ namespace PostService.Controllers
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while creating postHistory, message: {0}", ex.Message), null);
+                if (ex.GetType().IsAssignableFrom(typeof(ForeignKeyConstraintException)))
+                {
+                    return StatusCode(StatusCodes.Status409Conflict, ex.Message);
+                }
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
@@ -200,12 +213,12 @@ namespace PostService.Controllers
         /// <response code="200">Returns updated post history</response>
         /// <response code="401">Unauthorized user</response>
         /// <response code="404">Post history with postHistoryId is not found</response>
-        ///<response code="422">Foreign key constraint violation</response>
+        /// <response code="409">Conflict - Foreign key constraint violation</response>
         /// <response code="500">Error on the server while updating</response>
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{postHistoryId}")]
         public ActionResult<PostHistory> UpdatePostHistory([FromBody] PostHistoryUpdateDto postHistoryUpdateDto, int postHistoryId)
@@ -237,7 +250,7 @@ namespace PostService.Controllers
                 _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while updating post history with ID {0}, message: {1}", postHistoryId, ex.Message), null);
                 if (ex.GetType().IsAssignableFrom(typeof(ForeignKeyConstraintException)))
                 {
-                    return StatusCode(StatusCodes.Status422UnprocessableEntity, ex.Message);
+                    return StatusCode(StatusCodes.Status409Conflict, ex.Message);
                 }
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
@@ -281,7 +294,7 @@ namespace PostService.Controllers
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while deleting postHistory with ID {0}, message: {1}", postHistoryId, ex.Message), null);
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting comment!");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting postHistory!");
             }
         }
     }

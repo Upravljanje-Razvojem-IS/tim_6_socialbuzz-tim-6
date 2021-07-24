@@ -14,5 +14,6 @@ namespace PostService.Data.Post
         void CreateService(Service service);
         void UpdateService(Service oldService, Service newService);
         void DeleteService(Guid id);
+        bool SaveChanges();
     }
 }

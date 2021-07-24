@@ -14,5 +14,6 @@ namespace PostService.Data.Post
         void CreateProduct(Product product);
         void UpdateProduct(Product oldProduct, Product newProduct);
         void DeleteProduct(Guid id);
+        bool SaveChanges();
     }
 }

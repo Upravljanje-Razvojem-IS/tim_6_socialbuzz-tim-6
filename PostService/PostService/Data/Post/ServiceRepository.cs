@@ -33,17 +33,23 @@ namespace PostService.Data.Post
 
         public void CreateService(Service service)
         {
-            throw new NotImplementedException();
+            _context.Services.Add(service);
         }
 
         public void DeleteService(Guid id)
         {
-            throw new NotImplementedException();
+            var service = GetServiceById(id);
+            _context.Remove(service);
         }
 
         public void UpdateService(Service oldService, Service newService)
         {
             throw new NotImplementedException();
+        }
+
+        public bool SaveChanges()
+        {
+            return _context.SaveChanges() > 0;
         }
     }
 }

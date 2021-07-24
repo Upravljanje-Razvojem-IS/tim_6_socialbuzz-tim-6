@@ -102,26 +102,39 @@
              --header 'Authorization: TODO - dodati jwt' \
             {     \
              "Price": 600, \
-             "DateTo": "2021-11-15T09:00:00"\
+             "DateTo": "2021-11-15T09:00:00"\                     BOLJE BEZ PA SETOVATI KASNIJE
              "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
             } 
             </remarks>
             <response code="201">Returns the created post history</response>
             <response code="401">Unauthorized user</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
             <response code="500">There was an error on the server</response>
         </member>
         <member name="M:PostService.Controllers.PostHistoryController.UpdatePostHistory(PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto,System.Int32)">
-             <summary>
-             Updates post history
-             </summary>
-             <param name="postHistoryUpdateDto">Model of post history for udpdate</param>
-             <param name="postHistoryId">Post history id</param>
-             <returns>Confirmation of update</returns>
-             <response code="200">Returns updated post history</response>
-             <response code="401">Unauthorized user</response>
-             <response code="404">Post history with postHistoryId is not found</response>
-            <response code="422">Foreign key constraint violation</response>
-             <response code="500">Error on the server while updating</response>
+            <summary>
+            Updates post history
+            </summary>
+            <param name="postHistoryUpdateDto">Model of post history for udpdate</param>
+            <param name="postHistoryId">Post history id</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            POST 'https://localhost:44377/api/postHistories/' \
+            Example of a request to create postHistory \
+             --header 'Authorization: TODO - dodati jwt' \
+             --param  'postHistoryId = 9'
+            {     \
+             "Price": 550, \
+             "DateFrom": "2020-10-15T09:00:00"\
+             "DateTo": "2021-11-15T09:00:00"\
+             "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
+            } 
+            </remarks>
+            <response code="200">Returns updated post history</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Post history with postHistoryId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
         </member>
         <member name="M:PostService.Controllers.PostHistoryController.DeletePostHistory(System.Int32)">
             <summary>
@@ -132,7 +145,7 @@
             <remarks>        
             Example of a request to delete postHistory
             DELETE 'https://localhost:44377/api/postHistories' \
-                --param  'postHistoryId = 7'
+              --param  'postHistoryId = 7'
             </remarks>
             <response code="204">PostHistory successfully deleted</response>
             <response code="401" >Unauthorized user</response>
@@ -167,15 +180,85 @@
             <response code="500">There was an error on the server</response>
         </member>
         <member name="M:PostService.Controllers.ProductController.GetProductById(System.Guid)">
-             <summary>
-             Returns product with productId
-             </summary>
-             <param name="productId">Products's Id</param>
-             <returns>Product with productId</returns>
+            <summary>
+            Returns product with productId
+            </summary>
+            <param name="productId">Products's Id</param>
+            <returns>Product with productId</returns>
             <response code="200">Returns the product</response>
-             <response code="401">Unauthorized user</response>
-             <response code="404">Product with this productId is not found</response>
-             <response code="500">There was an error on the server</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Product with this productId is not found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:PostService.Controllers.ProductController.CreateProduct(PostService.Models.DTOs.Post.ProductCreationDto)">
+            <summary>
+            Creates product
+            </summary>
+            <param name="productDto">Model of product to create</param>
+            <remarks>
+            POST 'https://localhost:44377/api/products/' \
+            Example of a request to create product \
+             --header 'Authorization: TODO - dodati jwt' \
+            {
+            "weight": "130g",
+            "postName": "Nike sportska majica",
+            "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
+            "description": "Nike Sportswear T-Shirt je muška majica, koju odlikuje udobnost, jer je napravljena od mekog materijala.",
+            "price": 2310,
+            "currency": "Rsd",
+            "category": "Sportska odeća",
+            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
+             }
+            </remarks>
+            <response code="201">Returns the created product</response>
+            <response code="401">Unauthorized user</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:PostService.Controllers.ProductController.UpdateProduct(PostService.Models.DTOs.Post.ProductUpdateDto,System.Guid)">
+            <summary>
+            Updates product
+            </summary>
+            <param name="productUpdateDto">Model of product for udpdate</param>
+            <param name="productId">Product id</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            POST 'https://localhost:44377/api/products/' \
+            Example of a request to create postHistory \
+             --header 'Authorization: TODO - dodati jwt' \
+             --param  'productId = example of Guid'
+            {
+            "postName": "Nike majica",
+            "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
+            "description": "Nike Sportswear T-Shirt je muška majica, koja je jako udobna jer je napravljena od mekog materijala.",
+            "price": 2450,
+            "currency": "Rsd",
+            "category": "Sportska odeća",
+            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+            "weight": "110g"
+            }
+            </remarks>
+            <response code="200">Returns updated product</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Product with productId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:PostService.Controllers.ProductController.DeleteProduct(System.Guid)">
+            <summary>
+            Deleting product with productId
+            </summary>
+            <param name="productId">Product's Id</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete product
+            DELETE 'https://localhost:44377/api/products' \
+              --param  'productId = example of Guid'
+            </remarks>
+            <response code="204">Prdouct successfully deleted</response>
+            <response code="401" >Unauthorized user</response>
+            <response code="404">Product with this productId is not found</response>
+            <response code="409">Product reference in another table</response>
+            <response code="500">There was an error on the server</response>
         </member>
         <member name="T:PostService.Controllers.ServiceController">
             <summary>
@@ -300,11 +383,6 @@
             Price for the post in a certain period of time
             </summary>
         </member>
-        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.DateTo">
-            <summary>
-            Date to which a certain post's price applies
-            </summary>
-        </member>
         <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.PostId">
             <summary>
             Id of the post to which a certain price applies
@@ -380,6 +458,51 @@
             Id of the user's account who posted the post
             </summary>
         </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostId">
+            <summary>
+            Unique identifier for the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostName">
+            <summary>
+            Name of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostImage">
+            <summary>
+            Image of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Description">
+            <summary>
+            Description of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Price">
+            <summary>
+            Price of the post(product) with currency
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Category">
+            <summary>
+            Category to which the post(product) belongs
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PublicationDate">
+            <summary>
+            Date when the post(product) was published
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.AccountId">
+            <summary>
+            Id of the user's account who posted the post
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Weight">
+            <summary>
+            Weight of the product
+            </summary>
+        </member>
         <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.PostName">
             <summary>
             Name of the post(product)
@@ -416,6 +539,46 @@
             </summary>
         </member>
         <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Weight">
+            <summary>
+            Weight of the product
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.PostName">
+            <summary>
+            Name of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.PostImage">
+            <summary>
+            Image of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Description">
+            <summary>
+            Description of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Price">
+            <summary>
+            Price of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Currency">
+            <summary>
+            Payment currency
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Category">
+            <summary>
+            Category to which the post(product) belongs
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.AccountId">
+            <summary>
+            Id of the user's account who posted the post
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Weight">
             <summary>
             Weight of the product
             </summary>
