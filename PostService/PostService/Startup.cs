@@ -19,6 +19,10 @@ using Microsoft.AspNetCore.Http;
 using System.Reflection;
 using System.IO;
 using PostService.Data.AccountMock;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using PostService.Logger;
 
 namespace PostService
 {
@@ -65,12 +69,35 @@ namespace PostService
 
                setupAction.IncludeXmlComments(xmlCommentsPath);
             });
-        
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(jwt =>
+            {
+                jwt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+
+            });
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IPostHistoryRepository, PostHistoryRepository>();
             services.AddScoped<IAccountMockRepository, AccountMockRepository>();
+
+            services.AddSingleton<IFakeLogger, FakeLogger>();
+            services.AddHttpContextAccessor();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
@@ -104,6 +131,8 @@ namespace PostService
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

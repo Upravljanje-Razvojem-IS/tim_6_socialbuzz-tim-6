@@ -12,7 +12,7 @@ namespace PostService.Data.Post
         List<Service> GetServicesByAccountId(Guid id);
         Service GetServiceById(Guid id);
         void CreateService(Service service);
-        void UpdateService(Service service);
+        void UpdateService(Service oldService, Service newService);
         void DeleteService(Guid id);
     }
 }

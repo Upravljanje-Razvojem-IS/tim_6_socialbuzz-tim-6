@@ -25,19 +25,35 @@ namespace PostService.Data.PostHistories
             return _context.PostHistories.Where(e => e.PostId == id).ToList();
         }
 
+
+        public PostHistory GetPostHistoryById(int id)
+        {
+            return _context.PostHistories.FirstOrDefault(e => e.PostHistoryId == id);
+        }
+
         public void CreatePostHistory(PostHistory postHistory)
         {
-            throw new NotImplementedException();
+            _context.PostHistories.Add(postHistory);
         }
 
         public void DeletePostHistory(int id)
         {
-            throw new NotImplementedException();
+            var postHistory = GetPostHistoryById(id);
+            _context.Remove(postHistory);
         }
 
-        public void UpdatePostHistory(PostHistory postHistory)
+        public void UpdatePostHistory(PostHistory oldPostHistory, PostHistory newPostHistory)
         {
-            throw new NotImplementedException();
+            oldPostHistory.Price = newPostHistory.Price;
+            oldPostHistory.DateFrom = newPostHistory.DateFrom;
+            oldPostHistory.DateTo = newPostHistory.DateTo;
+            oldPostHistory.PostId = newPostHistory.PostId;
         }
+
+        public bool SaveChanges()
+        {
+            return _context.SaveChanges() > 0;
+        }
+
     }
 }

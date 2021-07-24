@@ -12,7 +12,7 @@ namespace PostService.Data.Post
         List<Product> GetProductsByAccountId(Guid id);
         Product GetProductById(Guid id);
         void CreateProduct(Product product);
-        void UpdateProduct(Product product);
+        void UpdateProduct(Product oldProduct, Product newProduct);
         void DeleteProduct(Guid id);
     }
 }

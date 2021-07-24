@@ -42,7 +42,7 @@ namespace PostService.Data.Post
             throw new NotImplementedException();
         }
 
-        public void UpdateProduct(Product product)
+        public void UpdateProduct(Product oldProduct, Product newProduct)
         {
             throw new NotImplementedException();
         }

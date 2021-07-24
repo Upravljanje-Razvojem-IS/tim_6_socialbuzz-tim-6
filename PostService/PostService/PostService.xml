@@ -41,6 +41,7 @@
              <returns> Post with postId</returns>
             <response code="200">Returns the post</response>
              <response code="401">Unauthorized user</response>
+             <response code="403">Forbiden request - user with this role doesn't have permission to access endpoint</response>
              <response code="404">Post with this postId is not found</response>
              <response code="500">Error on the server</response>
         </member>
@@ -65,21 +66,78 @@
             Returns list of all post histories
             </summary>
             <returns>List of post histories</returns>
+            <remarks>        
+            Example of a request to get all post histories
+            GET 'https://localhost:44377/api/postHistories' 
+            </remarks>
             <response code="200">Returns list of post histories</response>
             <response code="401">Unauthorized user</response>
             <response code="404">No post histories found</response>
             <response code="500">Error on the server</response>
         </member>
         <member name="M:PostService.Controllers.PostHistoryController.GetPostHistoryByPostId(System.Guid)">
-             <summary>
-             Returns post history by postId
-             </summary>
-             <param name="postId">Post's Id</param>
-             <returns> Post history with postId</returns>
+            <summary>
+            Returns post history by postId
+            </summary>
+            <param name="postId">Post's Id</param>
+            <returns> Post history with postId</returns>
+            <remarks>        
+            Example of a request to get postHistory by postId
+            GET 'https://localhost:44377/api/postHistories/' \
+                --param  'postId = 23d2cce9-86d7-4bff-887e-f7712b16766d'
+            </remarks>
             <response code="200">Returns the post history</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Post history with this postId is not found</response>
+            <response code="500">Error on the server</response>
+        </member>
+        <member name="M:PostService.Controllers.PostHistoryController.CreatePostHistory(PostService.Models.DTOs.PostHistory.PostHistoryCreationDto)">
+            <summary>
+            Creates post history for a specific post
+            </summary>
+            <param name="postHistoryDto">Model of post history</param>
+            <remarks>
+            POST 'https://localhost:44377/api/postHistories/' \
+            Example of a request to create postHistory \
+             --header 'Authorization: TODO - dodati jwt' \
+            {     \
+             "Price": 600, \
+             "DateTo": "2021-11-15T09:00:00"\
+             "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
+            } 
+            </remarks>
+            <response code="201">Returns the created post history</response>
+            <response code="401">Unauthorized user</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:PostService.Controllers.PostHistoryController.UpdatePostHistory(PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto,System.Int32)">
+             <summary>
+             Updates post history
+             </summary>
+             <param name="postHistoryUpdateDto">Model of post history for udpdate</param>
+             <param name="postHistoryId">Post history id</param>
+             <returns>Confirmation of update</returns>
+             <response code="200">Returns updated post history</response>
              <response code="401">Unauthorized user</response>
-             <response code="404">Post history with this postId is not found</response>
-             <response code="500">Error on the server</response>
+             <response code="404">Post history with postHistoryId is not found</response>
+            <response code="422">Foreign key constraint violation</response>
+             <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:PostService.Controllers.PostHistoryController.DeletePostHistory(System.Int32)">
+            <summary>
+            Deleting post history with postHistoryId
+            </summary>
+            <param name="postHistoryId">PostHistory's Id</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete postHistory
+            DELETE 'https://localhost:44377/api/postHistories' \
+                --param  'postHistoryId = 7'
+            </remarks>
+            <response code="204">PostHistory successfully deleted</response>
+            <response code="401" >Unauthorized user</response>
+            <response code="404">Post history with this postHistoryId is not found</response>
+            <response code="500">There was an error on the server</response>
         </member>
         <member name="T:PostService.Controllers.ProductController">
             <summary>
@@ -237,6 +295,41 @@
             Weight of the product
             </summary>
         </member>
+        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.Price">
+            <summary>
+            Price for the post in a certain period of time
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.DateTo">
+            <summary>
+            Date to which a certain post's price applies
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.PostId">
+            <summary>
+            Id of the post to which a certain price applies
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.Price">
+            <summary>
+            Price for the post in a certain period of time
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.DateFrom">
+            <summary>
+            Date from which a certain post's price applies
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.DateTo">
+            <summary>
+            Date to which a certain post's price applies
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.PostId">
+            <summary>
+            Id of the post to which a certain price applies
+            </summary>
+        </member>
         <member name="P:PostService.Models.DTOs.Post.PostDto.PostId">
             <summary>
             Unique identifier for the post
@@ -283,6 +376,81 @@
             </summary>
         </member>
         <member name="P:PostService.Models.DTOs.Post.PostDto.AccountId">
+            <summary>
+            Id of the user's account who posted the post
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.PostName">
+            <summary>
+            Name of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.PostImage">
+            <summary>
+            Image of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Description">
+            <summary>
+            Description of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Price">
+            <summary>
+            Price of the post(product)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Currency">
+            <summary>
+            Payment currency
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Category">
+            <summary>
+            Category to which the post(product) belongs
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.AccountId">
+            <summary>
+            Id of the user's account who posted the post
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Weight">
+            <summary>
+            Weight of the product
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.PostName">
+            <summary>
+            Name of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.PostImage">
+            <summary>
+            Image of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Description">
+            <summary>
+            Description of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Price">
+            <summary>
+            Price of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Currency">
+            <summary>
+            Payment currency
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Category">
+            <summary>
+            Category to which the post(service) belongs
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.AccountId">
             <summary>
             Id of the user's account who posted the post
             </summary>

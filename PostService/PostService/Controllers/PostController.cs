@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PostService.Data.AccountMock;
@@ -143,12 +144,14 @@ namespace PostService.Controllers
         /// <returns> Post with postId</returns>
         ///<response code="200">Returns the post</response>
         /// <response code="401">Unauthorized user</response>
+        /// <response code="403">Forbiden request - user with this role doesn't have permission to access endpoint</response>
         /// <response code="404">Post with this postId is not found</response>
         /// <response code="500">Error on the server</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles = "Admin, User")]
         [HttpGet("{postId}")]
         public ActionResult<PostDto> GetPostById(Guid postId)
         {

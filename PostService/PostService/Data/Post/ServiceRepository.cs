@@ -41,7 +41,7 @@ namespace PostService.Data.Post
             throw new NotImplementedException();
         }
 
-        public void UpdateService(Service service)
+        public void UpdateService(Service oldService, Service newService)
         {
             throw new NotImplementedException();
         }

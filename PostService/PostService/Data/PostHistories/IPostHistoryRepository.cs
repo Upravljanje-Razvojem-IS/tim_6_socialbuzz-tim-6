@@ -10,8 +10,10 @@ namespace PostService.Data.PostHistories
     {
         List<PostHistory> GetPostHistories();
         List<PostHistory> GetPostHistoryByPostId(Guid id);
+        PostHistory GetPostHistoryById(int id);
         void CreatePostHistory(PostHistory postHistory);
-        void UpdatePostHistory(PostHistory postHistory);
+        void UpdatePostHistory(PostHistory oldPostHistory, PostHistory newPostHistory);
         void DeletePostHistory(int id);
+        bool SaveChanges();
     }
 }

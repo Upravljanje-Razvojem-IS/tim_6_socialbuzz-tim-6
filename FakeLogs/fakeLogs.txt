@@ -1,0 +1,13 @@
+Post Service - 23/07/2021 10:37 AM - Information 80000014-0003-fd00-b63f-84710c7967bb  Successfully created new post history with ID 54f9baf6-271e-40cb-8d80-a27980fc8b63 in database 
+Post Service - 23/07/2021 10:57 AM - Information 80000056-0000-fa00-b63f-84710c7967bb  Successfully created new post history with ID 54f9baf6-271e-40cb-8d80-a27980fc8b63 in database 
+Post Service - 23/07/2021 11:02 PM - Error 8000001f-0000-f900-b63f-84710c7967bb  Error while updating post history with ID 9, message: Foreign key constraint violated 
+Post Service - 23/07/2021 11:04 PM - Information 80000023-0003-fd00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 23/07/2021 11:07 PM - Information 80000029-0003-fd00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 23/07/2021 11:19 PM - Information 80000026-0002-ff00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 23/07/2021 11:23 PM - Information 80000024-0000-f900-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 24/07/2021 10:31 AM - Information 80000020-0003-ff00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 24/07/2021 10:38 AM - Information 80000004-0002-fb00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 24/07/2021 11:00 AM - Information 8000002c-0002-ff00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 24/07/2021 11:01 AM - Error 8000002f-0002-ff00-b63f-84710c7967bb  Error while updating post history with ID 9, message: Foreign key constraint violated 
+Post Service - 24/07/2021 11:01 AM - Information 80000030-0002-ff00-b63f-84710c7967bb  Successfully updated post history with ID 9 
+Post Service - 24/07/2021 11:07 AM - Information 80000033-0002-ff00-b63f-84710c7967bb  Successfully updated post history with ID 9 
