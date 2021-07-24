@@ -179,12 +179,15 @@ namespace PostService.Controllers
         /// </summary>
         /// <param name="productUpdateDto">Model of product for udpdate</param>
         /// <param name="productId">Product id</param>
+        /// <param name="userId">ID of the user who sends the request/param>
         /// <returns>Confirmation of update</returns>
         /// <remarks>
         /// POST 'https://localhost:44377/api/products/' \
         /// Example of a request to create postHistory \
         ///  --header 'Authorization: TODO - dodati jwt' \
         ///  --param  'productId = example of Guid'
+        ///  --param  correct userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+        ///           wrong userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
         /// {
         /// "postName": "Nike majica",
         /// "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
@@ -198,19 +201,26 @@ namespace PostService.Controllers
         /// </remarks>
         /// <response code="200">Returns updated product</response>
         /// <response code="401">Unauthorized user</response>
+        /// <response code="403">Forbiden request - user with this userId doesn't have permission to update product</response>
         /// <response code="404">Product with productId is not found</response>
         /// <response code="409">Conflict - Foreign key constraint violation</response>
         /// <response code="500">Error on the server while updating</response>
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{productId}")]
-        public ActionResult<Product> UpdateProduct([FromBody] ProductUpdateDto productUpdateDto, Guid productId)
+        public ActionResult<Product> UpdateProduct([FromBody] ProductUpdateDto productUpdateDto, Guid productId, [FromHeader] Guid userId)
         {
             try
             {
+                if (productUpdateDto.AccountId != userId)
+                {
+                    return StatusCode(StatusCodes.Status403Forbidden, String.Format("User whit ID {0} doesn't have permission to update this product because he isn't product owner", userId));
+                }
+
                 var oldProduct = _productRepository.GetProductById(productId);
                 if (oldProduct == null)
                 {
@@ -235,28 +245,39 @@ namespace PostService.Controllers
         /// Deleting product with productId
         /// </summary>
         /// <param name="productId">Product's Id</param>
+        /// <param name="userId">ID of the user who sends the request/param>
         /// <returns>Status 204 - NoContent</returns>
         /// <remarks>        
         /// Example of a request to delete product
         /// DELETE 'https://localhost:44377/api/products' \
-        ///   --param  'productId = example of Guid'
+        ///   --param  'productId = 23d2cce9-86d7-4bff-887e-f7712b16766d'
+        ///   --param  userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+        ///           wrong userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
         /// </remarks>
         /// <response code="204">Prdouct successfully deleted</response>
         /// <response code="401" >Unauthorized user</response>
+        /// <response code="403">Forbiden request - user with this userId doesn't have permission to delete product</response>
         /// <response code="404">Product with this productId is not found</response>
         /// <response code="409">Product reference in another table</response>
         /// <response code="500">There was an error on the server</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{productId}")]
-        public IActionResult DeleteProduct(Guid productId)
+        public IActionResult DeleteProduct(Guid productId,[FromHeader] Guid userId)
         {
             try
             {
                 var product = _productRepository.GetProductById(productId);
+
+                if (product.AccountId != userId)
+                {
+                    return StatusCode(StatusCodes.Status403Forbidden, String.Format("User whit ID {0} doesn't have permission to delete this product because he isn't product owner", userId));
+                }
+
                 if (product == null)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, String.Format("There is no product with ID {0}!", productId));

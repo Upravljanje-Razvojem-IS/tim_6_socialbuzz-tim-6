@@ -214,52 +214,8 @@
             <response code="401">Unauthorized user</response>
             <response code="500">There was an error on the server</response>
         </member>
-        <member name="M:PostService.Controllers.ProductController.UpdateProduct(PostService.Models.DTOs.Post.ProductUpdateDto,System.Guid)">
-            <summary>
-            Updates product
-            </summary>
-            <param name="productUpdateDto">Model of product for udpdate</param>
-            <param name="productId">Product id</param>
-            <returns>Confirmation of update</returns>
-            <remarks>
-            POST 'https://localhost:44377/api/products/' \
-            Example of a request to create postHistory \
-             --header 'Authorization: TODO - dodati jwt' \
-             --param  'productId = example of Guid'
-            {
-            "postName": "Nike majica",
-            "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
-            "description": "Nike Sportswear T-Shirt je muška majica, koja je jako udobna jer je napravljena od mekog materijala.",
-            "price": 2450,
-            "currency": "Rsd",
-            "category": "Sportska odeća",
-            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a",
-            "weight": "110g"
-            }
-            </remarks>
-            <response code="200">Returns updated product</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">Product with productId is not found</response>
-            <response code="409">Conflict - Foreign key constraint violation</response>
-            <response code="500">Error on the server while updating</response>
-        </member>
-        <member name="M:PostService.Controllers.ProductController.DeleteProduct(System.Guid)">
-            <summary>
-            Deleting product with productId
-            </summary>
-            <param name="productId">Product's Id</param>
-            <returns>Status 204 - NoContent</returns>
-            <remarks>        
-            Example of a request to delete product
-            DELETE 'https://localhost:44377/api/products' \
-              --param  'productId = example of Guid'
-            </remarks>
-            <response code="204">Prdouct successfully deleted</response>
-            <response code="401" >Unauthorized user</response>
-            <response code="404">Product with this productId is not found</response>
-            <response code="409">Product reference in another table</response>
-            <response code="500">There was an error on the server</response>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.UpdateProduct(PostService.Models.DTOs.Post.ProductUpdateDto,System.Guid,System.Guid)" -->
+        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.DeleteProduct(System.Guid,System.Guid)" -->
         <member name="T:PostService.Controllers.ServiceController">
             <summary>
             Service controller with endpoints for CRUD operations

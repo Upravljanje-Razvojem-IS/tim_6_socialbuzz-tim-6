@@ -24,7 +24,7 @@ namespace PostService.Controllers
     [ApiController]
     [Route("api/postHistories")]
     [Produces("application/json", "application/xml")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class PostHistoryController : ControllerBase
     {
         private readonly IPostHistoryRepository _postHistoryRepository;
@@ -82,7 +82,6 @@ namespace PostService.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [AllowAnonymous]
         public ActionResult<List<PostHistory>> GetPostHisttories()
         {
             try
@@ -119,7 +118,6 @@ namespace PostService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{postId}")]
-        [AllowAnonymous]
         public ActionResult<List<PostHistory>> GetPostHistoryByPostId(Guid postId)
         {
             try

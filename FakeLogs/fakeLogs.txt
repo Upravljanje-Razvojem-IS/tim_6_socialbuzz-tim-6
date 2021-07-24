@@ -53,3 +53,5 @@ Post Service - 24/07/2021 04:56 PM - Error 80000057-0003-fe00-b63f-84710c7967bb 
 Post Service - 24/07/2021 04:59 PM - Error 8000005b-0003-fe00-b63f-84710c7967bb  Error while creating postHistory, message: Foreign key constraint violated. Post with that ID doesn't exist! 
 Post Service - 24/07/2021 05:56 PM - Information 80000065-0001-fd00-b63f-84710c7967bb  Successfully updated product with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe 
 Post Service - 24/07/2021 06:02 PM - Information 80000046-0002-ff00-b63f-84710c7967bb  Successfully updated product with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe 
+Post Service - 24/07/2021 09:57 PM - Information 80000044-0001-ff00-b63f-84710c7967bb  Successfully created new post history with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe in database 
+Post Service - 24/07/2021 10:20 PM - Information 80000058-0002-ff00-b63f-84710c7967bb  Successfully updated product with ID 15908a81-dcae-43e7-fecb-08d94eb2a3fe 
