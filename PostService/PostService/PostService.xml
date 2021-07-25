@@ -254,6 +254,31 @@
              <response code="404">Service with this serviceId is not found</response>
              <response code="500">There was an error on the server</response>
         </member>
+        <member name="M:PostService.Controllers.ServiceController.CreateService(PostService.Models.DTOs.Post.ServiceCreationDto)">
+            <summary>
+            Creates service
+            </summary>
+            <param name="serviceDto">Model of service to create</param>
+            <remarks>
+            POST 'https://localhost:44377/api/services/' \
+            Example of a request to create service \
+             --header 'Authorization: TODO - dodati jwt' \
+            {
+            "postName": "Sportska masaža",
+            "postImage": "https://www.msccollege.edu/wp-content/uploads/2020/06/sports-massage-therapy-1024x683.jpg",
+            "description": "Zakaži svoj termin i spremno dočekaj sledeći trening",
+            "price": 3000,
+            "currency": "Rsd",
+            "category": "Lepota i zdravlje",
+            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
+            }
+            </remarks>
+            <response code="201">Returns the created service</response>
+            <response code="401">Unauthorized user</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.UpdateService(PostService.Models.DTOs.Post.ServiceUpdateDto,System.Guid,System.Guid)" -->
+        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.DeleteService(System.Guid,System.Guid)" -->
         <member name="P:PostService.Entities.PostHistory.PostHistoryId">
             <summary>
             Unique identifier for the post history
@@ -539,6 +564,41 @@
             Weight of the product
             </summary>
         </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostId">
+            <summary>
+            Unique identifier for the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostName">
+            <summary>
+            Name of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostImage">
+            <summary>
+            Image of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Description">
+            <summary>
+            Description of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Price">
+            <summary>
+            Price of the post(service) with currency
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Category">
+            <summary>
+            Category to which the post(service) belongs
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.AccountId">
+            <summary>
+            Id of the user's account who posted the post
+            </summary>
+        </member>
         <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.PostName">
             <summary>
             Name of the post(service)
@@ -570,6 +630,41 @@
             </summary>
         </member>
         <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.AccountId">
+            <summary>
+            Id of the user's account who posted the post
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.PostName">
+            <summary>
+            Name of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.PostImage">
+            <summary>
+            Image of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Description">
+            <summary>
+            Description of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Price">
+            <summary>
+            Price of the post(service)
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Currency">
+            <summary>
+            Payment currency
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Category">
+            <summary>
+            Category to which the post(service) belongs
+            </summary>
+        </member>
+        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.AccountId">
             <summary>
             Id of the user's account who posted the post
             </summary>

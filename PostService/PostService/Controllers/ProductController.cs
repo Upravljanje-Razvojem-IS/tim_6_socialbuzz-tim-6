@@ -163,7 +163,7 @@ namespace PostService.Controllers
                 product.PublicationDate = DateTime.Now;
                 _productRepository.CreateProduct(product);
                 _productRepository.SaveChanges();
-                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully created new post history with ID {0} in database", product.PostId), null);
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully created new product with ID {0} in database", product.PostId), null);
                 string location = _linkGenerator.GetPathByAction("GetProductById", "Product", new { productId = product.PostId });
                 return Created(location, _mapper.Map<ProductConfirmationDto>(product));
             }
@@ -183,7 +183,7 @@ namespace PostService.Controllers
         /// <returns>Confirmation of update</returns>
         /// <remarks>
         /// POST 'https://localhost:44377/api/products/' \
-        /// Example of a request to create postHistory \
+        /// Example of a request to update product \
         ///  --header 'Authorization: TODO - dodati jwt' \
         ///  --param  'productId = example of Guid'
         ///  --param  correct userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
@@ -255,7 +255,7 @@ namespace PostService.Controllers
         ///           wrong userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
         /// </remarks>
         /// <response code="204">Prdouct successfully deleted</response>
-        /// <response code="401" >Unauthorized user</response>
+        /// <response code="401">Unauthorized user</response>
         /// <response code="403">Forbiden request - user with this userId doesn't have permission to delete product</response>
         /// <response code="404">Product with this productId is not found</response>
         /// <response code="409">Product reference in another table</response>

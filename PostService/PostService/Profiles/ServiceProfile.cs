@@ -17,6 +17,12 @@ namespace PostService.Profiles
                 opt => opt.MapFrom(src => "Usluga"));
 
             CreateMap<Service, Post>();
+            CreateMap<ServiceCreationDto, Service>();
+            CreateMap<Service, ServiceConfirmationDto>().ForMember(
+                    dest => dest.Price,
+                    opt => opt.MapFrom(src => $"{ src.Price } { src.Currency }"));
+
+            CreateMap<ServiceUpdateDto, Service>();
         }
     }
 }
