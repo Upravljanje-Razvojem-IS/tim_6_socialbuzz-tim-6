@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReactionService</name>
+    </assembly>
+    <members>
+        <member name="T:ReactionService.Entities.Reaction">
+            <summary>
+            Entity class which models reactions which are added to the posts
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.ReactionId">
+            <summary>
+            Unique identifier of the reaction
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.PostId">
+            <summary>
+            PostId to which the reaction is added
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.ReactionTypeId">
+            <summary>
+            Unique identifier of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.AccountId">
+            <summary>
+            Id of the user who adds reaction
+            </summary>
+        </member>
+        <member name="T:ReactionService.Entities.ReactionType">
+            <summary>
+            Entity class which models different types of reactions
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.ReactionType.ReactionTypeId">
+            <summary>
+            Unique identifier of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.ReactionType.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+    </members>
+</doc>

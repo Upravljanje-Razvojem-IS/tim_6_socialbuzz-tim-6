@@ -1,0 +1,109 @@
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using ReactionService.Entities;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+
+namespace ReactionService
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+
+            services.AddDbContext<ReactionDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ReactionServiceDb")));
+            services.AddControllers(setup =>
+            {
+                setup.ReturnHttpNotAcceptable = true;
+            }
+            ).AddXmlDataContractSerializerFormatters();
+
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("ReactionApiSpecification",
+                     new Microsoft.OpenApi.Models.OpenApiInfo()
+                     {
+                         Title = "ReactionService API",
+                         Version = "1.0",
+                         Description = "This API allows you to fetch all reactions, one specific reaction, add new reaction, update and delete reaction that exists. Also, you can fetch all reaction types, reactions for a specific post, create, update and delete reactions.",
+                         Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                         {
+                             Name = "Dušan Krstić",
+                             Email = "dusankrsticpn@gmail.com"
+                         },
+                         License = new Microsoft.OpenApi.Models.OpenApiLicense
+                         {
+                             Name = "FTN"
+                         }
+                     });
+
+                var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name }.xml";
+                var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
+
+                setupAction.IncludeXmlComments(xmlCommentsPath);
+
+                services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+
+                app.UseSwaggerUI(setupAction => {
+                    setupAction.SwaggerEndpoint("/swagger/PostApiSpecification/swagger.json", "PostService API");
+                    setupAction.RoutePrefix = "";
+                });
+            }
+            else //Ako se nalazimo u Production modu postavljamo default poruku za greške koje nastaju na servisu
+            {
+                app.UseExceptionHandler(appBuilder =>
+                {
+                    appBuilder.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("Unexpected error, please try again later.");
+                    });
+                });
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+    }
+}

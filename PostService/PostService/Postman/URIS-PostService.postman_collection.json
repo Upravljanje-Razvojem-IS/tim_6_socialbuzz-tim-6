@@ -356,6 +356,16 @@
 						{
 							"name": "GetProductById",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -430,7 +440,7 @@
 								"header": [
 									{
 										"key": "userId",
-										"value": "",
+										"value": "59ed7d80-39c9-42b8-a822-70ddd295914a",
 										"type": "text"
 									}
 								],
