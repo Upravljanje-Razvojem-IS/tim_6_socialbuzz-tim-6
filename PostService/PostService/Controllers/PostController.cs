@@ -76,8 +76,8 @@ namespace PostService.Controllers
             {
                 if (string.IsNullOrEmpty(postType))
                 {
-                    List<Product> products = new List<Product>();
-                    List<Service> services = new List<Service>();
+                    List<Product> products;
+                    List<Service> services;
                     if (!string.IsNullOrEmpty(username))
                     {
                         var account = _accountMockRepository.GetAccountByUsername(username);
@@ -85,11 +85,10 @@ namespace PostService.Controllers
                         {
                             return StatusCode(StatusCodes.Status400BadRequest, "Account with given username does not exist");
                         }
-                        else
-                        {
-                            products = _productRepository.GetProductsByAccountId(account.AccountId);
-                            services = _serviceRepository.GetServicesByAccountId(account.AccountId);
-                        }
+
+                        products = _productRepository.GetProductsByAccountId(account.AccountId);
+                        services = _serviceRepository.GetServicesByAccountId(account.AccountId);
+
                     }
                     else
                     {

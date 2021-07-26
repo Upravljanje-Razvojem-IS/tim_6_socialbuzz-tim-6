@@ -15,7 +15,7 @@ namespace PostService.Data.AccountMock
             FillData();
         }
 
-        private void FillData()
+        private static void FillData()
         {
             Accounts.AddRange(new List<AccountDto>
             {

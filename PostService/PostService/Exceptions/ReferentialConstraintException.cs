@@ -8,6 +8,11 @@ namespace PostService.Exceptions
     [Serializable]
     public class ReferentialConstraintException : Exception
     {
+        public ReferentialConstraintException()
+        {
+
+        }
+
         public ReferentialConstraintException(string message)
             : base(message)
         {

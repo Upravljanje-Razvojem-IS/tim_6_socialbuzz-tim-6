@@ -100,9 +100,9 @@
             POST 'https://localhost:44377/api/postHistories/' \
             Example of a request to create postHistory \
              --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
             {     \
              "Price": 600, \
-             "DateTo": "2021-11-15T09:00:00"\                     BOLJE BEZ PA SETOVATI KASNIJE
              "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
             } 
             </remarks>
@@ -122,6 +122,7 @@
             POST 'https://localhost:44377/api/postHistories/' \
             Example of a request to create postHistory \
              --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
              --param  'postHistoryId = 9'
             {     \
              "Price": 550, \
@@ -199,6 +200,7 @@
             POST 'https://localhost:44377/api/products/' \
             Example of a request to create product \
              --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
             {
             "weight": "130g",
             "postName": "Nike sportska majica",
@@ -263,6 +265,7 @@
             POST 'https://localhost:44377/api/services/' \
             Example of a request to create service \
              --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
             {
             "postName": "Sportska masaža",
             "postImage": "https://www.msccollege.edu/wp-content/uploads/2020/06/sports-massage-therapy-1024x683.jpg",

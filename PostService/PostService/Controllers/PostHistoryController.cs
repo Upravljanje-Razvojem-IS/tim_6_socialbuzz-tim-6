@@ -144,9 +144,9 @@ namespace PostService.Controllers
         /// POST 'https://localhost:44377/api/postHistories/' \
         /// Example of a request to create postHistory \
         ///  --header 'Authorization: TODO - dodati jwt' \
+        ///  npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
         /// {     \
         ///  "Price": 600, \
-        ///  "DateTo": "2021-11-15T09:00:00"\                     BOLJE BEZ PA SETOVATI KASNIJE
         ///  "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
         /// } 
         /// </remarks>
@@ -200,6 +200,7 @@ namespace PostService.Controllers
         /// POST 'https://localhost:44377/api/postHistories/' \
         /// Example of a request to create postHistory \
         ///  --header 'Authorization: TODO - dodati jwt' \
+        ///  npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
         ///  --param  'postHistoryId = 9'
         /// {     \
         ///  "Price": 550, \

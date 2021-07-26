@@ -8,6 +8,11 @@ namespace PostService.Exceptions
     [Serializable]
     public class ForeignKeyConstraintException : Exception
     {
+        public ForeignKeyConstraintException()
+        {
+
+        }
+
         public ForeignKeyConstraintException(string message) 
             : base(message)
         {
