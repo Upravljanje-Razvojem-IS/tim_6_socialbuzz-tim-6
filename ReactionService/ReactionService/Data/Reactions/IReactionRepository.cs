@@ -10,7 +10,7 @@ namespace ReactionService.Data.Reactions
     {
         List<Reaction> GetReactions();
         public Reaction GetReactionById(Guid reactionId);
-        List<Reaction> GetReactionByPostId(int postId);
+        List<Reaction> GetReactionByPostId(Guid postId);
         List<Reaction> GetReactionByReactionTypeId(int reactionTypeId);
         void CreateReaction(Reaction reaction);
         public void UpdateReaction(Reaction reaction);

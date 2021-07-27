@@ -4,6 +4,85 @@
         <name>ReactionService</name>
     </assembly>
     <members>
+        <member name="T:ReactionService.Controllers.ReactionController">
+            <summary>
+            Reaction controller with endpoints for CRUD operations
+            </summary>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetPostOptions">
+            <summary>
+            Returns implemented options for API   
+            </summary>
+            <returns>Header key 'Allow' with allowed requests</returns>
+            <remarks>
+            Example of successful request \
+            OPTIONS 'https://localhost:44389/api/reactions' \
+            </remarks>
+            <response code="200">Return header key 'Allow' with allowed requests</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactions">
+            <summary>
+            Returns list of all reactions
+            </summary>
+            <returns>List of reactions</returns>
+            <remarks>
+            GET 'https://localhost:44389/api/reactions' \
+                Example of successful request \
+                    --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns list of reactions</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">No reactions found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactionById(System.Guid)">
+            <summary>
+            Returns reaction with reactionId
+            </summary>
+            <param name="reactionId">Reaction's Id</param>
+            <returns>Reaction with reactionId</returns>
+            <remarks>
+            Example of successful request \
+            GET 'https://localhost:44389/api/reactions/19E0ACBF-5707-49EE-8CB6-134C00B7C10B' \
+                --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns the reaction</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Reaction with this reactionId is not found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactionByReactionTypeId(System.Int32)">
+            <summary>
+            Returns reaction(s) by reactionTypeId
+            </summary>
+            <param name="typeId">Reaction type's Id</param>
+            <returns> Reaction(s) with reactionTypeId</returns>
+            <remarks>        
+            Example of a request to get reactions(s) by reactionTypeId
+            GET 'https://localhost:44389/api/reactions/reactionType/2' \
+                --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns the reaction(s)</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Reaction with this reactionTypeId is not found</response>
+            <response code="500">Error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactionByPostId(System.Guid)">
+            <summary>
+            Returns reaction(s) by postId
+            </summary>
+            <param name="postId">Post's Id</param>
+            <returns> Reaction(s) with postId</returns>
+            <remarks>        
+            Example of a request to get reactions(s) by postId
+            GET 'https://localhost:44389/api/reactions/postId/8ccb1467-9f38-4164-88da-15882fe82e58' \
+                --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns the reaction(s)</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Reaction with this postId is not found</response>
+            <response code="500">Error on the server</response>
+        </member>
         <member name="T:ReactionService.Controllers.ReactionTypeController">
             <summary>
             ReactionType controller with endpoints for fetching different types of reactions

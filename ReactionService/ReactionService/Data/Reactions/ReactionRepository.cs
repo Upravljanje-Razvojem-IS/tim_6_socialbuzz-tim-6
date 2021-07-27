@@ -1,4 +1,5 @@
-﻿using ReactionService.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ReactionService.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,22 +18,22 @@ namespace ReactionService.Data.Reactions
 
         public List<Reaction> GetReactions()
         {
-            throw new NotImplementedException();
+            return _context.Reactions.ToList();
         }
 
         public Reaction GetReactionById(Guid reactionId)
         {
-            throw new NotImplementedException();
+            return _context.Reactions.Include(e => e.ReactionType).FirstOrDefault(e => e.ReactionId == reactionId);
         }
 
         public List<Reaction> GetReactionByReactionTypeId(int reactionTypeId)
         {
-            return _context.Reactions.Where(e => e.ReactionTypeId == reactionTypeId).ToList();
+            return _context.Reactions.Include(e => e.ReactionType).Where(e => e.ReactionTypeId == reactionTypeId).ToList();
         }
 
-        public List<Reaction> GetReactionByPostId(int postId)
+        public List<Reaction> GetReactionByPostId(Guid postId)
         {
-            throw new NotImplementedException();
+            return _context.Reactions.Include(e => e.ReactionType).Where(e => e.PostId == postId).ToList();
         }
 
         public void CreateReaction(Reaction reaction)

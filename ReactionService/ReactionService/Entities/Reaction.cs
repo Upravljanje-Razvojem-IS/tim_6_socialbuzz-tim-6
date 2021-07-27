@@ -32,5 +32,7 @@ namespace ReactionService.Entities
         /// Id of the user who adds reaction
         /// </summary>
         public Guid AccountId { get; set; }
+
+        public virtual ReactionType ReactionType { get; set; }
     }
 }
