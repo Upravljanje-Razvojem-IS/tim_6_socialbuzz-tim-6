@@ -4,6 +4,70 @@
         <name>ReactionService</name>
     </assembly>
     <members>
+        <member name="T:ReactionService.Controllers.ReactionTypeController">
+            <summary>
+            ReactionType controller with endpoints for fetching different types of reactions
+            </summary>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.GetReactionTypesOptions">
+            <summary>
+            Returns implemented options for API   
+            </summary>
+            <returns>Header key 'Allow' with allowed requests</returns>
+            <remarks>
+            Example of successful request \
+            OPTIONS 'https://localhost:44389/api/reactionTypes' \
+            </remarks>
+            <response code="200">Return header key 'Allow' with allowed requests</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.GetReactionTypes">
+            <summary>
+            Returns list of all reaction types
+            </summary>
+            <returns>List of reaction types</returns>
+            <remarks>
+            GET 'https://localhost:44389/api/reactionTypes' \
+                Example of successful request \
+                    --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns list of reaction types</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">No reaction types found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.GetReactionTypeById(System.Int32)">
+             <summary>
+             Returns reaction type with reactionTypeId
+             </summary>
+             <param name="reactionTypeId">Reaction type's Id</param>
+             <returns>Reaction type with reactionTypeId</returns>
+             <remarks>
+             GET 'https://localhost:44389/api/reactionTypes/2' \
+                 Example of successful request \
+                     --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+             </remarks>
+            <response code="200">Returns the reaction type</response>
+             <response code="401">Unauthorized user</response>
+             <response code="404">Reaction type with this reactionTypeId is not found</response>
+             <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.CreateReactionType(ReactionService.Models.DTOs.ReactionTypes.ReactionTypeCreationDto)">
+            <summary>
+            Creates reaction type
+            </summary>
+            <param name="reactionTypeDto">Model of reactionType to create</param>
+            <remarks>
+            POST 'https://localhost:44389/api/reactionTypes/' \
+            Example of a request to create reactionType \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            {
+            "typeName": "NewType"
+            }
+            </remarks>
+            <response code="201">Returns the created reactionType</response>
+            <response code="401">Unauthorized user</response>
+            <response code="500">There was an error on the server</response>
+        </member>
         <member name="T:ReactionService.Entities.Reaction">
             <summary>
             Entity class which models reactions which are added to the posts
@@ -40,6 +104,21 @@
             </summary>
         </member>
         <member name="P:ReactionService.Entities.ReactionType.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeConfirmationDto.ReactionTypeId">
+            <summary>
+            Unique identifier of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeConfirmationDto.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeCreationDto.TypeName">
             <summary>
             Name of the reaction type
             </summary>

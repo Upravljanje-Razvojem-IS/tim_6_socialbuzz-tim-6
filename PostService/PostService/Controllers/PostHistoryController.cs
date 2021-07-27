@@ -59,7 +59,7 @@ namespace PostService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPostOpstions()
+        public IActionResult GetPostOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();

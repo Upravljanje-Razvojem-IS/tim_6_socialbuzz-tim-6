@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,13 +9,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ReactionService.Data.ReactionTypes;
 using ReactionService.Entities;
+using ReactionService.Logger;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ReactionService
@@ -62,9 +67,29 @@ namespace ReactionService
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
                 setupAction.IncludeXmlComments(xmlCommentsPath);
-
-                services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(jwt =>
+            {
+                jwt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+
+            });
+
+            services.AddScoped<IReactionTypeRepository, ReactionTypeRepository>();
+            services.AddSingleton<IFakeLogger, FakeLogger>();
+            services.AddHttpContextAccessor();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,7 +101,7 @@ namespace ReactionService
                 app.UseSwagger();
 
                 app.UseSwaggerUI(setupAction => {
-                    setupAction.SwaggerEndpoint("/swagger/PostApiSpecification/swagger.json", "PostService API");
+                    setupAction.SwaggerEndpoint("/swagger/ReactionApiSpecification/swagger.json", "ReactionService API");
                     setupAction.RoutePrefix = "";
                 });
             }
