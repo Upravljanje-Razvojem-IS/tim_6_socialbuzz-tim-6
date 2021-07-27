@@ -180,7 +180,7 @@ namespace PostService.Controllers
         /// </summary>
         /// <param name="productUpdateDto">Model of product for udpdate</param>
         /// <param name="productId">Product id</param>
-        /// <param name="userId">ID of the user who sends the request/param>
+        /// <param name="userId">ID of the user who sends the request</param>
         /// <returns>Confirmation of update</returns>
         /// <remarks>
         /// POST 'https://localhost:44377/api/products/' \
@@ -247,7 +247,7 @@ namespace PostService.Controllers
         /// Deleting product with productId
         /// </summary>
         /// <param name="productId">Product's Id</param>
-        /// <param name="userId">ID of the user who sends the request/param>
+        /// <param name="userId">ID of the user who sends the request</param>
         /// <returns>Status 204 - NoContent</returns>
         /// <remarks>        
         /// Example of a request to delete product

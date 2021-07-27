@@ -178,7 +178,7 @@ namespace PostService.Controllers
         /// </summary>
         /// <param name="serviceUpdateDto">Model of service for udpdate</param>
         /// <param name="serviceId">Service id</param>
-        /// <param name="userId">ID of the user who sends the request/param>
+        /// <param name="userId">ID of the user who sends the request</param>
         /// <returns>Confirmation of update</returns>
         /// <remarks>
         /// POST 'https://localhost:44377/api/services/' \
@@ -244,7 +244,7 @@ namespace PostService.Controllers
         /// Deleting service with serviceId
         /// </summary>
         /// <param name="serviceId">Service's Id</param>
-        /// <param name="userId">ID of the user who sends the request/param>
+        /// <param name="userId">ID of the user who sends the request</param>
         /// <returns>Status 204 - NoContent</returns>
         /// <remarks>        
         /// Example of a request to delete service
