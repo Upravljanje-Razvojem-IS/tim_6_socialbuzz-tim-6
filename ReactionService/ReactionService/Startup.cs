@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ReactionService.Data.Reactions;
 using ReactionService.Data.ReactionTypes;
 using ReactionService.Entities;
 using ReactionService.Logger;
@@ -86,6 +87,7 @@ namespace ReactionService
             });
 
             services.AddScoped<IReactionTypeRepository, ReactionTypeRepository>();
+            services.AddScoped<IReactionRepository, ReactionRepository>();
             services.AddSingleton<IFakeLogger, FakeLogger>();
             services.AddHttpContextAccessor();
 

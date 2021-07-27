@@ -66,6 +66,50 @@
             </remarks>
             <response code="201">Returns the created reactionType</response>
             <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction type</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.UpdateReactionType(ReactionService.Models.DTOs.ReactionTypes.ReactionTypeUpdateDto,System.Int32)">
+            <summary>
+            Updates reaction type
+            </summary>
+            <param name="reactionTypeUpdateDto">Model of reaction type for udpdate</param>
+            <param name="reactionTypeId">Reaction type id</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            POST 'https://localhost:44389/api/reactionTypes/' \
+            Example of a request to update product \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+             --param  'reactionTypeId = example of Guid'
+            {
+            "typeName": "UpdatedType"
+            }
+            </remarks>
+            <response code="200">Returns updated reaction type</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to update reaction type</response>
+            <response code="404">Reaction type with reactionTypeId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.DeleteReactionType(System.Int32)">
+            <summary>
+            Deleting reaction type with reactionTypeId
+            </summary>
+            <param name="reactionTypeId">Reaction type's Id</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete reaction type
+            DELETE 'https://localhost:44389/api/reactionTypes' \
+              --param  'reactionTypeId = 4'
+              --param  userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+                       wrong userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            </remarks>
+            <response code="204">Reaction type successfully deleted</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction type</response>
+            <response code="404">Reaction type with this reactionTypeId is not found</response>
+            <response code="409">Reaction type reference in another table</response>
             <response code="500">There was an error on the server</response>
         </member>
         <member name="T:ReactionService.Entities.Reaction">
@@ -119,6 +163,11 @@
             </summary>
         </member>
         <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeCreationDto.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeUpdateDto.TypeName">
             <summary>
             Name of the reaction type
             </summary>

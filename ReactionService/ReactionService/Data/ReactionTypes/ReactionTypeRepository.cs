@@ -30,9 +30,9 @@ namespace ReactionService.Data.ReactionTypes
             _context.ReactionTypes.Add(reactionType);
         }
 
-        public void UpdateReactionType(ReactionType reactionType)
+        public void UpdateReactionType(ReactionType oldReactionType, ReactionType newReactionType)
         {
-            throw new NotImplementedException();
+            oldReactionType.TypeName = newReactionType.TypeName;
         }
 
         public void DeleteReactionType(int reactionTypeId)

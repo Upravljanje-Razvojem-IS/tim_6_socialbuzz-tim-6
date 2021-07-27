@@ -60,3 +60,8 @@ Post Service - 25/07/2021 09:36 AM - Error 80000051-0001-ff00-b63f-84710c7967bb 
 Post Service - 25/07/2021 08:28 PM - Information 80000089-0000-fa00-b63f-84710c7967bb  Successfully created new service with ID a92c61da-1c18-4a1a-159d-08d94f9a11bc in database 
 Post Service - 25/07/2021 08:32 PM - Information 80000059-0001-ff00-b63f-84710c7967bb  Successfully updated service with ID a92c61da-1c18-4a1a-159d-08d94f9a11bc 
 Reaction Service - 27/07/2021 10:20 AM - Information 80000004-0000-ff00-b63f-84710c7967bb  Successfully created new reaction type with ID 4 in database 
+Reaction Service - 27/07/2021 02:30 PM - Information 8000000e-0000-ff00-b63f-84710c7967bb  Successfully created new reaction type with ID 5 in database 
+Reaction Service - 27/07/2021 05:06 PM - Information 8000000c-0003-ff00-b63f-84710c7967bb  Successfully updated reaction type with ID 3 
+Reaction Service - 27/07/2021 05:22 PM - Information 8000000b-0000-fe00-b63f-84710c7967bb  Successfully updated reaction type with ID 3 
+Reaction Service - 27/07/2021 05:34 PM - Information 80000012-0000-fd00-b63f-84710c7967bb  Successfully updated reaction type with ID 3  
+

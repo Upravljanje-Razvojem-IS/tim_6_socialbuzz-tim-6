@@ -14,6 +14,7 @@ namespace ReactionService.Profiles
         {
             CreateMap<ReactionTypeCreationDto, ReactionType>();
             CreateMap<ReactionType, ReactionTypeConfirmationDto>();
+            CreateMap<ReactionTypeUpdateDto, ReactionType>();
         }
     }
 }

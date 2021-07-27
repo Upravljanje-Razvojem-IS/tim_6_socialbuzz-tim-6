@@ -14,7 +14,7 @@ namespace ReactionService.Data.ReactionTypes
 
         void CreateReactionType(ReactionType reactionType);
 
-        void UpdateReactionType(ReactionType reactionType);
+        void UpdateReactionType(ReactionType oldReactionType, ReactionType newReactionType);
 
         void DeleteReactionType(int reactionTypeId);
 
