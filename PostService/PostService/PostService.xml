@@ -1,710 +1,713 @@
 <?xml version="1.0"?>
 <doc>
-    <assembly>
-        <name>PostService</name>
-    </assembly>
-    <members>
-        <member name="T:PostService.Controllers.PostController">
-            <summary>
-            Post controller with endpoints for fetching posts
-            </summary>
-        </member>
-        <member name="M:PostService.Controllers.PostController.GetPostOpstions">
-            <summary>
-            Returns implemented options for API   
-            </summary>
-            <returns>Header key 'Allow' with allowed requests</returns>
-            <remarks>
-            Example of successful request \
-            OPTIONS 'https://localhost:44377/api/posts' \
-            </remarks>
-            <response code="200">Return header key 'Allow' with allowed requests</response>
-        </member>
-        <member name="M:PostService.Controllers.PostController.GetPosts(System.String,System.String)">
-            <summary>
-            Returns list of all posts 
-            </summary>
-            <param name="postType">Name of the post type (product or service)</param>
-            <param name="username">Name of the user who posted</param>
-            <returns>List of posts</returns>
-            <response code="200">Returns list of posts</response>
-            <response code="400">Bad request - e.g. wrong post type, wrong username</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">No posts found</response>
-            <response code="500">Error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.PostController.GetPostById(System.Guid)">
-             <summary>
-             Returns post with postId
-             </summary>
-             <param name="postId">Post's Id</param>
-             <returns> Post with postId</returns>
-            <response code="200">Returns the post</response>
-             <response code="401">Unauthorized user</response>
-             <response code="403">Forbiden request - user with this role doesn't have permission to access endpoint</response>
-             <response code="404">Post with this postId is not found</response>
-             <response code="500">Error on the server</response>
-        </member>
-        <member name="T:PostService.Controllers.PostHistoryController">
-            <summary>
-            PostHistory controller with endpoints for CRUD operations
-            </summary>
-        </member>
-        <member name="M:PostService.Controllers.PostHistoryController.GetPostOpstions">
-            <summary>
-            Returns implemented options for API   
-            </summary>
-            <returns>Header key 'Allow' with allowed requests</returns>
-            <remarks>
-            Example of successful request \
-            OPTIONS 'https://localhost:44377/api/postHistories' \
-            </remarks>
-            <response code="200">Return header key 'Allow' with allowed requests</response>
-        </member>
-        <member name="M:PostService.Controllers.PostHistoryController.GetPostHisttories">
-            <summary>
-            Returns list of all post histories
-            </summary>
-            <returns>List of post histories</returns>
-            <remarks>        
-            Example of a request to get all post histories
-            GET 'https://localhost:44377/api/postHistories' 
-            </remarks>
-            <response code="200">Returns list of post histories</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">No post histories found</response>
-            <response code="500">Error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.PostHistoryController.GetPostHistoryByPostId(System.Guid)">
-            <summary>
-            Returns post history by postId
-            </summary>
-            <param name="postId">Post's Id</param>
-            <returns> Post history with postId</returns>
-            <remarks>        
-            Example of a request to get postHistory by postId
-            GET 'https://localhost:44377/api/postHistories/' \
-                --param  'postId = 23d2cce9-86d7-4bff-887e-f7712b16766d'
-            </remarks>
-            <response code="200">Returns the post history</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">Post history with this postId is not found</response>
-            <response code="500">Error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.PostHistoryController.CreatePostHistory(PostService.Models.DTOs.PostHistory.PostHistoryCreationDto)">
-            <summary>
-            Creates post history for a specific post
-            </summary>
-            <param name="postHistoryDto">Model of post history</param>
-            <remarks>
-            POST 'https://localhost:44377/api/postHistories/' \
-            Example of a request to create postHistory \
-             --header 'Authorization: TODO - dodati jwt' \
-            {     \
-             "Price": 600, \
-             "DateTo": "2021-11-15T09:00:00"\                     BOLJE BEZ PA SETOVATI KASNIJE
-             "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
-            } 
-            </remarks>
-            <response code="201">Returns the created post history</response>
-            <response code="401">Unauthorized user</response>
-            <response code="409">Conflict - Foreign key constraint violation</response>
-            <response code="500">There was an error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.PostHistoryController.UpdatePostHistory(PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto,System.Int32)">
-            <summary>
-            Updates post history
-            </summary>
-            <param name="postHistoryUpdateDto">Model of post history for udpdate</param>
-            <param name="postHistoryId">Post history id</param>
-            <returns>Confirmation of update</returns>
-            <remarks>
-            POST 'https://localhost:44377/api/postHistories/' \
-            Example of a request to create postHistory \
-             --header 'Authorization: TODO - dodati jwt' \
-             --param  'postHistoryId = 9'
-            {     \
-             "Price": 550, \
-             "DateFrom": "2020-10-15T09:00:00"\
-             "DateTo": "2021-11-15T09:00:00"\
-             "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
-            } 
-            </remarks>
-            <response code="200">Returns updated post history</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">Post history with postHistoryId is not found</response>
-            <response code="409">Conflict - Foreign key constraint violation</response>
-            <response code="500">Error on the server while updating</response>
-        </member>
-        <member name="M:PostService.Controllers.PostHistoryController.DeletePostHistory(System.Int32)">
-            <summary>
-            Deleting post history with postHistoryId
-            </summary>
-            <param name="postHistoryId">PostHistory's Id</param>
-            <returns>Status 204 - NoContent</returns>
-            <remarks>        
-            Example of a request to delete postHistory
-            DELETE 'https://localhost:44377/api/postHistories' \
-              --param  'postHistoryId = 7'
-            </remarks>
-            <response code="204">PostHistory successfully deleted</response>
-            <response code="401" >Unauthorized user</response>
-            <response code="404">Post history with this postHistoryId is not found</response>
-            <response code="500">There was an error on the server</response>
-        </member>
-        <member name="T:PostService.Controllers.ProductController">
-            <summary>
-            Product controller with endpoints for CRUD operations
-            </summary>
-        </member>
-        <member name="M:PostService.Controllers.ProductController.GetPostOpstions">
-            <summary>
-            Returns implemented options for API   
-            </summary>
-            <returns>Header key 'Allow' with allowed requests</returns>
-            <remarks>
-            Example of successful request \
-            OPTIONS 'https://localhost:44377/api/products' \
-            </remarks>
-            <response code="200">Return header key 'Allow' with allowed requests</response>
-        </member>
-        <member name="M:PostService.Controllers.ProductController.GetProducts(System.String)">
-            <summary>
-            Returns list of all products
-            </summary>
-            <param name="productName">Name of the product</param>
-            <returns>List of products</returns>
-            <response code="200">Returns list of products</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">No products found</response>
-            <response code="500">There was an error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.ProductController.GetProductById(System.Guid)">
-            <summary>
-            Returns product with productId
-            </summary>
-            <param name="productId">Products's Id</param>
-            <returns>Product with productId</returns>
-            <response code="200">Returns the product</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">Product with this productId is not found</response>
-            <response code="500">There was an error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.ProductController.CreateProduct(PostService.Models.DTOs.Post.ProductCreationDto)">
-            <summary>
-            Creates product
-            </summary>
-            <param name="productDto">Model of product to create</param>
-            <remarks>
-            POST 'https://localhost:44377/api/products/' \
-            Example of a request to create product \
-             --header 'Authorization: TODO - dodati jwt' \
-            {
-            "weight": "130g",
-            "postName": "Nike sportska majica",
-            "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
-            "description": "Nike Sportswear T-Shirt je muška majica, koju odlikuje udobnost, jer je napravljena od mekog materijala.",
-            "price": 2310,
-            "currency": "Rsd",
-            "category": "Sportska odeća",
-            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
-             }
-            </remarks>
-            <response code="201">Returns the created product</response>
-            <response code="401">Unauthorized user</response>
-            <response code="500">There was an error on the server</response>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.UpdateProduct(PostService.Models.DTOs.Post.ProductUpdateDto,System.Guid,System.Guid)" -->
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.DeleteProduct(System.Guid,System.Guid)" -->
-        <member name="T:PostService.Controllers.ServiceController">
-            <summary>
-            Service controller with endpoints for CRUD operations
-            </summary>
-        </member>
-        <member name="M:PostService.Controllers.ServiceController.GetPostOpstions">
-            <summary>
-            Returns implemented options for API   
-            </summary>
-            <returns>Header key 'Allow' with allowed requests</returns>
-            <remarks>
-            Example of successful request \
-            OPTIONS 'https://localhost:44377/api/services' \
-            </remarks>
-            <response code="200">Return header key 'Allow' with allowed requests</response>
-        </member>
-        <member name="M:PostService.Controllers.ServiceController.GetServices(System.String)">
-            <summary>
-            Returns list of all services
-            </summary>
-            <param name="serviceName">Name of the service</param>
-            <returns>List of products</returns>
-            <response code="200">Returns list of services</response>
-            <response code="401">Unauthorized user</response>
-            <response code="404">No services found</response>
-            <response code="500">There was an error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.ServiceController.GetServiceById(System.Guid)">
-             <summary>
-             Returns service with serviceId
-             </summary>
-             <param name="serviceId">Service's Id</param>
-             <returns>Service with serviceId</returns>
-            <response code="200">Returns the service</response>
-             <response code="401">Unauthorized user</response>
-             <response code="404">Service with this serviceId is not found</response>
-             <response code="500">There was an error on the server</response>
-        </member>
-        <member name="M:PostService.Controllers.ServiceController.CreateService(PostService.Models.DTOs.Post.ServiceCreationDto)">
-            <summary>
-            Creates service
-            </summary>
-            <param name="serviceDto">Model of service to create</param>
-            <remarks>
-            POST 'https://localhost:44377/api/services/' \
-            Example of a request to create service \
-             --header 'Authorization: TODO - dodati jwt' \
-            {
-            "postName": "Sportska masaža",
-            "postImage": "https://www.msccollege.edu/wp-content/uploads/2020/06/sports-massage-therapy-1024x683.jpg",
-            "description": "Zakaži svoj termin i spremno dočekaj sledeći trening",
-            "price": 3000,
-            "currency": "Rsd",
-            "category": "Lepota i zdravlje",
-            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
-            }
-            </remarks>
-            <response code="201">Returns the created service</response>
-            <response code="401">Unauthorized user</response>
-            <response code="500">There was an error on the server</response>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.UpdateService(PostService.Models.DTOs.Post.ServiceUpdateDto,System.Guid,System.Guid)" -->
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.DeleteService(System.Guid,System.Guid)" -->
-        <member name="P:PostService.Entities.PostHistory.PostHistoryId">
-            <summary>
-            Unique identifier for the post history
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.PostHistory.Price">
-            <summary>
-            Price for the post in a certain period of time
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.PostHistory.DateFrom">
-            <summary>
-            Date from which a certain post's price applies
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.PostHistory.DateTo">
-            <summary>
-            Date to which a certain post's price applies
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.PostHistory.PostId">
-            <summary>
-            Id of the post to which a certain price applies
-            </summary>
-        </member>
-        <member name="T:PostService.Entities.Posts.Post">
-            <summary>
-            Entity class which models different kind of posts (products and services)
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.PostId">
-            <summary>
-            Unique identifier for the post
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.PostName">
-            <summary>
-            Name of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.PostImage">
-            <summary>
-            Image of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.Description">
-            <summary>
-            Description of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.Price">
-            <summary>
-            Price of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.Currency">
-            <summary>
-            Payment currency
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.Category">
-            <summary>
-            Category to which the post belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.PublicationDate">
-            <summary>
-            Date when the post was published
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Post.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Entities.Posts.Product.Weight">
-            <summary>
-            Weight of the product
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.Price">
-            <summary>
-            Price for the post in a certain period of time
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.PostId">
-            <summary>
-            Id of the post to which a certain price applies
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.Price">
-            <summary>
-            Price for the post in a certain period of time
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.DateFrom">
-            <summary>
-            Date from which a certain post's price applies
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.DateTo">
-            <summary>
-            Date to which a certain post's price applies
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.PostId">
-            <summary>
-            Id of the post to which a certain price applies
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.PostId">
-            <summary>
-            Unique identifier for the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.PostName">
-            <summary>
-            Name of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.PostImage">
-            <summary>
-            Image of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.Description">
-            <summary>
-            Description of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.Price">
-            <summary>
-            Price of the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.Currency">
-            <summary>
-            Payment currency
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.Category">
-            <summary>
-            Category to which the post belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.PostType">
-            <summary>
-            Type of the post (product or service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.PublicationDate">
-            <summary>
-            Date when the post was published
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.PostDto.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostId">
-            <summary>
-            Unique identifier for the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostName">
-            <summary>
-            Name of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostImage">
-            <summary>
-            Image of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Description">
-            <summary>
-            Description of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Price">
-            <summary>
-            Price of the post(product) with currency
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Category">
-            <summary>
-            Category to which the post(product) belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PublicationDate">
-            <summary>
-            Date when the post(product) was published
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Weight">
-            <summary>
-            Weight of the product
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.PostName">
-            <summary>
-            Name of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.PostImage">
-            <summary>
-            Image of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Description">
-            <summary>
-            Description of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Price">
-            <summary>
-            Price of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Currency">
-            <summary>
-            Payment currency
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Category">
-            <summary>
-            Category to which the post(product) belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Weight">
-            <summary>
-            Weight of the product
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.PostName">
-            <summary>
-            Name of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.PostImage">
-            <summary>
-            Image of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Description">
-            <summary>
-            Description of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Price">
-            <summary>
-            Price of the post(product)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Currency">
-            <summary>
-            Payment currency
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Category">
-            <summary>
-            Category to which the post(product) belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Weight">
-            <summary>
-            Weight of the product
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostId">
-            <summary>
-            Unique identifier for the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostName">
-            <summary>
-            Name of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostImage">
-            <summary>
-            Image of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Description">
-            <summary>
-            Description of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Price">
-            <summary>
-            Price of the post(service) with currency
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Category">
-            <summary>
-            Category to which the post(service) belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.PostName">
-            <summary>
-            Name of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.PostImage">
-            <summary>
-            Image of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Description">
-            <summary>
-            Description of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Price">
-            <summary>
-            Price of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Currency">
-            <summary>
-            Payment currency
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Category">
-            <summary>
-            Category to which the post(service) belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.PostName">
-            <summary>
-            Name of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.PostImage">
-            <summary>
-            Image of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Description">
-            <summary>
-            Description of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Price">
-            <summary>
-            Price of the post(service)
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Currency">
-            <summary>
-            Payment currency
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Category">
-            <summary>
-            Category to which the post(service) belongs
-            </summary>
-        </member>
-        <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.AccountId">
-            <summary>
-            Id of the user's account who posted the post
-            </summary>
-        </member>
-        <member name="P:PostService.Models.Mock.AccountDto.AccountId">
-            <summary>
-            Unique identifier for the user account
-            </summary>
-        </member>
-        <member name="P:PostService.Models.Mock.AccountDto.Username">
-            <summary>
-            Username for the user account
-            </summary>
-        </member>
-        <member name="P:PostService.Models.Mock.AccountDto.Name">
-            <summary>
-            First name of the user
-            is active
-            </summary>
-        </member>
-        <member name="P:PostService.Models.Mock.AccountDto.Surname">
-            <summary>
-            Last name of the user
-            is active
-            </summary>
-        </member>
-        <member name="P:PostService.Models.Mock.AccountDto.Email">
-            <summary>
-            Email of the user
-            </summary>
-        </member>
-        <member name="P:PostService.Models.Mock.AccountDto.PhoneNumber">
-            <summary>
-            User's phone number
-            </summary>
-        </member>
-        <member name="P:PostService.Models.Mock.AccountDto.Address">
-            <summary>
-            User's home address
-            </summary>
-        </member>
-    </members>
+  <assembly>
+    <name>PostService</name>
+  </assembly>
+  <members>
+    <member name="T:PostService.Controllers.PostController">
+      <summary>
+        Post controller with endpoints for fetching posts
+      </summary>
+    </member>
+    <member name="M:PostService.Controllers.PostController.GetPostOpstions">
+      <summary>
+        Returns implemented options for API
+      </summary>
+      <returns>Header key 'Allow' with allowed requests</returns>
+      <remarks>
+        Example of successful request \
+        OPTIONS 'https://localhost:44377/api/posts' \
+      </remarks>
+      <response code="200">Return header key 'Allow' with allowed requests</response>
+    </member>
+    <member name="M:PostService.Controllers.PostController.GetPosts(System.String,System.String)">
+      <summary>
+        Returns list of all posts
+      </summary>
+      <param name="postType">Name of the post type (product or service)</param>
+      <param name="username">Name of the user who posted</param>
+      <returns>List of posts</returns>
+      <response code="200">Returns list of posts</response>
+      <response code="400">Bad request - e.g. wrong post type, wrong username</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">No posts found</response>
+      <response code="500">Error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.PostController.GetPostById(System.Guid)">
+      <summary>
+        Returns post with postId
+      </summary>
+      <param name="postId">Post's Id</param>
+      <returns> Post with postId</returns>
+      <response code="200">Returns the post</response>
+      <response code="401">Unauthorized user</response>
+      <response code="403">Forbiden request - user with this role doesn't have permission to access endpoint</response>
+      <response code="404">Post with this postId is not found</response>
+      <response code="500">Error on the server</response>
+    </member>
+    <member name="T:PostService.Controllers.PostHistoryController">
+      <summary>
+        PostHistory controller with endpoints for CRUD operations
+      </summary>
+    </member>
+    <member name="M:PostService.Controllers.PostHistoryController.GetPostOpstions">
+      <summary>
+        Returns implemented options for API
+      </summary>
+      <returns>Header key 'Allow' with allowed requests</returns>
+      <remarks>
+        Example of successful request \
+        OPTIONS 'https://localhost:44377/api/postHistories' \
+      </remarks>
+      <response code="200">Return header key 'Allow' with allowed requests</response>
+    </member>
+    <member name="M:PostService.Controllers.PostHistoryController.GetPostHisttories">
+      <summary>
+        Returns list of all post histories
+      </summary>
+      <returns>List of post histories</returns>
+      <remarks>
+        Example of a request to get all post histories
+        GET 'https://localhost:44377/api/postHistories'
+      </remarks>
+      <response code="200">Returns list of post histories</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">No post histories found</response>
+      <response code="500">Error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.PostHistoryController.GetPostHistoryByPostId(System.Guid)">
+      <summary>
+        Returns post history by postId
+      </summary>
+      <param name="postId">Post's Id</param>
+      <returns> Post history with postId</returns>
+      <remarks>
+        Example of a request to get postHistory by postId
+        GET 'https://localhost:44377/api/postHistories/' \
+        --param  'postId = 23d2cce9-86d7-4bff-887e-f7712b16766d'
+      </remarks>
+      <response code="200">Returns the post history</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">Post history with this postId is not found</response>
+      <response code="500">Error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.PostHistoryController.CreatePostHistory(PostService.Models.DTOs.PostHistory.PostHistoryCreationDto)">
+      <summary>
+        Creates post history for a specific post
+      </summary>
+      <param name="postHistoryDto">Model of post history</param>
+      <remarks>
+        POST 'https://localhost:44377/api/postHistories/' \
+        Example of a request to create postHistory \
+        --header 'Authorization: TODO - dodati jwt' \
+        npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
+        {     \
+        "Price": 600, \
+        "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
+        }
+      </remarks>
+      <response code="201">Returns the created post history</response>
+      <response code="401">Unauthorized user</response>
+      <response code="409">Conflict - Foreign key constraint violation</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.PostHistoryController.UpdatePostHistory(PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto,System.Int32)">
+      <summary>
+        Updates post history
+      </summary>
+      <param name="postHistoryUpdateDto">Model of post history for udpdate</param>
+      <param name="postHistoryId">Post history id</param>
+      <returns>Confirmation of update</returns>
+      <remarks>
+        POST 'https://localhost:44377/api/postHistories/' \
+        Example of a request to create postHistory \
+        --header 'Authorization: TODO - dodati jwt' \
+        npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
+        --param  'postHistoryId = 9'
+        {     \
+        "Price": 550, \
+        "DateFrom": "2020-10-15T09:00:00"\
+        "DateTo": "2021-11-15T09:00:00"\
+        "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
+        }
+      </remarks>
+      <response code="200">Returns updated post history</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">Post history with postHistoryId is not found</response>
+      <response code="409">Conflict - Foreign key constraint violation</response>
+      <response code="500">Error on the server while updating</response>
+    </member>
+    <member name="M:PostService.Controllers.PostHistoryController.DeletePostHistory(System.Int32)">
+      <summary>
+        Deleting post history with postHistoryId
+      </summary>
+      <param name="postHistoryId">PostHistory's Id</param>
+      <returns>Status 204 - NoContent</returns>
+      <remarks>
+        Example of a request to delete postHistory
+        DELETE 'https://localhost:44377/api/postHistories' \
+        --param  'postHistoryId = 7'
+      </remarks>
+      <response code="204">PostHistory successfully deleted</response>
+      <response code="401" >Unauthorized user</response>
+      <response code="404">Post history with this postHistoryId is not found</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <member name="T:PostService.Controllers.ProductController">
+      <summary>
+        Product controller with endpoints for CRUD operations
+      </summary>
+    </member>
+    <member name="M:PostService.Controllers.ProductController.GetPostOpstions">
+      <summary>
+        Returns implemented options for API
+      </summary>
+      <returns>Header key 'Allow' with allowed requests</returns>
+      <remarks>
+        Example of successful request \
+        OPTIONS 'https://localhost:44377/api/products' \
+      </remarks>
+      <response code="200">Return header key 'Allow' with allowed requests</response>
+    </member>
+    <member name="M:PostService.Controllers.ProductController.GetProducts(System.String)">
+      <summary>
+        Returns list of all products
+      </summary>
+      <param name="productName">Name of the product</param>
+      <returns>List of products</returns>
+      <response code="200">Returns list of products</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">No products found</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.ProductController.GetProductById(System.Guid)">
+      <summary>
+        Returns product with productId
+      </summary>
+      <param name="productId">Products's Id</param>
+      <returns>Product with productId</returns>
+      <response code="200">Returns the product</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">Product with this productId is not found</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.ProductController.CreateProduct(PostService.Models.DTOs.Post.ProductCreationDto)">
+      <summary>
+        Creates product
+      </summary>
+      <param name="productDto">Model of product to create</param>
+      <remarks>
+        POST 'https://localhost:44377/api/products/' \
+        Example of a request to create product \
+        --header 'Authorization: TODO - dodati jwt' \
+        npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
+        {
+        "weight": "130g",
+        "postName": "Nike sportska majica",
+        "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
+        "description": "Nike Sportswear T-Shirt je muška majica, koju odlikuje udobnost, jer je napravljena od mekog materijala.",
+        "price": 2310,
+        "currency": "Rsd",
+        "category": "Sportska odeća",
+        "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
+        }
+      </remarks>
+      <response code="201">Returns the created product</response>
+      <response code="401">Unauthorized user</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.UpdateProduct(PostService.Models.DTOs.Post.ProductUpdateDto,System.Guid,System.Guid)" -->
+    <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.DeleteProduct(System.Guid,System.Guid)" -->
+    <member name="T:PostService.Controllers.ServiceController">
+      <summary>
+        Service controller with endpoints for CRUD operations
+      </summary>
+    </member>
+    <member name="M:PostService.Controllers.ServiceController.GetPostOpstions">
+      <summary>
+        Returns implemented options for API
+      </summary>
+      <returns>Header key 'Allow' with allowed requests</returns>
+      <remarks>
+        Example of successful request \
+        OPTIONS 'https://localhost:44377/api/services' \
+      </remarks>
+      <response code="200">Return header key 'Allow' with allowed requests</response>
+    </member>
+    <member name="M:PostService.Controllers.ServiceController.GetServices(System.String)">
+      <summary>
+        Returns list of all services
+      </summary>
+      <param name="serviceName">Name of the service</param>
+      <returns>List of products</returns>
+      <response code="200">Returns list of services</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">No services found</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.ServiceController.GetServiceById(System.Guid)">
+      <summary>
+        Returns service with serviceId
+      </summary>
+      <param name="serviceId">Service's Id</param>
+      <returns>Service with serviceId</returns>
+      <response code="200">Returns the service</response>
+      <response code="401">Unauthorized user</response>
+      <response code="404">Service with this serviceId is not found</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <member name="M:PostService.Controllers.ServiceController.CreateService(PostService.Models.DTOs.Post.ServiceCreationDto)">
+      <summary>
+        Creates service
+      </summary>
+      <param name="serviceDto">Model of service to create</param>
+      <remarks>
+        POST 'https://localhost:44377/api/services/' \
+        Example of a request to create service \
+        --header 'Authorization: TODO - dodati jwt' \
+        npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
+        {
+        "postName": "Sportska masaža",
+        "postImage": "https://www.msccollege.edu/wp-content/uploads/2020/06/sports-massage-therapy-1024x683.jpg",
+        "description": "Zakaži svoj termin i spremno dočekaj sledeći trening",
+        "price": 3000,
+        "currency": "Rsd",
+        "category": "Lepota i zdravlje",
+        "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
+        }
+      </remarks>
+      <response code="201">Returns the created service</response>
+      <response code="401">Unauthorized user</response>
+      <response code="500">There was an error on the server</response>
+    </member>
+    <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.UpdateService(PostService.Models.DTOs.Post.ServiceUpdateDto,System.Guid,System.Guid)" -->
+    <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.DeleteService(System.Guid,System.Guid)" -->
+    <member name="P:PostService.Entities.PostHistory.PostHistoryId">
+      <summary>
+        Unique identifier for the post history
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.PostHistory.Price">
+      <summary>
+        Price for the post in a certain period of time
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.PostHistory.DateFrom">
+      <summary>
+        Date from which a certain post's price applies
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.PostHistory.DateTo">
+      <summary>
+        Date to which a certain post's price applies
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.PostHistory.PostId">
+      <summary>
+        Id of the post to which a certain price applies
+      </summary>
+    </member>
+    <member name="T:PostService.Entities.Posts.Post">
+      <summary>
+        Entity class which models different kind of posts (products and services)
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.PostId">
+      <summary>
+        Unique identifier for the post
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.PostName">
+      <summary>
+        Name of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.PostImage">
+      <summary>
+        Image of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.Description">
+      <summary>
+        Description of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.Price">
+      <summary>
+        Price of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.Currency">
+      <summary>
+        Payment currency
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.Category">
+      <summary>
+        Category to which the post belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.PublicationDate">
+      <summary>
+        Date when the post was published
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Post.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Entities.Posts.Product.Weight">
+      <summary>
+        Weight of the product
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.Price">
+      <summary>
+        Price for the post in a certain period of time
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryCreationDto.PostId">
+      <summary>
+        Id of the post to which a certain price applies
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.Price">
+      <summary>
+        Price for the post in a certain period of time
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.DateFrom">
+      <summary>
+        Date from which a certain post's price applies
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.DateTo">
+      <summary>
+        Date to which a certain post's price applies
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.PostHistory.PostHistoryUpdateDto.PostId">
+      <summary>
+        Id of the post to which a certain price applies
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.PostId">
+      <summary>
+        Unique identifier for the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.PostName">
+      <summary>
+        Name of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.PostImage">
+      <summary>
+        Image of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.Description">
+      <summary>
+        Description of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.Price">
+      <summary>
+        Price of the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.Currency">
+      <summary>
+        Payment currency
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.Category">
+      <summary>
+        Category to which the post belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.PostType">
+      <summary>
+        Type of the post (product or service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.PublicationDate">
+      <summary>
+        Date when the post was published
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.PostDto.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostId">
+      <summary>
+        Unique identifier for the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostName">
+      <summary>
+        Name of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PostImage">
+      <summary>
+        Image of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Description">
+      <summary>
+        Description of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Price">
+      <summary>
+        Price of the post(product) with currency
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Category">
+      <summary>
+        Category to which the post(product) belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.PublicationDate">
+      <summary>
+        Date when the post(product) was published
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductConfirmationDto.Weight">
+      <summary>
+        Weight of the product
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.PostName">
+      <summary>
+        Name of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.PostImage">
+      <summary>
+        Image of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Description">
+      <summary>
+        Description of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Price">
+      <summary>
+        Price of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Currency">
+      <summary>
+        Payment currency
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Category">
+      <summary>
+        Category to which the post(product) belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductCreationDto.Weight">
+      <summary>
+        Weight of the product
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.PostName">
+      <summary>
+        Name of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.PostImage">
+      <summary>
+        Image of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Description">
+      <summary>
+        Description of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Price">
+      <summary>
+        Price of the post(product)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Currency">
+      <summary>
+        Payment currency
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Category">
+      <summary>
+        Category to which the post(product) belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ProductUpdateDto.Weight">
+      <summary>
+        Weight of the product
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostId">
+      <summary>
+        Unique identifier for the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostName">
+      <summary>
+        Name of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.PostImage">
+      <summary>
+        Image of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Description">
+      <summary>
+        Description of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Price">
+      <summary>
+        Price of the post(service) with currency
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.Category">
+      <summary>
+        Category to which the post(service) belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceConfirmationDto.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.PostName">
+      <summary>
+        Name of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.PostImage">
+      <summary>
+        Image of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Description">
+      <summary>
+        Description of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Price">
+      <summary>
+        Price of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Currency">
+      <summary>
+        Payment currency
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.Category">
+      <summary>
+        Category to which the post(service) belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceCreationDto.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.PostName">
+      <summary>
+        Name of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.PostImage">
+      <summary>
+        Image of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Description">
+      <summary>
+        Description of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Price">
+      <summary>
+        Price of the post(service)
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Currency">
+      <summary>
+        Payment currency
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.Category">
+      <summary>
+        Category to which the post(service) belongs
+      </summary>
+    </member>
+    <member name="P:PostService.Models.DTOs.Post.ServiceUpdateDto.AccountId">
+      <summary>
+        Id of the user's account who posted the post
+      </summary>
+    </member>
+    <member name="P:PostService.Models.Mock.AccountDto.AccountId">
+      <summary>
+        Unique identifier for the user account
+      </summary>
+    </member>
+    <member name="P:PostService.Models.Mock.AccountDto.Username">
+      <summary>
+        Username for the user account
+      </summary>
+    </member>
+    <member name="P:PostService.Models.Mock.AccountDto.Name">
+      <summary>
+        First name of the user
+        is active
+      </summary>
+    </member>
+    <member name="P:PostService.Models.Mock.AccountDto.Surname">
+      <summary>
+        Last name of the user
+        is active
+      </summary>
+    </member>
+    <member name="P:PostService.Models.Mock.AccountDto.Email">
+      <summary>
+        Email of the user
+      </summary>
+    </member>
+    <member name="P:PostService.Models.Mock.AccountDto.PhoneNumber">
+      <summary>
+        User's phone number
+      </summary>
+    </member>
+    <member name="P:PostService.Models.Mock.AccountDto.Address">
+      <summary>
+        User's home address
+      </summary>
+    </member>
+  </members>
 </doc>
