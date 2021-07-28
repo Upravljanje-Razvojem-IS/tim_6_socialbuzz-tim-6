@@ -3,12 +3,18 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Net.Http.Headers;
+using ReactionService.Data.BlockingMock;
+using ReactionService.Data.FollowingMock;
 using ReactionService.Data.Reactions;
 using ReactionService.Entities;
 using ReactionService.Logger;
+using ReactionService.Models.Mocks;
+using ReactionService.ServiceCalls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ReactionService.Controllers
@@ -27,15 +33,17 @@ namespace ReactionService.Controllers
         private readonly LinkGenerator _linkGenerator;
         private readonly IFakeLogger _logger;
         private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IPostService _postService;
 
-        public ReactionController(IReactionRepository reactionRepository, IMapper mapper, IFakeLogger logger,
-                                    LinkGenerator linkGenerator, IHttpContextAccessor contextAccessor)
+        public ReactionController(IReactionRepository reactionRepository, IMapper mapper, IFakeLogger logger, LinkGenerator linkGenerator, 
+                                  IHttpContextAccessor contextAccessor, IPostService postService)
         {
             _reactionRepository = reactionRepository;
             _mapper = mapper;
             _linkGenerator = linkGenerator;
             _logger = logger;
             _contextAccessor = contextAccessor;
+            _postService = postService;
         }
 
         /// <summary>
@@ -169,11 +177,14 @@ namespace ReactionService.Controllers
         /// Returns reaction(s) by postId
         /// </summary>
         /// <param name="postId">Post's Id</param>
+        /// <param name="userId">User's Id</param>
         /// <returns> Reaction(s) with postId</returns>
         /// <remarks>        
         /// Example of a request to get reactions(s) by postId
-        /// GET 'https://localhost:44389/api/reactions/postId/8ccb1467-9f38-4164-88da-15882fe82e58' \
+        /// GET 'https://localhost:44389/api/reactions/postId/8CCB1467-9F38-4164-88DA-15882FE82E58' \
         ///     --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+        /// Successful request: --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+        /// Bad request:        --param 'userId = f2f88bcd-d0a2-4fe7-a23f-df97a59731cd'
         /// </remarks>
         /// <response code="200">Returns the reaction(s)</response>
         /// <response code="401">Unauthorized user</response>
@@ -184,14 +195,26 @@ namespace ReactionService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("postId/{postId}")]
-        public ActionResult<List<Reaction>> GetReactionByPostId(Guid postId)
+        public ActionResult<List<Reaction>> GetReactionByPostId(Guid postId, [FromHeader] Guid userId)
         {
             try
             {
-                var reaction = _reactionRepository.GetReactionByPostId(postId);
-                if (reaction == null)
+                var post = _postService.GetPostById<PostDto>(HttpMethod.Get, postId, Request.Headers["Authorization"]).Result;
+                if (post == null)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, "Reaction(s) with this id is not found");
+                    return StatusCode(StatusCodes.Status400BadRequest, "Post with that ID does not exist!");
+                }
+                var sellerId = post.AccountId;
+
+                if (_reactionRepository.CheckDidIBlockSeller(userId, sellerId))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "You can't see reactions for this post because you blocked seller or you are blocked!");
+                }
+
+                var reaction = _reactionRepository.GetReactionByPostId(postId, userId);
+                if (reaction == null || reaction.Count == 0)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, "There are no reactions for this post yet");
                 }
                 return Ok(reaction);
             }

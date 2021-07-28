@@ -7,7 +7,7 @@ namespace ReactionService.Data.BlockingMock
 {
     public interface IBlockingMockRepository
     {
-        List<Guid> GetUsersIBlocked(Guid userId);
+        List<Guid> GetBlockedUsers(Guid userId);
 
         /// <summary>
         /// Check did I block user

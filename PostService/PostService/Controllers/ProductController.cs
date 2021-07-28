@@ -136,6 +136,7 @@ namespace PostService.Controllers
         /// POST 'https://localhost:44377/api/products/' \
         /// Example of a request to create product \
         ///  --header 'Authorization: TODO - dodati jwt' \
+        ///  npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
         /// {
         /// "weight": "130g",
         /// "postName": "Nike sportska majica",
@@ -185,6 +186,7 @@ namespace PostService.Controllers
         /// POST 'https://localhost:44377/api/products/' \
         /// Example of a request to update product \
         ///  --header 'Authorization: TODO - dodati jwt' \
+        ///  npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
         ///  --param  'productId = example of Guid'
         ///  --param  correct userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
         ///           wrong userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'

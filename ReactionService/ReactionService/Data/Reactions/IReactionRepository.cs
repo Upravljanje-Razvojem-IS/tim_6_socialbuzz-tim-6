@@ -10,14 +10,14 @@ namespace ReactionService.Data.Reactions
     {
         List<Reaction> GetReactions();
         public Reaction GetReactionById(Guid reactionId);
-        List<Reaction> GetReactionByPostId(Guid postId);
+        List<Reaction> GetReactionByPostId(Guid postId, Guid userId);
         List<Reaction> GetReactionByReactionTypeId(int reactionTypeId);
         void CreateReaction(Reaction reaction);
         public void UpdateReaction(Reaction reaction);
         public void DeleteReaction(Guid reactionID);
-        bool CheckDoIFollowSeller(int userId, int sellerId);
-        bool CheckDidIBlockSeller(int userId, int sellerId);
-        public Reaction CheckDidIAlreadyReact(int userId, int postId);
+        bool CheckDoIFollowSeller(Guid userId, Guid sellerId);
+        bool CheckDidIBlockSeller(Guid userId, Guid sellerId);
+        public Reaction CheckDidIAlreadyReact(Guid userId, Guid postId);
         bool SaveChanges();
     }
 }

@@ -11,10 +11,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ReactionService.Data.BlockingMock;
+using ReactionService.Data.FollowingMock;
 using ReactionService.Data.Reactions;
 using ReactionService.Data.ReactionTypes;
 using ReactionService.Entities;
 using ReactionService.Logger;
+using ReactionService.ServiceCalls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -88,6 +91,9 @@ namespace ReactionService
 
             services.AddScoped<IReactionTypeRepository, ReactionTypeRepository>();
             services.AddScoped<IReactionRepository, ReactionRepository>();
+            services.AddScoped<IFollowingMockRepository, FollowingMockRepository>();
+            services.AddScoped<IBlockingMockRepository, BlockingMockRepository>();
+            services.AddScoped<IPostService, PostService>();
             services.AddSingleton<IFakeLogger, FakeLogger>();
             services.AddHttpContextAccessor();
 

@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ReactionService.Data.BlockingMock;
+using ReactionService.Data.FollowingMock;
 using ReactionService.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,10 +12,14 @@ namespace ReactionService.Data.Reactions
     public class ReactionRepository : IReactionRepository
     {
         private readonly ReactionDbContext _context;
+        private readonly IBlockingMockRepository _blockingMockRepository;
+        private readonly IFollowingMockRepository _followingMockRepository;
 
-        public ReactionRepository(ReactionDbContext context)
+        public ReactionRepository(ReactionDbContext context, IBlockingMockRepository blockingMockRepository, IFollowingMockRepository followingMockRepository)
         {
             _context = context;
+            _blockingMockRepository = blockingMockRepository;
+            _followingMockRepository = followingMockRepository;
         }
 
         public List<Reaction> GetReactions()
@@ -31,9 +37,15 @@ namespace ReactionService.Data.Reactions
             return _context.Reactions.Include(e => e.ReactionType).Where(e => e.ReactionTypeId == reactionTypeId).ToList();
         }
 
-        public List<Reaction> GetReactionByPostId(Guid postId)
+        public List<Reaction> GetReactionByPostId(Guid postId, Guid userId)
         {
-            return _context.Reactions.Include(e => e.ReactionType).Where(e => e.PostId == postId).ToList();
+            var reactions = from reaction in _context.Reactions
+                        where !(from users in _blockingMockRepository.GetBlockedUsers(userId)
+                                select users).Contains(reaction.AccountId)
+                        where reaction.PostId == postId
+                        select reaction;
+
+            return reactions.Include(e => e.ReactionType).ToList();
         }
 
         public void CreateReaction(Reaction reaction)
@@ -51,19 +63,19 @@ namespace ReactionService.Data.Reactions
             throw new NotImplementedException();
         }
 
-        public Reaction CheckDidIAlreadyReact(int userId, int postId)
+        public Reaction CheckDidIAlreadyReact(Guid userId, Guid postId)
         {
             throw new NotImplementedException();
         }
 
-        public bool CheckDidIBlockSeller(int userId, int sellerId)
+        public bool CheckDidIBlockSeller(Guid userId, Guid sellerId)
         {
-            throw new NotImplementedException();
+            return _blockingMockRepository.CheckDidIBlockSeller(userId, sellerId);
         }
 
-        public bool CheckDoIFollowSeller(int userId, int sellerId)
+        public bool CheckDoIFollowSeller(Guid userId, Guid sellerId)
         {
-            throw new NotImplementedException();
+            return _followingMockRepository.CheckDoIFollowSeller(userId, sellerId);
         }
 
         public bool SaveChanges()
