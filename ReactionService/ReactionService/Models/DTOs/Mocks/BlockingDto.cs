@@ -5,21 +5,21 @@ using System.Threading.Tasks;
 
 namespace ReactionService.Models.DTOs.Mocks
 {
-    public class FollowingDto
+    public class BlockingDto
     {
         /// <summary>
-        /// Unique identifier for the following
+        /// Unique identifier for the blocking
         /// </summary>
-        public Guid FollowingId;
+        public Guid BlockingId;
 
         /// <summary>
-        /// Id of the user who followed another user
+        /// Id of the user who blocked another user
         /// </summary>
-        public Guid FollowerId;
+        public Guid BlockerId;
 
         /// <summary>
-        /// Id of the user who are followed by another user
+        /// Id of the user who are blocked by another user
         /// </summary>
-        public Guid FollowedId;
+        public Guid BlockedId;
     }
 }
