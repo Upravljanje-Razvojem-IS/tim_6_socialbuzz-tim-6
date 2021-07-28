@@ -99,7 +99,7 @@ namespace PostService.Controllers
                     List<PostDto> posts = new List<PostDto>();
                     posts.AddRange(_mapper.Map<List<PostDto>>(products));
                     posts.AddRange(_mapper.Map<List<PostDto>>(services));
-                    if (posts == null || posts.Count == 0)
+                    if (posts.Count == 0)
                     {
                         return StatusCode(StatusCodes.Status404NotFound, "No posts found");
                     }
