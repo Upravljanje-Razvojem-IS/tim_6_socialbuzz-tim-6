@@ -46,7 +46,7 @@ namespace PostService.Controllers
         /// <response code="200">Return header key 'Allow' with allowed requests</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpOptions]
-        public IActionResult GetPostOpstions()
+        public IActionResult GetPostOptions()
         {
             Response.Headers.Add("Allow", "GET");
             return Ok();

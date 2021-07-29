@@ -9,7 +9,7 @@
             Post controller with endpoints for fetching posts
             </summary>
         </member>
-        <member name="M:PostService.Controllers.PostController.GetPostOpstions">
+        <member name="M:PostService.Controllers.PostController.GetPostOptions">
             <summary>
             Returns implemented options for API   
             </summary>
@@ -50,7 +50,7 @@
             PostHistory controller with endpoints for CRUD operations
             </summary>
         </member>
-        <member name="M:PostService.Controllers.PostHistoryController.GetPostOpstions">
+        <member name="M:PostService.Controllers.PostHistoryController.GetPostOptions">
             <summary>
             Returns implemented options for API   
             </summary>
@@ -158,7 +158,7 @@
             Product controller with endpoints for CRUD operations
             </summary>
         </member>
-        <member name="M:PostService.Controllers.ProductController.GetPostOpstions">
+        <member name="M:PostService.Controllers.ProductController.GetPostOptions">
             <summary>
             Returns implemented options for API   
             </summary>
@@ -216,14 +216,67 @@
             <response code="401">Unauthorized user</response>
             <response code="500">There was an error on the server</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.UpdateProduct(PostService.Models.DTOs.Post.ProductUpdateDto,System.Guid,System.Guid)" -->
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ProductController.DeleteProduct(System.Guid,System.Guid)" -->
+        <member name="M:PostService.Controllers.ProductController.UpdateProduct(PostService.Models.DTOs.Post.ProductUpdateDto,System.Guid,System.Guid)">
+            <summary>
+            Updates product
+            </summary>
+            <param name="productUpdateDto">Model of product for udpdate</param>
+            <param name="productId">Product id</param>
+            <param name="userId">ID of the user who sends the request</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            POST 'https://localhost:44377/api/products/' \
+            Example of a request to update product \
+             --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
+             --param  'productId = example of Guid'
+             --param  correct userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+                      wrong userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+            {
+            "postName": "Nike majica",
+            "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
+            "description": "Nike Sportswear T-Shirt je muška majica, koja je jako udobna jer je napravljena od mekog materijala.",
+            "price": 2450,
+            "currency": "Rsd",
+            "category": "Sportska odeća",
+            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+            "weight": "110g"
+            }
+            </remarks>
+            <response code="200">Returns updated product</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to update product</response>
+            <response code="404">Product with productId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:PostService.Controllers.ProductController.DeleteProduct(System.Guid,System.Guid)">
+            <summary>
+            Deleting product with productId
+            </summary>
+            <param name="productId">Product's Id</param>
+            <param name="userId">ID of the user who sends the request</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete product
+            DELETE 'https://localhost:44377/api/products' \
+              --param  'productId = 23d2cce9-86d7-4bff-887e-f7712b16766d'
+              --param  userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+                      wrong userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            </remarks>
+            <response code="204">Prdouct successfully deleted</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to delete product</response>
+            <response code="404">Product with this productId is not found</response>
+            <response code="409">Product reference in another table</response>
+            <response code="500">There was an error on the server</response>
+        </member>
         <member name="T:PostService.Controllers.ServiceController">
             <summary>
             Service controller with endpoints for CRUD operations
             </summary>
         </member>
-        <member name="M:PostService.Controllers.ServiceController.GetPostOpstions">
+        <member name="M:PostService.Controllers.ServiceController.GetPostOptions">
             <summary>
             Returns implemented options for API   
             </summary>
@@ -280,8 +333,59 @@
             <response code="401">Unauthorized user</response>
             <response code="500">There was an error on the server</response>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.UpdateService(PostService.Models.DTOs.Post.ServiceUpdateDto,System.Guid,System.Guid)" -->
-        <!-- Badly formed XML comment ignored for member "M:PostService.Controllers.ServiceController.DeleteService(System.Guid,System.Guid)" -->
+        <member name="M:PostService.Controllers.ServiceController.UpdateService(PostService.Models.DTOs.Post.ServiceUpdateDto,System.Guid,System.Guid)">
+            <summary>
+            Updates service
+            </summary>
+            <param name="serviceUpdateDto">Model of service for udpdate</param>
+            <param name="serviceId">Service id</param>
+            <param name="userId">ID of the user who sends the request</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            POST 'https://localhost:44377/api/services/' \
+            Example of a request to update service \
+             --header 'Authorization: TODO - dodati jwt' \
+             --param  'serviceId = example of Guid'
+             --param  correct userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+                      wrong userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+            {
+            "postName": "Masaža za sportiste",
+            "postImage": "https://clubfiftyone.co.uk/wp-content/uploads/2019/09/Sports-therapy.jpg",
+            "description": "Zakaži svoj termin za sportsku masažu i spremno dočekaj sledeći trening",
+            "price": 2800,
+            "currency": "Rsd",
+            "category": "Lepota i zdravlje",
+            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
+            }
+            </remarks>
+            <response code="200">Returns updated service</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to update service</response>
+            <response code="404">Service with serviceId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:PostService.Controllers.ServiceController.DeleteService(System.Guid,System.Guid)">
+            <summary>
+            Deleting service with serviceId
+            </summary>
+            <param name="serviceId">Service's Id</param>
+            <param name="userId">ID of the user who sends the request</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete service
+            DELETE 'https://localhost:44377/api/services' \
+              --param  'serviceId = 4767dabb-05ac-4db6-d37a-08d94f34a631'
+              --param  userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+                       wrong userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+            </remarks>
+            <response code="204">Service successfully deleted</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to delete service</response>
+            <response code="404">Service with this serviceId is not found</response>
+            <response code="409">Service reference in another table</response>
+            <response code="500">There was an error on the server</response>
+        </member>
         <member name="P:PostService.Entities.PostHistory.PostHistoryId">
             <summary>
             Unique identifier for the post history

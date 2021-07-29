@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace PostService.Exceptions
 {
-    [Serializable]
     public class ForeignKeyConstraintException : Exception
     {
         public ForeignKeyConstraintException()
@@ -13,12 +12,12 @@ namespace PostService.Exceptions
 
         }
 
-        public ForeignKeyConstraintException(string message) 
+        public ForeignKeyConstraintException(string message)
             : base(message)
         {
 
         }
-        public ForeignKeyConstraintException(string message, Exception inner) 
+        public ForeignKeyConstraintException(string message, Exception inner)
             : base(message, inner)
         {
 

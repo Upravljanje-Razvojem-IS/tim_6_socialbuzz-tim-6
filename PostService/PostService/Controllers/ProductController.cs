@@ -58,7 +58,7 @@ namespace PostService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPostOpstions()
+        public IActionResult GetPostOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
@@ -292,6 +292,7 @@ namespace PostService.Controllers
                 }
                 _productRepository.DeleteProduct(productId);
                 _productRepository.SaveChanges();
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully deleted product with ID {0} from database", productId), null);
 
                 return NoContent();
             }

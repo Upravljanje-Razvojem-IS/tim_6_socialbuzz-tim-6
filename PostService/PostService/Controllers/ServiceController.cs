@@ -57,7 +57,7 @@ namespace PostService.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpOptions]
         [AllowAnonymous]
-        public IActionResult GetPostOpstions()
+        public IActionResult GetPostOptions()
         {
             Response.Headers.Add("Allow", "GET, POST, PUT, DELETE");
             return Ok();
@@ -289,6 +289,7 @@ namespace PostService.Controllers
                 }
                 _serviceRepository.DeleteService(serviceId);
                 _serviceRepository.SaveChanges();
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully deleted service with ID {0} from database", serviceId), null);
 
                 return NoContent();
             }
