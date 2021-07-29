@@ -97,14 +97,14 @@
             </summary>
             <param name="postHistoryDto">Model of post history</param>
             <remarks>
-              POST 'https://localhost:44377/api/postHistories/' \
-              Example of a request to create postHistory \
-              --header 'Authorization: TODO - dodati jwt' \
-              npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
-              {     \
-              "Price": 600, \
-              "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
-              }
+            POST 'https://localhost:44377/api/postHistories/' \
+            Example of a request to create postHistory \
+             --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
+            {     \
+             "Price": 600, \
+             "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
+            } 
             </remarks>
             <response code="201">Returns the created post history</response>
             <response code="401">Unauthorized user</response>
@@ -119,17 +119,17 @@
             <param name="postHistoryId">Post history id</param>
             <returns>Confirmation of update</returns>
             <remarks>
-              POST 'https://localhost:44377/api/postHistories/' \
-              Example of a request to create postHistory \
-              --header 'Authorization: TODO - dodati jwt' \
-              npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
-              --param  'postHistoryId = 9'
-              {     \
-              "Price": 550, \
-              "DateFrom": "2020-10-15T09:00:00"\
-              "DateTo": "2021-11-15T09:00:00"\
-              "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
-              }
+            POST 'https://localhost:44377/api/postHistories/' \
+            Example of a request to create postHistory \
+             --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
+             --param  'postHistoryId = 9'
+            {     \
+             "Price": 550, \
+             "DateFrom": "2020-10-15T09:00:00"\
+             "DateTo": "2021-11-15T09:00:00"\
+             "PostId": "54f9baf6-271e-40cb-8d80-a27980fc8b63"
+            } 
             </remarks>
             <response code="200">Returns updated post history</response>
             <response code="401">Unauthorized user</response>
@@ -197,20 +197,20 @@
             </summary>
             <param name="productDto">Model of product to create</param>
             <remarks>
-              POST 'https://localhost:44377/api/products/' \
-              Example of a request to create product \
-              --header 'Authorization: TODO - dodati jwt' \
-              npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA'
-              {
-              "weight": "130g",
-              "postName": "Nike sportska majica",
-              "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
-              "description": "Nike Sportswear T-Shirt je muška majica, koju odlikuje udobnost, jer je napravljena od mekog materijala.",
-              "price": 2310,
-              "currency": "Rsd",
-              "category": "Sportska odeća",
-              "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
-              }
+            POST 'https://localhost:44377/api/products/' \
+            Example of a request to create product \
+             --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
+            {
+            "weight": "130g",
+            "postName": "Nike sportska majica",
+            "postImage": "https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg",
+            "description": "Nike Sportswear T-Shirt je muška majica, koju odlikuje udobnost, jer je napravljena od mekog materijala.",
+            "price": 2310,
+            "currency": "Rsd",
+            "category": "Sportska odeća",
+            "accountId": "59ed7d80-39c9-42b8-a822-70ddd295914a"
+             }
             </remarks>
             <response code="201">Returns the created product</response>
             <response code="401">Unauthorized user</response>
@@ -228,6 +228,7 @@
             POST 'https://localhost:44377/api/products/' \
             Example of a request to update product \
              --header 'Authorization: TODO - dodati jwt' \
+             npr.: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg'
              --param  'productId = example of Guid'
              --param  correct userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
                       wrong userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'

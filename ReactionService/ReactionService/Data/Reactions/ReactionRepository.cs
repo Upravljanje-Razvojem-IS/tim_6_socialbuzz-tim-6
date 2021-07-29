@@ -50,7 +50,7 @@ namespace ReactionService.Data.Reactions
 
         public void CreateReaction(Reaction reaction)
         {
-            throw new NotImplementedException();
+            _context.Reactions.Add(reaction);
         }
 
         public void UpdateReaction(Reaction reaction)
@@ -65,7 +65,7 @@ namespace ReactionService.Data.Reactions
 
         public Reaction CheckDidIAlreadyReact(Guid userId, Guid postId)
         {
-            throw new NotImplementedException();
+            return _context.Reactions.FirstOrDefault(e => e.AccountId == userId && e.PostId == postId);
         }
 
         public bool CheckDidIBlockSeller(Guid userId, Guid sellerId)
@@ -80,7 +80,7 @@ namespace ReactionService.Data.Reactions
 
         public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            return _context.SaveChanges() > 0;
         }
     }
 }

@@ -64,4 +64,4 @@ Reaction Service - 27/07/2021 02:30 PM - Information 8000000e-0000-ff00-b63f-847
 Reaction Service - 27/07/2021 05:06 PM - Information 8000000c-0003-ff00-b63f-84710c7967bb  Successfully updated reaction type with ID 3 
 Reaction Service - 27/07/2021 05:22 PM - Information 8000000b-0000-fe00-b63f-84710c7967bb  Successfully updated reaction type with ID 3 
 Reaction Service - 27/07/2021 05:34 PM - Information 80000012-0000-fd00-b63f-84710c7967bb  Successfully updated reaction type with ID 3  
-
+Reaction Service - 29/07/2021 10:53 AM - Information 80000042-0002-ff00-b63f-84710c7967bb  Successfully created new reaction with ID e44944f6-1b06-44ff-c4b7-08d9526e5a32 in database 

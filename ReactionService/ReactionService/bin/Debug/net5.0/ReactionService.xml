@@ -86,6 +86,40 @@
             <response code="404">Reaction with this postId is not found</response>
             <response code="500">Error on the server</response>
         </member>
+        <member name="M:ReactionService.Controllers.ReactionController.CreateReaction(ReactionService.Models.DTOs.Reactions.ReactionCreationDto,System.Guid)">
+            <summary>
+            Creates reaction 
+            </summary>
+            <param name="reactionDto">Model of reaction to create</param>
+            <param name="userId">Id of the user who sends the request</param>
+            <remarks>
+            POST 'https://localhost:44389/api/reactions/' \
+            Example of a request to create reaction \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+             Successful request: 
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+            "reactionTypeId": 2,
+            }
+             Bad request if previous request has already been executed because you can react to the same post only once: 
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+            "reactionTypeId": 3,
+            }
+             Bad request because user with ID: '59ed7d80-39c9-42b8-a822-70ddd295914a' doesn't follow the seller of this post and can't react:
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "5284A73F-1F9E-4799-A793-5A4FE4A1DF56",
+            "reactionTypeId": 3,
+            }
+            </remarks>
+            <response code="201">Returns the created reaction</response>
+            <response code="401">Unauthorized user</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">There was an error on the server</response>
+        </member>
         <member name="T:ReactionService.Controllers.ReactionTypeController">
             <summary>
             ReactionType controller with endpoints for fetching different types of reactions
@@ -148,7 +182,7 @@
             </remarks>
             <response code="201">Returns the created reactionType</response>
             <response code="401">Unauthorized user</response>
-            <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction type</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to create reaction type</response>
             <response code="500">There was an error on the server</response>
         </member>
         <member name="M:ReactionService.Controllers.ReactionTypeController.UpdateReactionType(ReactionService.Models.DTOs.ReactionTypes.ReactionTypeUpdateDto,System.Int32)">
@@ -248,6 +282,16 @@
         <member name="P:ReactionService.Entities.ReactionType.TypeName">
             <summary>
             Name of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.Reactions.ReactionCreationDto.PostId">
+            <summary>
+            Unique identifier of the post to which the reaction is added
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.Reactions.ReactionCreationDto.ReactionTypeId">
+            <summary>
+            Unique identifier of the reactionType 
             </summary>
         </member>
         <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeConfirmationDto.ReactionTypeId">

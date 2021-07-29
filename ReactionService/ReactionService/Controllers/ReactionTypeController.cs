@@ -148,7 +148,7 @@ namespace ReactionService.Controllers
         /// </remarks>
         /// <response code="201">Returns the created reactionType</response>
         /// <response code="401">Unauthorized user</response>
-        /// <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction type</response>
+        /// <response code="403">Forbiden request - user with this userId doesn't have permission to create reaction type</response>
         /// <response code="500">There was an error on the server</response>
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]

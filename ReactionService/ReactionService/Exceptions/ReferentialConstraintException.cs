@@ -7,11 +7,6 @@ namespace ReactionService.Exceptions
 {
     public class ReferentialConstraintException : Exception
     {
-        public ReferentialConstraintException()
-        {
-
-        }
-
         public ReferentialConstraintException(string message)
             : base(message)
         {

@@ -3,12 +3,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using ReactionService.Data.BlockingMock;
 using ReactionService.Data.FollowingMock;
 using ReactionService.Data.Reactions;
+using ReactionService.Data.ReactionTypes;
 using ReactionService.Entities;
+using ReactionService.Exceptions;
 using ReactionService.Logger;
+using ReactionService.Models.DTOs.Reactions;
 using ReactionService.Models.Mocks;
 using ReactionService.ServiceCalls;
 using System;
@@ -29,6 +33,7 @@ namespace ReactionService.Controllers
     public class ReactionController : ControllerBase
     {
         private readonly IReactionRepository _reactionRepository;
+        private readonly IReactionTypeRepository _reactionTypeRepository;
         private readonly IMapper _mapper;
         private readonly LinkGenerator _linkGenerator;
         private readonly IFakeLogger _logger;
@@ -36,7 +41,7 @@ namespace ReactionService.Controllers
         private readonly IPostService _postService;
 
         public ReactionController(IReactionRepository reactionRepository, IMapper mapper, IFakeLogger logger, LinkGenerator linkGenerator, 
-                                  IHttpContextAccessor contextAccessor, IPostService postService)
+                                  IHttpContextAccessor contextAccessor, IPostService postService, IReactionTypeRepository reactionTypeRepository)
         {
             _reactionRepository = reactionRepository;
             _mapper = mapper;
@@ -44,6 +49,7 @@ namespace ReactionService.Controllers
             _logger = logger;
             _contextAccessor = contextAccessor;
             _postService = postService;
+            _reactionTypeRepository = reactionTypeRepository;
         }
 
         /// <summary>
@@ -160,7 +166,7 @@ namespace ReactionService.Controllers
             try
             {
                 var reaction = _reactionRepository.GetReactionByReactionTypeId(typeId);
-                if (reaction == null)
+                if (reaction == null || reaction.Count == 0)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, "Reaction(s) with this id is not found");
                 }
@@ -222,6 +228,106 @@ namespace ReactionService.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 
+            }
+        }
+
+        /// <summary>
+        /// Creates reaction 
+        /// </summary>
+        /// <param name="reactionDto">Model of reaction to create</param>
+        /// <param name="userId">Id of the user who sends the request</param>
+        /// <remarks>
+        /// POST 'https://localhost:44389/api/reactions/' \
+        /// Example of a request to create reaction \
+        ///  --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+        ///  Successful request: 
+        ///  --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+        /// {
+        /// "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+        /// "reactionTypeId": 2,
+        /// }
+        ///  Bad request if previous request has already been executed because you can react to the same post only once: 
+        ///  --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+        /// {
+        /// "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+        /// "reactionTypeId": 3,
+        /// }
+        ///  Bad request because user with ID: '59ed7d80-39c9-42b8-a822-70ddd295914a' doesn't follow the seller of this post and can't react:
+        ///  --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+        /// {
+        /// "postId": "5284A73F-1F9E-4799-A793-5A4FE4A1DF56",
+        /// "reactionTypeId": 3,
+        /// }
+        ///  Bad request because reaction type with ID: '20' doesn't exist :
+        ///  --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+        /// {
+        /// "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+        /// "reactionTypeId": 20,
+        /// }
+        ///  Bad request because post with ID: '23d2cce9-86d7-4bff-887e-f7712b16766c' doesn't exist :
+        ///  --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+        /// {
+        /// "postId": "23d2cce9-86d7-4bff-887e-f7712b16766c",
+        /// "reactionTypeId": 2,
+        /// }
+        /// </remarks>
+        /// <response code="201">Returns the created reaction</response>
+        /// <response code="401">Unauthorized user</response>
+        /// <response code="409">Conflict - Foreign key constraint violation</response>
+        /// <response code="500">There was an error on the server</response>
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost]
+        public ActionResult<Reaction> CreateReaction([FromBody] ReactionCreationDto reactionDto, [FromHeader] Guid userId)
+        {
+            try
+            {
+                Reaction reaction = _mapper.Map<Reaction>(reactionDto);
+
+                ReactionType reactionType = _reactionTypeRepository.GetReactionTypeById(reaction.ReactionTypeId);
+                if (reactionType == null)
+                {
+                    throw new ForeignKeyConstraintException("Foreign key constraint violated. Reaction type with that ID doesn't exist!");
+                }
+
+                var post = _postService.GetPostById<PostDto>(HttpMethod.Get, reaction.PostId, Request.Headers["Authorization"]).Result;
+                if (post == null)
+                {
+                    throw new ForeignKeyConstraintException("Foreign key constraint violated. Post with that ID doesn't exist!");
+                }
+                var sellerId = post.AccountId;
+
+                if (!_reactionRepository.CheckDoIFollowSeller(userId, sellerId))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, String.Format("You are not following user with ID {0} so you can not react to his posts.", sellerId));
+                }
+
+                if (_reactionRepository.CheckDidIAlreadyReact(userId, reaction.PostId) != null)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, "You have already reacted to this post.");
+                }
+
+                reaction.AccountId = userId;
+
+                _reactionRepository.CreateReaction(reaction);
+                _reactionRepository.SaveChanges();
+
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully created new reaction with ID {0} in database", reaction.ReactionId), null);
+
+                string location = _linkGenerator.GetPathByAction("GetReactionById", "Reaction", new { reactionId = reaction.ReactionId });
+                return Created(location, reaction);
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType().IsAssignableFrom(typeof(ForeignKeyConstraintException)))
+                {
+                    return StatusCode(StatusCodes.Status409Conflict, ex.Message);
+                }
+                _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while creating reaction, message: {0}", ex.Message), null);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }
