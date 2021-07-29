@@ -11,13 +11,11 @@ namespace ReactionService.Models.DTOs.ReactionTypes
         /// <summary>
         /// Unique identifier of the reaction type
         /// </summary>
-        [Required]
         public int ReactionTypeId { get; set; }
 
         /// <summary>
         /// Name of the reaction type
         /// </summary>
-        [Required]
         public String TypeName { get; set; }
     }
 }

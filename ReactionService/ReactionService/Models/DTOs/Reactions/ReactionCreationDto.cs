@@ -11,6 +11,7 @@ namespace ReactionService.Models.DTOs.Reactions
         /// <summary>
         /// Unique identifier of the post to which the reaction is added
         /// </summary>
+        [Required]
         public Guid PostId { get; set; }
 
         /// <summary>

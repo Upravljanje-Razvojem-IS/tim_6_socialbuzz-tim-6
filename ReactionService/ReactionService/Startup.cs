@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ using ReactionService.Data.FollowingMock;
 using ReactionService.Data.Reactions;
 using ReactionService.Data.ReactionTypes;
 using ReactionService.Entities;
+using ReactionService.Filters;
 using ReactionService.Logger;
 using ReactionService.ServiceCalls;
 using System;
@@ -44,9 +46,11 @@ namespace ReactionService
             services.AddDbContext<ReactionDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ReactionServiceDb")));
             services.AddControllers(setup =>
             {
+                setup.Filters.Add<ValidationFilter>();
                 setup.ReturnHttpNotAcceptable = true;
             }
-            ).AddXmlDataContractSerializerFormatters();
+            ).AddXmlDataContractSerializerFormatters()
+            .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddSwaggerGen(setupAction =>
             {

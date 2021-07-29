@@ -78,3 +78,5 @@ Reaction Service - 29/07/2021 12:59 PM - Error 8000000e-0001-fb00-b63f-84710c796
 Reaction Service - 29/07/2021 12:59 PM - Information 8000000f-0001-fb00-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
 Reaction Service - 29/07/2021 12:59 PM - Information 80000010-0001-fb00-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
 Reaction Service - 29/07/2021 01:05 PM - Information 80000005-0001-f900-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
+Reaction Service - 29/07/2021 11:37 PM - Information 8000000b-0001-f900-b63f-84710c7967bb  Successfully created new reaction type with ID 7 in database 
+Reaction Service - 29/07/2021 11:38 PM - Information 8000000d-0001-f900-b63f-84710c7967bb  Successfully deleted reaction type with ID 7 from database 
