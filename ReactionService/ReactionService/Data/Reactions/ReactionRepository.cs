@@ -24,7 +24,7 @@ namespace ReactionService.Data.Reactions
 
         public List<Reaction> GetReactions()
         {
-            return _context.Reactions.ToList();
+            return _context.Reactions.Include(e => e.ReactionType).ToList();
         }
 
         public Reaction GetReactionById(Guid reactionId)
@@ -53,14 +53,15 @@ namespace ReactionService.Data.Reactions
             _context.Reactions.Add(reaction);
         }
 
-        public void UpdateReaction(Reaction reaction)
+        public void UpdateReaction(Reaction oldReaction, Reaction newReaction)
         {
-            throw new NotImplementedException();
+            oldReaction.ReactionTypeId = newReaction.ReactionTypeId;
         }
 
         public void DeleteReaction(Guid reactionID)
         {
-            throw new NotImplementedException();
+            var reaction = GetReactionById(reactionID);
+            _context.Remove(reaction);
         }
 
         public Reaction CheckDidIAlreadyReact(Guid userId, Guid postId)

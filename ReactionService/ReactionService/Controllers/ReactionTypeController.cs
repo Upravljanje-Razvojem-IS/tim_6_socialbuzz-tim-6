@@ -184,7 +184,7 @@ namespace ReactionService.Controllers
         /// <param name="reactionTypeId">Reaction type id</param>
         /// <returns>Confirmation of update</returns>
         /// <remarks>
-        /// POST 'https://localhost:44389/api/reactionTypes/' \
+        /// PUT 'https://localhost:44389/api/reactionTypes/' \
         /// Example of a request to update product \
         ///  --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
         ///  --param  'reactionTypeId = example of Guid'
@@ -274,6 +274,7 @@ namespace ReactionService.Controllers
                 }
                 _reactionTypeRepository.DeleteReactionType(reactionTypeId);
                 _reactionTypeRepository.SaveChanges();
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully deleted reaction type with ID {0} from database", reactionTypeId), null);
 
                 return NoContent();
             }

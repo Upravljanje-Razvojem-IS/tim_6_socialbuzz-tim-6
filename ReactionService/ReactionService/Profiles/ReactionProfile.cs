@@ -13,6 +13,7 @@ namespace ReactionService.Profiles
         public ReactionProfile()
         {
             CreateMap<ReactionCreationDto, Reaction>();
+            CreateMap<ReactionUpdateDto, Reaction>();
         }
     }
 }

@@ -65,3 +65,16 @@ Reaction Service - 27/07/2021 05:06 PM - Information 8000000c-0003-ff00-b63f-847
 Reaction Service - 27/07/2021 05:22 PM - Information 8000000b-0000-fe00-b63f-84710c7967bb  Successfully updated reaction type with ID 3 
 Reaction Service - 27/07/2021 05:34 PM - Information 80000012-0000-fd00-b63f-84710c7967bb  Successfully updated reaction type with ID 3  
 Reaction Service - 29/07/2021 10:53 AM - Information 80000042-0002-ff00-b63f-84710c7967bb  Successfully created new reaction with ID e44944f6-1b06-44ff-c4b7-08d9526e5a32 in database 
+Reaction Service - 29/07/2021 11:51 AM - Error 8000001b-0002-fd00-b63f-84710c7967bb  Error while deleting reaction with ID e44944f6-1b06-44ff-c4b7-08d9526e5a32, message: The method or operation is not implemented. 
+Reaction Service - 29/07/2021 12:06 PM - Information 80000003-0001-fa00-b63f-84710c7967bb  Successfully deleted reaction with ID e44944f6-1b06-44ff-c4b7-08d9526e5a32 from database 
+Reaction Service - 29/07/2021 12:55 PM - Error 80000039-0000-fb00-b63f-84710c7967bb  Error while updating reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7, message: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Reaction
+System.Object -> ReactionService.Entities.Reaction 
+Reaction Service - 29/07/2021 12:57 PM - Information 8000000b-0001-fb00-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
+Reaction Service - 29/07/2021 12:57 PM - Information 8000000c-0001-fb00-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
+Reaction Service - 29/07/2021 12:59 PM - Error 8000000e-0001-fb00-b63f-84710c7967bb  Error while updating reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7, message: Foreign key constraint violated. Reaction type with that ID doesn't exist! 
+Reaction Service - 29/07/2021 12:59 PM - Information 8000000f-0001-fb00-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
+Reaction Service - 29/07/2021 12:59 PM - Information 80000010-0001-fb00-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
+Reaction Service - 29/07/2021 01:05 PM - Information 80000005-0001-f900-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 

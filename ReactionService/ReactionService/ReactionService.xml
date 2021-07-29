@@ -114,10 +114,71 @@
             "postId": "5284A73F-1F9E-4799-A793-5A4FE4A1DF56",
             "reactionTypeId": 3,
             }
+             Bad request because reaction type with ID: '20' doesn't exist :
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+            "reactionTypeId": 20,
+            }
+             Bad request because post with ID: '23d2cce9-86d7-4bff-887e-f7712b16766c' doesn't exist :
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766c",
+            "reactionTypeId": 2,
+            }
             </remarks>
             <response code="201">Returns the created reaction</response>
             <response code="401">Unauthorized user</response>
             <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.UpdateReaction(ReactionService.Models.DTOs.Reactions.ReactionUpdateDto,System.Guid,System.Guid)">
+            <summary>
+            Updates reaction
+            </summary>
+            <param name="reactionUpdateDto">Model of reaction for udpdate</param>
+            <param name="reactionId">Reaction id</param>
+            <param name="userId">Id of the user who sends the request</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            PUT 'https://localhost:44389/api/reactions/3B6D0A06-E64B-4F42-8689-FC10E8E6EDF7' \
+             Successful request: 
+             --param 'userId = 42B70088-9DBD-4B19-8FC7-16414E94A8A6'
+            {
+            "reactionTypeId": 2,
+            }
+            Bad request because user with id: '59ED7D80-39C9-42B8-A822-70DDD295914A' didn't create this reaction:
+             --param 'userId = 59ED7D80-39C9-42B8-A822-70DDD295914A'
+            {
+            "reactionTypeId": 2,
+            }
+            </remarks>
+            <response code="200">Returns updated reaction</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to update reaction</response>
+            <response code="404">Post history with postHistoryId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.DeleteReaction(System.Guid,System.Guid)">
+            <summary>
+            Deleting reaction with reactionId
+            </summary>
+            <param name="reactionId">Reaction's Id</param>
+            <param name="userId">ID of the user who sends the request</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete reaction
+            DELETE 'https://localhost:44389/api/reactions/19e0acbf-5707-49ee-8cb6-134c00b7c10b' \
+            Successful request:
+            --param userId = 'f2f88bcd-d0a2-4fe7-a23f-df97a59731cd'
+            Bad request because user with id: '42b70088-9dbd-4b19-8fc7-16414e94a8a6' didn't create this reaction:
+            --param userId = '42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+            </remarks>
+            <response code="204">Reaction successfully deleted</response>
+            <response code="401" >Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction</response>
+            <response code="404">Reaction with this reactionId is not found</response>
             <response code="500">There was an error on the server</response>
         </member>
         <member name="T:ReactionService.Controllers.ReactionTypeController">
@@ -193,7 +254,7 @@
             <param name="reactionTypeId">Reaction type id</param>
             <returns>Confirmation of update</returns>
             <remarks>
-            POST 'https://localhost:44389/api/reactionTypes/' \
+            PUT 'https://localhost:44389/api/reactionTypes/' \
             Example of a request to update product \
              --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
              --param  'reactionTypeId = example of Guid'
@@ -290,6 +351,11 @@
             </summary>
         </member>
         <member name="P:ReactionService.Models.DTOs.Reactions.ReactionCreationDto.ReactionTypeId">
+            <summary>
+            Unique identifier of the reactionType 
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.Reactions.ReactionUpdateDto.ReactionTypeId">
             <summary>
             Unique identifier of the reactionType 
             </summary>

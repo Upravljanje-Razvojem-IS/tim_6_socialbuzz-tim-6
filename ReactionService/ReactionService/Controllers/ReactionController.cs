@@ -208,7 +208,7 @@ namespace ReactionService.Controllers
                 var post = _postService.GetPostById<PostDto>(HttpMethod.Get, postId, Request.Headers["Authorization"]).Result;
                 if (post == null)
                 {
-                    return StatusCode(StatusCodes.Status400BadRequest, "Post with that ID does not exist!");
+                    return StatusCode(StatusCodes.Status400BadRequest, String.Format("Post with ID {0} does not exist!", postId));
                 }
                 var sellerId = post.AccountId;
 
@@ -328,6 +328,140 @@ namespace ReactionService.Controllers
                 }
                 _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while creating reaction, message: {0}", ex.Message), null);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Updates reaction
+        /// </summary>
+        /// <param name="reactionUpdateDto">Model of reaction for udpdate</param>
+        /// <param name="reactionId">Reaction id</param>
+        /// <param name="userId">Id of the user who sends the request</param>
+        /// <returns>Confirmation of update</returns>
+        /// <remarks>
+        /// PUT 'https://localhost:44389/api/reactions/3B6D0A06-E64B-4F42-8689-FC10E8E6EDF7' \
+        ///  Successful request: 
+        ///  --param 'userId = 42B70088-9DBD-4B19-8FC7-16414E94A8A6'
+        /// {
+        /// "reactionTypeId": 2,
+        /// }
+        /// Bad request because user with id: '59ED7D80-39C9-42B8-A822-70DDD295914A' didn't create this reaction:
+        ///  --param 'userId = 59ED7D80-39C9-42B8-A822-70DDD295914A'
+        /// {
+        /// "reactionTypeId": 2,
+        /// }
+        /// </remarks>
+        /// <response code="200">Returns updated reaction</response>
+        /// <response code="401">Unauthorized user</response>
+        /// <response code="403">Forbiden request - user with this userId doesn't have permission to update reaction</response>
+        /// <response code="404">Post history with postHistoryId is not found</response>
+        /// <response code="409">Conflict - Foreign key constraint violation</response>
+        /// <response code="500">Error on the server while updating</response>
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPut("{reactionId}")]
+        public ActionResult<Reaction> UpdateReaction([FromBody] ReactionUpdateDto reactionUpdateDto, Guid reactionId, [FromHeader] Guid userId)
+        {
+            try
+            {
+                var oldReaction = _reactionRepository.GetReactionById(reactionId);
+                if (oldReaction == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, String.Format("There is no reaction with ID {0}", reactionId));
+                }
+                Reaction newReaction = _mapper.Map<Reaction>(reactionUpdateDto);
+                newReaction.PostId = oldReaction.PostId;
+
+                if (oldReaction.AccountId != userId)
+                {
+                    return StatusCode(StatusCodes.Status403Forbidden, String.Format("User whit ID {0} doesn't have permission to update this reaction because he didn't create it", userId));
+                }
+
+                ReactionType reactionType = _reactionTypeRepository.GetReactionTypeById(newReaction.ReactionTypeId);
+                if (reactionType == null)
+                {
+                    throw new ForeignKeyConstraintException("Foreign key constraint violated. Reaction type with that ID doesn't exist!");
+                }
+
+                var post = _postService.GetPostById<PostDto>(HttpMethod.Get, oldReaction.PostId, Request.Headers["Authorization"]).Result;
+                if (post == null)
+                {
+                    throw new ForeignKeyConstraintException("Foreign key constraint violated. Post with that ID doesn't exist!");
+                }
+
+                _reactionRepository.UpdateReaction(oldReaction, newReaction);
+                _reactionRepository.SaveChanges();
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully updated reaction with ID {0}", reactionId), null);
+
+                return Ok(oldReaction);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while updating reaction with ID {0}, message: {1}", reactionId, ex.Message), null);
+                if (ex.GetType().IsAssignableFrom(typeof(ForeignKeyConstraintException)))
+                {
+                    return StatusCode(StatusCodes.Status409Conflict, ex.Message);
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Deleting reaction with reactionId
+        /// </summary>
+        /// <param name="reactionId">Reaction's Id</param>
+        /// <param name="userId">ID of the user who sends the request</param>
+        /// <returns>Status 204 - NoContent</returns>
+        /// <remarks>        
+        /// Example of a request to delete reaction
+        /// DELETE 'https://localhost:44389/api/reactions/19e0acbf-5707-49ee-8cb6-134c00b7c10b' \
+        /// Successful request:
+        /// --param userId = 'f2f88bcd-d0a2-4fe7-a23f-df97a59731cd'
+        /// Bad request because user with id: '42b70088-9dbd-4b19-8fc7-16414e94a8a6' didn't create this reaction:
+        /// --param userId = '42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+        /// </remarks>
+        /// <response code="204">Reaction successfully deleted</response>
+        /// <response code="401" >Unauthorized user</response>
+        /// <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction</response>
+        /// <response code="404">Reaction with this reactionId is not found</response>
+        /// <response code="500">There was an error on the server</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpDelete("{reactionId}")]
+        public IActionResult DeleteReaction(Guid reactionId, [FromHeader] Guid userId)
+        {
+            try
+            {
+                var reaction = _reactionRepository.GetReactionById(reactionId);
+
+                if (reaction.AccountId != userId)
+                {
+                    return StatusCode(StatusCodes.Status403Forbidden, String.Format("User whit ID {0} doesn't have permission to delete this reaction because he didn't create it", userId));
+                }
+
+                if (reaction == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, String.Format("There is no reaction with ID {0}", reactionId));
+                }
+
+                _reactionRepository.DeleteReaction(reactionId);
+                _reactionRepository.SaveChanges();
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully deleted reaction with ID {0} from database", reactionId), null);
+
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while deleting reaction with ID {0}, message: {1}", reactionId, ex.Message), null);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting reaction!");
             }
         }
     }

@@ -13,7 +13,7 @@ namespace ReactionService.Data.Reactions
         List<Reaction> GetReactionByPostId(Guid postId, Guid userId);
         List<Reaction> GetReactionByReactionTypeId(int reactionTypeId);
         void CreateReaction(Reaction reaction);
-        public void UpdateReaction(Reaction reaction);
+        public void UpdateReaction(Reaction oldReaction, Reaction newReaction);
         public void DeleteReaction(Guid reactionID);
         bool CheckDoIFollowSeller(Guid userId, Guid sellerId);
         bool CheckDidIBlockSeller(Guid userId, Guid sellerId);
