@@ -11,7 +11,8 @@ namespace PostService.Models.DTOs.PostHistory
         /// <summary>
         /// Price for the post in a certain period of time
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Price is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Price must be greater then 0")]
         public Double Price { get; set; }
 
         /// <summary>

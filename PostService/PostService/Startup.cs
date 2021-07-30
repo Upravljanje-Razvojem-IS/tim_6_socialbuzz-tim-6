@@ -23,6 +23,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PostService.Logger;
+using PostService.Filters;
+using FluentValidation.AspNetCore;
 
 namespace PostService
 {
@@ -42,8 +44,10 @@ namespace PostService
             services.AddControllers(setup =>
             {
                 setup.ReturnHttpNotAcceptable = true;
+                setup.Filters.Add<ValidationFilter>();
             }
-            ).AddXmlDataContractSerializerFormatters();
+            ).AddXmlDataContractSerializerFormatters()
+            .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddSwaggerGen(setupAction =>
             {
