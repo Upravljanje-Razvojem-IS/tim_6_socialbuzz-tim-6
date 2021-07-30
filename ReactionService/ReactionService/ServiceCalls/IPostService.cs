@@ -9,6 +9,6 @@ namespace ReactionService.ServiceCalls
 {
     public interface IPostService
     {
-        public Task<T> GetPostById<T>(HttpMethod method, Guid postId, string authorizationToken);
+        public Task<T> GetPostById<T>(HttpMethod method, Guid postId, string jwtToken);
     }
 }

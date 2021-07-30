@@ -10,16 +10,34 @@ namespace ReactionService.Models.DTOs.Mocks
         /// <summary>
         /// Unique identifier for the following
         /// </summary>
-        public Guid FollowingId;
+        private Guid followingId;
+
+        public Guid FollowingId
+        {
+            get { return FollowingId; }
+            set { FollowingId = value; }
+        }
 
         /// <summary>
         /// Id of the user who followed another user
         /// </summary>
-        public Guid FollowerId;
+        private Guid followerId;
+
+        public Guid FollowerId
+        {
+            get { return FollowerId; }
+            set { FollowerId = value; }
+        }
 
         /// <summary>
         /// Id of the user who are followed by another user
         /// </summary>
-        public Guid FollowedId;
+        private Guid followedId;
+
+        public Guid FollowedId
+        {
+            get { return FollowedId; }
+            set { FollowedId = value; }
+        }
     }
 }

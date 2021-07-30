@@ -52,7 +52,7 @@ namespace ReactionService.Data.FollowingMock
                     followedUsersIds.Add(following.FollowedId);
                 }
             }
-            return followedUsersIds; ;
+            return followedUsersIds;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace ReactionService.Exceptions
 {
+    [Serializable]
     public class ForeignKeyConstraintException : Exception
     {
         public ForeignKeyConstraintException(string message)

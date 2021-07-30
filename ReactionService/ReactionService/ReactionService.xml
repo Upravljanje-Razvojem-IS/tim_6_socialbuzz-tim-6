@@ -380,32 +380,32 @@
             Name of the reaction type
             </summary>
         </member>
-        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.BlockingId">
+        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.blockingId">
             <summary>
             Unique identifier for the blocking
             </summary>
         </member>
-        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.BlockerId">
+        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.blockerId">
             <summary>
             Id of the user who blocked another user
             </summary>
         </member>
-        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.BlockedId">
+        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.blockedId">
             <summary>
             Id of the user who are blocked by another user
             </summary>
         </member>
-        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.FollowingId">
+        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.followingId">
             <summary>
             Unique identifier for the following
             </summary>
         </member>
-        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.FollowerId">
+        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.followerId">
             <summary>
             Id of the user who followed another user
             </summary>
         </member>
-        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.FollowedId">
+        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.followedId">
             <summary>
             Id of the user who are followed by another user
             </summary>

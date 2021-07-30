@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using ReactionService.Models.Mocks;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,17 @@ namespace ReactionService.ServiceCalls
 {
     public class PostService : IPostService
     {
+        private readonly IConfiguration configuration;
 
+        public PostService(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
         public async Task<T> GetPostById<T>(HttpMethod method, Guid postId, string jwtToken)
         {
             using (HttpClient client = new HttpClient())
             {
-                Uri url = new Uri("https://localhost:44377/api/posts/" + postId);
+                Uri url = new Uri($"{ configuration["Services:PostService"] }api/posts/" + postId);
                 HttpRequestMessage request = new HttpRequestMessage(method, url);
                 request.Headers.Add("Accept", "application/json");
                 request.Headers.Add("Authorization", jwtToken);
@@ -31,9 +37,7 @@ namespace ReactionService.ServiceCalls
 
                     return JsonConvert.DeserializeObject<T>(content);
                 }
-
                 return default(T);
-                //throw new Exception($"There was an error while communicating with PostService! Code: {response.StatusCode}, Message: {response.ReasonPhrase}");
             }
         }
     }

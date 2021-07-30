@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace ReactionService.Exceptions
 {
+    [Serializable]
     public class ReferentialConstraintException : Exception
     {
         public ReferentialConstraintException(string message)
