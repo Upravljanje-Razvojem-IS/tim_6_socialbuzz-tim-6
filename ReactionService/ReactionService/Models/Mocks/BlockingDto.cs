@@ -14,8 +14,8 @@ namespace ReactionService.Models.DTOs.Mocks
 
         public Guid BlockingId
         {
-            get { return BlockingId; }
-            set { BlockingId = value; }
+            get { return blockingId; }
+            set { blockingId = value; }
         }
 
         /// <summary>
@@ -25,8 +25,8 @@ namespace ReactionService.Models.DTOs.Mocks
 
         public Guid BlockerId
         {
-            get { return BlockerId; }
-            set { BlockerId = value; }
+            get { return blockerId; }
+            set { blockerId = value; }
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace ReactionService.Models.DTOs.Mocks
 
         public Guid BlockedId
         {
-            get { return BlockedId; }
-            set { BlockedId = value; }
+            get { return blockedId; }
+            set { blockedId = value; }
         }
     }
 }

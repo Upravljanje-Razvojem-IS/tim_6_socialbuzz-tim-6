@@ -14,8 +14,8 @@ namespace ReactionService.Models.DTOs.Mocks
 
         public Guid FollowingId
         {
-            get { return FollowingId; }
-            set { FollowingId = value; }
+            get { return followingId; }
+            set { followingId = value; }
         }
 
         /// <summary>
@@ -25,8 +25,8 @@ namespace ReactionService.Models.DTOs.Mocks
 
         public Guid FollowerId
         {
-            get { return FollowerId; }
-            set { FollowerId = value; }
+            get { return followerId; }
+            set { followerId = value; }
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace ReactionService.Models.DTOs.Mocks
 
         public Guid FollowedId
         {
-            get { return FollowedId; }
-            set { FollowedId = value; }
+            get { return followedId; }
+            set { followedId = value; }
         }
     }
 }
