@@ -39,7 +39,7 @@ namespace ReportingService.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Chats");
                 });
 #pragma warning restore 612, 618
         }
