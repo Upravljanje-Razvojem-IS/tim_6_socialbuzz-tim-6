@@ -22,7 +22,6 @@ C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Microsoft.OpenApi.dll
-C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -59,3 +58,6 @@ C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\obj\Debug
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\obj\Debug\net5.0\ref\ReportingService.dll
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\obj\Debug\net5.0\ReportingService.pdb
 C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\obj\Debug\net5.0\ReportingService.genruntimeconfig.cache
+C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Predrag Djukic\source\repos\ReportingService\ReportingService\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

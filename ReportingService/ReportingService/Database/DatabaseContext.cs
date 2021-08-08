@@ -14,6 +14,6 @@ namespace ReportingService.Database
 
         }
 
-        public virtual DbSet<Report> Chats { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
     }
 }
