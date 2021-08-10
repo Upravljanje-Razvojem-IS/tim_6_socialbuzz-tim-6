@@ -1,0 +1,395 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EvaluationsService</name>
+    </assembly>
+    <members>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetEvaluationsOpstions">
+            <summary>
+            Return implemented options for API   
+            </summary>
+            <returns>Header key 'Allow' with allowed requests</returns>
+            <remarks>
+            Example of successful request \
+            OPTIONS 'https://localhost:32647/api/evaluations' \
+            </remarks>
+            <response code="200">Return header key 'Allow' with allowed requests</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetAllEvaluations(System.String)">
+            <summary>
+            Return all evaluations    
+            </summary>
+            <param name="key">Authorization header</param>
+            <returns>List of all evaluations</returns>
+            <remarks>
+            Example of successful request \
+            GET 'https://localhost:32647/api/evaluations' \
+                --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw=='
+            </remarks>
+            <response code="200">Return list of evaluations</response>
+            <response code="404">There is no evaluations</response>
+            <response code="401">Authorization error</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetEvaluationByID(System.String,System.Guid)">
+            <summary>
+            Return evaluation for provided evaluation ID    
+            </summary>
+            <returns>Evaluation with provided ID</returns>
+            <remarks>
+            Example of successful request \
+            GET 'https://localhost:32647/api/evaluations/da0fdb58-6b1f-43e1-97d5-55d1089f5142' \
+                --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw=='
+            </remarks>
+            <response code="200">Returns evaluation for provided ID</response>
+            <response code="400">There is no evaluation with provided ID</response>
+            <response code="401">Authorization error</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetEvaluationsByPostID(System.String,System.Int32)">
+            <summary>
+            Return evaluations from the specified post 
+            </summary>
+            <returns>List of evaluations for the specified post</returns>
+            <remarks>
+            GET 'https://localhost:32647/api/evaluations/byPostID' \
+                Example of successful request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'postID = 1' \
+                Example of a failed request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'postID = 3' \
+            </remarks>
+            <param name="postID">Post ID</param>
+            <param name="key">Authorization header</param>
+            <response code="200">Return list of evaluations for given post</response>
+            <response code="400">Post with provided ID does not exist</response>
+            <response code="401">Authorization error</response>
+            <response code="404">There is no evaluations with provided post ID</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetEvaluationsOnPostByMark(System.String,System.Int32,System.Int32)">
+            <summary>
+            Return evaluations with provided mark from the specified post 
+            </summary>
+            <returns>List of evaluations with specified mark for the selected post</returns>
+            <remarks>
+            GET 'https://localhost:32647/api/evaluations/byMark' \
+                Example of successful request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'postID = 1' \
+                    --param  'mark = 5' \
+                Example of a failed request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'postID = 3' \
+                    --param  'mark = 1' \
+            </remarks>
+            <param name="postID">Post ID</param>
+            <param name="mark">Mark</param>
+            <param name="key">Authorization header</param>
+            <response code="200">Return list of evaluations with provided mark for given post</response>
+            <response code="400">Post with provided ID does not exist or does not have any evaluations or evaluations with provided mark</response>
+            <response code="401">Authorization error</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.GetEvaluationsByAccountID(System.String,System.Int32)">
+            <summary>
+            Return all evaluations that account submited 
+            </summary>
+            <returns>List of evaluations from the specified Account</returns>
+            <remarks>
+            GET 'https://localhost:32647/api/evaluations/byAccountID' \
+                Example of successful request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'accountID = 2' \
+                Example of a failed request \
+                    --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                    --param  'accountID = 5'
+            </remarks>
+            <param name="accountID">Account ID</param>
+            <param name="key">Authorization header</param>
+            <response code="200">Return list of evaluations for given account</response>
+            <response code="400">Account with provided ID does not exist</response>
+            <response code="401">Authorization error</response>
+            <response code="404">There is still no posted evaluations for provided account ID</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.CreateEvaluation(System.String,EvaluationsService.Model.EvaluationCreateDto,System.Int32)">
+            <summary>
+            Submits new evaluation
+            </summary>
+            <param name="evaluationDto">Model of evaluation that is being submited</param>
+            <param name="accountID">Account ID that sends request</param>
+            <param name="key">Authorization header</param>
+            <returns></returns>
+            <remarks>
+            POST 'https://localhost:49877/api/evaluations/' \
+            Example of successful request \
+             --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+             --param 'accountID = 2' \
+             --body \
+            {     \
+                "PostID": 1, \
+                "Mark": 5, \
+                "Description":"Test." \
+            } \
+            </remarks>
+            <response code="201">Return confirmation that new evaluation is sumbited</response>
+            <response code="400">Post with given ID does not exist</response>
+            <response code="401">Authorization error</response>
+            <response code="500">Server Error while submiting evaluation</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.UpdateEvaluation(System.String,EvaluationsService.Model.EvaluationUpdateDto)">
+            <summary>
+            Update evaluation with provied ID
+            </summary>
+            <param name="newEvaluation">Evaluation model that is going to be updated</param>
+            <param name="key">Authorization header</param>
+            <returns></returns>
+            <remarks>
+            PUT 'https://localhost:32647/api/evaluations' \
+            Example of successful request    \
+             --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw=='  \
+             --body \
+            { \
+                "evaluationID": "1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5", \
+                "postID": 1, \
+                "content": "Updated succ!" \
+            } 
+            </remarks>
+            <response code="200">Return confirmation that evaluation is updated</response>
+            <response code="401">Authorization error</response>
+            <response code="404">Evaluation with provied ID not found</response>
+            <response code="500">Server Error while updating evaluation</response>
+        </member>
+        <member name="M:EvaluationsService.Controllers.EvaluationsController.DeleteEvaluation(System.String,System.Guid)">
+            <summary>
+            Delete evaluation with provied ID
+            </summary>
+            <param name="evaluationID">Evaluation ID that is going to be removed</param>
+            <param name="key">Authorization header</param>
+            <remarks>        
+            Example of successful request    \
+            DELETE 'https://localhost:32647/api/evaluation' \
+                --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+                --param  'evaluationID = 40b090d8-9e0f-470b-9e0e-2df13e05e935'
+            </remarks>
+            <response code="200">Evaluation successfully deleted</response>
+            <response code="401">Authorization error</response>
+            <response code="404">Evaluation with provided ID does not exist</response>
+            <response code="500">Server Error while deleting evaluation</response>
+        </member>
+        <member name="T:EvaluationsService.Model.Enteties.Evaluation">
+            <summary>
+            Evaluations model
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Enteties.Evaluation.EvaluationID">
+            <summary>
+            Evaluation ID
+            </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
+        </member>
+        <member name="P:EvaluationsService.Model.Enteties.Evaluation.Mark">
+            <summary>
+            Evaluation mark
+            </summary>
+            <example>5</example>
+        </member>
+        <member name="P:EvaluationsService.Model.Enteties.Evaluation.Description">
+            <summary>
+            Evaluation description
+            </summary>
+            <example>All went excelent, my recomendations for user.</example>
+        </member>
+        <member name="P:EvaluationsService.Model.Enteties.Evaluation.PostID">
+            <summary>
+            Post ID to which the evaluation refers
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EvaluationsService.Model.Enteties.Evaluation.AccountID">
+            <summary>
+            Account ID that submited evaluation
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EvaluationsService.Model.Enteties.Evaluation.Account">
+            <summary>
+            Account username that submited evaluation
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationCreateDto.Mark">
+            <summary>
+            Evaluation mark
+            </summary>
+            <example>4</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationCreateDto.Description">
+            <summary>
+            Evaluation description
+            </summary>
+            <example>All went fine.</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationCreateDto.PostID">
+            <summary>
+            Post ID to which the evaluation refers
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationsDto.EvaluationID">
+            <summary>
+            Evaluation ID
+            </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationsDto.Mark">
+            <summary>
+            Evaluation mark
+            </summary>
+            <example>5</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationsDto.Description">
+            <summary>
+            Evaluation description
+            </summary>
+            <example>5+. Recommendations.</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationsDto.PostID">
+            <summary>
+            Post ID to which the evaluation refers
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationsDto.AccountID">
+            <summary>
+            Account ID that submited evaluation
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationsDto.Account">
+            <summary>
+            Account username that submited evaluation
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationUpdateDto.EvaluationID">
+            <summary>
+            Evaluation ID
+            </summary>
+            <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationUpdateDto.Mark">
+            <summary>
+            Evaluation mark
+            </summary>
+            <example>2</example>
+        </member>
+        <member name="P:EvaluationsService.Model.EvaluationUpdateDto.Description">
+            <summary>
+            Evaluation description
+            </summary>
+            <example>I don't recommend this user.</example>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.AccountID">
+            <summary>
+            Account ID
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.Surname">
+            <summary>
+            Surname
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.Phone_number">
+            <summary>
+            Phone number
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.Address">
+            <summary>
+            Address
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.AccountDto.RoleID">
+            <summary>
+            Role ID
+            </summary>
+        </member>
+        <member name="T:EvaluationsService.Model.Mock.PostDto">
+            <summary>
+            DTO Post model
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.PostID">
+            <summary>
+            Post ID
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.AccountID">
+            <summary>
+            Account ID
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.PostName">
+            <summary>
+            Post name
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.PostImage">
+            <summary>
+            Post picture
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.Description">
+            <summary>
+            Post Description
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.Price">
+            <summary>
+            Post price
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.Currency">
+            <summary>
+            Post price currency
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.Category">
+            <summary>
+            Post category
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.Mock.PostDto.PublicationDate">
+            <summary>
+            Post creation date
+            </summary>
+        </member>
+        <member name="T:EvaluationsService.Model.ValueObjects.Account">
+            <summary>
+            Account Value Object
+            </summary>
+        </member>
+        <member name="P:EvaluationsService.Model.ValueObjects.Account.Username">
+            <summary>
+            Account username that submited evaluation
+            </summary>
+            <example>flowzy1</example>
+        </member>
+    </members>
+</doc>

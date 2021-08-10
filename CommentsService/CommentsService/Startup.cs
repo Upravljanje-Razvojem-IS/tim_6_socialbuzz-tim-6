@@ -1,4 +1,4 @@
-﻿using LoggingClassLibrary;
+﻿using CommentsService.Data.Mocks.AccountMock;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,12 +14,15 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using TheSocialBaz.Data;
-using TheSocialBaz.Data.PostMock;
-using TheSocialBaz.FakeLoggerService;
-//using TheSocialBaz.FakeLoggerService;
+using CommentingService.Data;
+using CommentingService.Data.PostMock;
+using CommentingService.FakeLoggerService;
+using CommentsService.Auth;
+using EvaluationsService.Auth;
+using CommentsService.Logger;
+using CommentsService.Data.Mocks.BlockMock;
 
-namespace TheSocialBaz
+namespace CommentingService
 {
     public class Startup
     {
@@ -35,17 +38,18 @@ namespace TheSocialBaz
         {
             services.AddControllers();
 
+            services.AddScoped<IAuthorization, Authorization>();
+
             services.AddScoped<ICommentingRepository, CommentingRepository>();
             services.AddScoped<IPostMockRepository, PostMockRepository>();
+            services.AddScoped<IAccountMockRepository, AccountMockRepository>();
+            services.AddScoped<IBlockMockRepository, BlockMockRepository>();
 
-            services.AddSingleton<Logger, FakeLogger>();
-            services.AddSingleton<ILogger, FakeLogger>();
+            services.AddSingleton<IFakeLogger, FakeLogger>();
 
             services.AddHttpContextAccessor();
 
             services.AddDbContext<DBContext>();
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddSwaggerGen(setupAction =>
             {
@@ -59,7 +63,7 @@ namespace TheSocialBaz
                          {
                              Name = "Pavle Marinkovic",
                              Email = "pavle019@live.com",
-                             Url = new Uri("https://pavlemarinkovic.com")
+                             Url = new Uri(Configuration.GetValue<string>("WebsiteUrl:url"))
                          },
                          License = new Microsoft.OpenApi.Models.OpenApiLicense
                          {
@@ -70,7 +74,7 @@ namespace TheSocialBaz
                 var xmlComments = $"{Assembly.GetExecutingAssembly().GetName().Name }.xml";
                 var xmlCommentsPath = Path.Combine(AppContext.BaseDirectory, xmlComments);
 
-                setupAction.IncludeXmlComments(xmlCommentsPath); //da bi swagger mogao citati xml komenatare
+                setupAction.IncludeXmlComments(xmlCommentsPath); 
             });
         }
 

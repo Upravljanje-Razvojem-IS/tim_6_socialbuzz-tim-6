@@ -1,20 +1,22 @@
-﻿using AutoMapper;
-using LoggingClassLibrary;
+﻿using CommentsService.Data.Mocks.AccountMock;
+using CommentsService.Model.ValueObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheSocialBaz.Data;
-using TheSocialBaz.Data.PostMock;
-using TheSocialBaz.Model;
-using TheSocialBaz.Model.Enteties;
+using CommentingService.Data;
+using CommentingService.Data.PostMock;
+using CommentingService.Model;
+using CommentingService.Model.Enteties;
+using EvaluationsService.Auth;
+using CommentsService.Auth;
+using CommentsService.Logger;
 
-namespace TheSocialBaz.Controllers
+namespace CommentingService.Controllers
 {
     [ApiController]
     [Route("api/comments")]
@@ -22,41 +24,21 @@ namespace TheSocialBaz.Controllers
     [Produces("application/json")]
     public class CommentingController : ControllerBase
     {
-        private readonly IMapper mapper;
         private readonly IHttpContextAccessor contextAccessor;
         private readonly ICommentingRepository commentRepository;
+        private readonly IAccountMockRepository accountRepository;
         private readonly IPostMockRepository postRepository;
-        private readonly IConfiguration configuration;
-        private readonly Logger logger;
+        private readonly IAuthorization authorization;
+        private readonly IFakeLogger logger;
 
-        public CommentingController(IPostMockRepository postRepository, IHttpContextAccessor contextAccessor, IMapper mapper, ICommentingRepository commentRepository, Logger logger, IConfiguration configuration)
+        public CommentingController(IAuthorization authorization, IPostMockRepository postRepository, IAccountMockRepository accountRepository, IHttpContextAccessor contextAccessor, ICommentingRepository commentRepository, IFakeLogger logger)
         {
-            this.mapper = mapper;
             this.contextAccessor = contextAccessor;
             this.commentRepository = commentRepository;
             this.postRepository = postRepository;
-            this.configuration = configuration;
+            this.accountRepository = accountRepository;
             this.logger = logger;
-        }
-
-        private bool Authorize(string key)
-        {
-            if (!key.StartsWith("Bearer"))
-            {
-                return false;
-            }
-
-            var keyOnly = key.Substring(key.IndexOf("Bearer") + 7);
-            var username = configuration.GetValue<string>("Authorization:Username");
-            var password = configuration.GetValue<string>("Authorization:Password");
-            var base64EncodedBytes = System.Convert.FromBase64String(keyOnly);
-            var user = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
- 
-            if ((username+":"+password) != user)
-            {
-                return false;
-            }
-            return true;
+            this.authorization = authorization;
         }
 
         /// <summary>
@@ -65,7 +47,7 @@ namespace TheSocialBaz.Controllers
         /// <returns>Header key 'Allow' with allowed requests</returns>
         /// <remarks>
         /// Example of successful request \
-        /// OPTIONS 'https://localhost:49877/api/comments' \
+        /// OPTIONS 'https://localhost:49877/api/comments'
         /// </remarks>
         /// <response code="200">Return header key 'Allow' with allowed requests</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -95,7 +77,7 @@ namespace TheSocialBaz.Controllers
         [HttpGet]
         public ActionResult<List<Comment>> GetAllComments([FromHeader(Name = "Authorization")] string key)
         {
-            if (!Authorize(key))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -130,7 +112,7 @@ namespace TheSocialBaz.Controllers
         [HttpGet("{commentID}")]
         public ActionResult<Comment> GetCommentByID([FromHeader(Name = "Authorization")] string key, [FromRoute] Guid commentID)
         {
-            if (!Authorize(key))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -157,15 +139,15 @@ namespace TheSocialBaz.Controllers
         /// GET 'https://localhost:49877/api/comments/byPostID' \
         ///     Example of successful request \
         ///         --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
-        ///         --param  'postID = 1' \
+        ///         --param  'postID = 3' \
         ///         --param  'accountID = 1' \
         ///     Example of a failed request \
         ///         --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
         ///         --param  'postID = 3' \
-        ///         --param  'accountID = 4'
+        ///         --param  'accountID = 2' \
         /// </remarks>
         /// <param name="postID">Post ID</param>
-        /// <param name="accountID">Account ID who is sending a request</param>
+        /// <param name="accountID">Account ID</param>
         /// <param name="key">Authorization header</param>
         /// <response code="200">Return list of comments for given post</response>
         /// <response code="400">Post with provided ID does not exist</response>
@@ -178,7 +160,7 @@ namespace TheSocialBaz.Controllers
         [HttpGet("byPostID")]
         public ActionResult<List<Comment>> GetCommentsByPostID([FromHeader(Name = "Authorization")] string key, [FromQuery] int postID, [FromQuery] int accountID)
         {
-            if (!Authorize(key))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -192,11 +174,68 @@ namespace TheSocialBaz.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, new { status = "Post with given ID does not exist", content = "" });
             }
 
-            var comments = commentRepository.GetCommentsByPostID(postID, accountID);
+            var accountIDThatPostedPost = postRepository.GetPostByID(postID).AccountID;
+
+            if (commentRepository.CheckIfUserBlocked(accountID, accountIDThatPostedPost))
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "You cannot see this user's posts or comments.", content = "" });
+            }
+
+            var comments = commentRepository.GetCommentsByPostID(postID);
 
             if (comments.Count == 0)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, new { status = "This post has no comments added", content = "" });
+            }
+
+            return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = comments });
+        }
+
+        /// <summary>
+        /// Return all coments that account posted 
+        /// </summary>
+        /// <returns>List of comments from the specified Account</returns>
+        /// <remarks>
+        /// GET 'https://localhost:49877/api/comments/byAccountID' \
+        ///     Example of successful request \
+        ///         --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+        ///         --param  'accountID = 2' \
+        ///     Example of a failed request \
+        ///         --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==' \
+        ///         --param  'accountID = 5'
+        /// </remarks>
+        /// <param name="accountID">Account ID</param>
+        /// <param name="key">Authorization header</param>
+        /// <response code="200">Return list of comments for given account</response>
+        /// <response code="400">Account with provided ID does not exist</response>
+        /// <response code="401">Authorization error</response>
+        /// <response code="404">There is still no created comments with provided account ID</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("byAccountID")]
+        public ActionResult<List<Comment>> GetCommentsByAccountID([FromHeader(Name = "Authorization")] string key, [FromQuery] int accountID)
+        {
+            if (!authorization.Authorize(key))
+            {
+                return StatusCode(StatusCodes.Status401Unauthorized, new
+                {
+                    status = "Authorization failed",
+                    content = ""
+                });
+            }
+
+            if (accountRepository.GetAccountByID(accountID) == null)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "Account with given ID does not exist", content = "" });
+            }
+
+            var comments = commentRepository.GetCommentsByAccountID(accountID);
+
+            if (comments.Count == 0)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "This account has no posted comments yet.", content = "" });
             }
 
             return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = comments });
@@ -232,7 +271,7 @@ namespace TheSocialBaz.Controllers
         [HttpPost]
         public IActionResult CreateComment([FromHeader(Name = "Authorization")] string key, [FromBody] CommentingCreateDto commentDto, [FromQuery] int accountID)
         {
-            if (!Authorize(key))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -246,12 +285,27 @@ namespace TheSocialBaz.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, new { status = "Post with given ID does not exist", content = "" });
             }
 
+            var accountIDThatPostedPost = postRepository.GetPostByID(commentDto.PostID).AccountID;
+
+            if (commentRepository.CheckIfUserBlocked(accountID, accountIDThatPostedPost))
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "You cannot post comment to this post.", content = "" });
+            }
+
+            Account accVO = new Account(accountRepository.getUsernameByID(accountID));
+
+            if (accVO.Username == null) //because of AccountMock, if we dont have account with provided id in params
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { status = "Account with that ID does not exist.", content = "" });
+            }
+
             var newComment = new Comment
             {
                 CommentText = commentDto.CommentText,
                 CommentDate = DateTime.Now,
                 AccountID = accountID,
-                PostID = commentDto.PostID
+                PostID = commentDto.PostID,
+                Account = accVO
             };
 
             try
@@ -266,7 +320,7 @@ namespace TheSocialBaz.Controllers
             {
                 logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Comment with ID {0} not created, message: {1}", newComment.CommentID, ex.Message), null);
 
-                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Create error " + ex.Message, content = "" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Create error, check logs for more info." + ex.Message, content = "" });
             }
 
 
@@ -284,9 +338,8 @@ namespace TheSocialBaz.Controllers
         ///  --header 'Authorization: Bearer YWRtaW46c3VwZXJBZG1pbjEyMw=='  \
         ///  --body \
         /// { \
-        ///     "commentID": "1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5", \
-        ///     "postID": 1, \
-        ///     "content": "Updated succ!" \
+        ///     "CommentID": "1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5", \
+        ///     "CommentText": "Updated succ!" \
         /// } 
         /// </remarks>
         /// <response code="200">Return confirmation that comment is updated</response>
@@ -300,7 +353,7 @@ namespace TheSocialBaz.Controllers
         [HttpPut]
         public IActionResult UpdateComment([FromHeader(Name = "Authorization")] string key, [FromBody] CommentingUpdateDto newComment)
         {
-            if (!Authorize(key))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -315,11 +368,6 @@ namespace TheSocialBaz.Controllers
             }
 
             var commentToUpdate = commentRepository.GetCommentByID(newComment.CommentID);
-
-            if (commentToUpdate.PostID != newComment.PostID)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, new { status = "Post ID can not be changed!", content = "" });
-            }
 
             commentToUpdate.CommentText = newComment.CommentText;
 
@@ -336,7 +384,7 @@ namespace TheSocialBaz.Controllers
             {
                 logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Comment with ID {0} not updated, message: {1}", commentToUpdate.CommentID, ex.Message), null);
 
-                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Update error", content = "" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Update error, check logs for more info.", content = "" });
 
 
             }
@@ -365,7 +413,7 @@ namespace TheSocialBaz.Controllers
         [HttpDelete]
         public IActionResult DeleteComment([FromHeader(Name = "Authorization")] string key, [FromQuery] Guid commentID)
         {
-            if (!Authorize(key))
+            if (!authorization.Authorize(key))
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -390,7 +438,7 @@ namespace TheSocialBaz.Controllers
             catch (Exception ex)
             {
                 logger.Log(LogLevel.Error, contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while deleting comment with ID {0}, message: {1}", commentID, ex.Message), null);
-                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Delete error", content = "" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Delete error, check logs for more info.", content = "" });
             }
 
         }

@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "dd3f49c6-7f29-4f98-b05c-33d0f3c71c89",
+		"name": "EvaluationsURIS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllEvaluations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "GetEvaluationByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "GetEvaluationsOnPostByMark",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:32647/api/evaluations/byMark?postID=3&mark=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32647",
+					"path": [
+						"api",
+						"evaluations",
+						"byMark"
+					],
+					"query": [
+						{
+							"key": "postID",
+							"value": "3"
+						},
+						{
+							"key": "mark",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEvaluationsByPostID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:49877/api/comments/byPostID?postID=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "49877",
+					"path": [
+						"api",
+						"comments",
+						"byPostID"
+					],
+					"query": [
+						{
+							"key": "postID",
+							"value": "3"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEvaluationsByAccountID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:49877/api/comments/byAccountID?accountID=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "49877",
+					"path": [
+						"api",
+						"comments",
+						"byAccountID"
+					],
+					"query": [
+						{
+							"key": "accountID",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddEvaluation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CommunicationKey",
+						"value": "JWT Kljuc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"postID\": 1,\r\n    \"content\": \"New comment\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEvaluation",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:49877/api/comments?evaluationID=e520ae60-1dfa-4602-9e08-7844bb55a19a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "49877",
+					"path": [
+						"api",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "evaluationID",
+							"value": "e520ae60-1dfa-4602-9e08-7844bb55a19a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateEvaluation",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YWRtaW46c3VwZXJBZG1pbjEyMw==",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"CommentID\": \"1cc45ba4-bbb9-41ad-b8fa-c768a4f14ca5\",\r\n    \"PostID\": 1,\r\n    \"CommentText\": \"vazi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:49877/api/comments/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "49877",
+					"path": [
+						"api",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OptionsEvaluations",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:32647/api/evaluations/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "32647",
+					"path": [
+						"api",
+						"evaluations",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

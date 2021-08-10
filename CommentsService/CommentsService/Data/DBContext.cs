@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheSocialBaz.Model.Enteties;
+using CommentingService.Model.Enteties;
 
-namespace TheSocialBaz.Data
+namespace CommentingService.Data
 {
     // ENTITY FRAMEWORK PODESAVANJA BAZE!
     public class DBContext : DbContext
@@ -26,7 +26,7 @@ namespace TheSocialBaz.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //this is empty method
+            modelBuilder.Entity<Comment>().OwnsOne(e => e.Account);
         }
     }
 }

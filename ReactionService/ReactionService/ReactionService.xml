@@ -1,0 +1,464 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReactionService</name>
+    </assembly>
+    <members>
+        <member name="T:ReactionService.Controllers.ReactionController">
+            <summary>
+            Reaction controller with endpoints for CRUD operations
+            </summary>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetPostOptions">
+            <summary>
+            Returns implemented options for API   
+            </summary>
+            <returns>Header key 'Allow' with allowed requests</returns>
+            <remarks>
+            Example of successful request \
+            OPTIONS 'https://localhost:44389/api/reactions' \
+            </remarks>
+            <response code="200">Return header key 'Allow' with allowed requests</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactions">
+            <summary>
+            Returns list of all reactions
+            </summary>
+            <returns>List of reactions</returns>
+            <remarks>
+            GET 'https://localhost:44389/api/reactions' \
+                Example of successful request \
+                    --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns list of reactions</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">No reactions found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactionById(System.Guid)">
+            <summary>
+            Returns reaction with reactionId
+            </summary>
+            <param name="reactionId">Reaction's Id</param>
+            <returns>Reaction with reactionId</returns>
+            <remarks>
+            Example of successful request \
+            GET 'https://localhost:44389/api/reactions/19E0ACBF-5707-49EE-8CB6-134C00B7C10B' \
+                --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns the reaction</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Reaction with this reactionId is not found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactionByReactionTypeId(System.Int32)">
+            <summary>
+            Returns reaction(s) by reactionTypeId
+            </summary>
+            <param name="typeId">Reaction type's Id</param>
+            <returns> Reaction(s) with reactionTypeId</returns>
+            <remarks>        
+            Example of a request to get reactions(s) by reactionTypeId
+            GET 'https://localhost:44389/api/reactions/reactionType/2' \
+                --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns the reaction(s)</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Reaction with this reactionTypeId is not found</response>
+            <response code="500">Error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.GetReactionByPostId(System.Guid,System.Guid)">
+            <summary>
+            Returns reaction(s) by postId
+            </summary>
+            <param name="postId">Post's Id</param>
+            <param name="userId">User's Id</param>
+            <returns> Reaction(s) with postId</returns>
+            <remarks>        
+            Example of a request to get reactions(s) by postId
+            GET 'https://localhost:44389/api/reactions/postId/8CCB1467-9F38-4164-88DA-15882FE82E58' \
+                --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            Successful request: --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            Bad request:        --param 'userId = f2f88bcd-d0a2-4fe7-a23f-df97a59731cd'
+            </remarks>
+            <response code="200">Returns the reaction(s)</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Reaction with this postId is not found</response>
+            <response code="500">Error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.CreateReaction(ReactionService.Models.DTOs.Reactions.ReactionCreationDto,System.Guid)">
+            <summary>
+            Creates reaction 
+            </summary>
+            <param name="reactionDto">Model of reaction to create</param>
+            <param name="userId">Id of the user who sends the request</param>
+            <remarks>
+            POST 'https://localhost:44389/api/reactions/' \
+            Example of a request to create reaction \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+             Successful request: 
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+            "reactionTypeId": 2,
+            }
+             Bad request if previous request has already been executed because you can react to the same post only once: 
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+            "reactionTypeId": 3,
+            }
+             Bad request because user with ID: '59ed7d80-39c9-42b8-a822-70ddd295914a' doesn't follow the seller of this post and can't react:
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "5284A73F-1F9E-4799-A793-5A4FE4A1DF56",
+            "reactionTypeId": 3,
+            }
+             Bad request because reaction type with ID: '20' doesn't exist :
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766d",
+            "reactionTypeId": 20,
+            }
+             Bad request because post with ID: '23d2cce9-86d7-4bff-887e-f7712b16766c' doesn't exist :
+             --param 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            {
+            "postId": "23d2cce9-86d7-4bff-887e-f7712b16766c",
+            "reactionTypeId": 2,
+            }
+            </remarks>
+            <response code="201">Returns the created reaction</response>
+            <response code="401">Unauthorized user</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.UpdateReaction(ReactionService.Models.DTOs.Reactions.ReactionUpdateDto,System.Guid,System.Guid)">
+            <summary>
+            Updates reaction
+            </summary>
+            <param name="reactionUpdateDto">Model of reaction for udpdate</param>
+            <param name="reactionId">Reaction id</param>
+            <param name="userId">Id of the user who sends the request</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            PUT 'https://localhost:44389/api/reactions/3B6D0A06-E64B-4F42-8689-FC10E8E6EDF7' \
+             Successful request: 
+             --param 'userId = 42B70088-9DBD-4B19-8FC7-16414E94A8A6'
+            {
+            "reactionTypeId": 2,
+            }
+            Bad request because user with id: '59ED7D80-39C9-42B8-A822-70DDD295914A' didn't create this reaction:
+             --param 'userId = 59ED7D80-39C9-42B8-A822-70DDD295914A'
+            {
+            "reactionTypeId": 2,
+            }
+            </remarks>
+            <response code="200">Returns updated reaction</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to update reaction</response>
+            <response code="404">Post history with postHistoryId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionController.DeleteReaction(System.Guid,System.Guid)">
+            <summary>
+            Deleting reaction with reactionId
+            </summary>
+            <param name="reactionId">Reaction's Id</param>
+            <param name="userId">ID of the user who sends the request</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete reaction
+            DELETE 'https://localhost:44389/api/reactions/19e0acbf-5707-49ee-8cb6-134c00b7c10b' \
+            Successful request:
+            --param userId = 'f2f88bcd-d0a2-4fe7-a23f-df97a59731cd'
+            Bad request because user with id: '42b70088-9dbd-4b19-8fc7-16414e94a8a6' didn't create this reaction:
+            --param userId = '42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+            </remarks>
+            <response code="204">Reaction successfully deleted</response>
+            <response code="401" >Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction</response>
+            <response code="404">Reaction with this reactionId is not found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="T:ReactionService.Controllers.ReactionTypeController">
+            <summary>
+            ReactionType controller with endpoints for fetching different types of reactions
+            </summary>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.GetReactionTypesOptions">
+            <summary>
+            Returns implemented options for API   
+            </summary>
+            <returns>Header key 'Allow' with allowed requests</returns>
+            <remarks>
+            Example of successful request \
+            OPTIONS 'https://localhost:44389/api/reactionTypes' \
+            </remarks>
+            <response code="200">Return header key 'Allow' with allowed requests</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.GetReactionTypes">
+            <summary>
+            Returns list of all reaction types
+            </summary>
+            <returns>List of reaction types</returns>
+            <remarks>
+            GET 'https://localhost:44389/api/reactionTypes' \
+                Example of successful request \
+                    --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            </remarks>
+            <response code="200">Returns list of reaction types</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">No reaction types found</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.GetReactionTypeById(System.Int32)">
+             <summary>
+             Returns reaction type with reactionTypeId
+             </summary>
+             <param name="reactionTypeId">Reaction type's Id</param>
+             <returns>Reaction type with reactionTypeId</returns>
+             <remarks>
+             GET 'https://localhost:44389/api/reactionTypes/2' \
+                 Example of successful request \
+                     --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+             </remarks>
+            <response code="200">Returns the reaction type</response>
+             <response code="401">Unauthorized user</response>
+             <response code="404">Reaction type with this reactionTypeId is not found</response>
+             <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.CreateReactionType(ReactionService.Models.DTOs.ReactionTypes.ReactionTypeCreationDto)">
+            <summary>
+            Creates reaction type
+            </summary>
+            <param name="reactionTypeDto">Model of reactionType to create</param>
+            <remarks>
+            POST 'https://localhost:44389/api/reactionTypes/' \
+            Example of a request to create reactionType \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+            {
+            "typeName": "NewType"
+            }
+            </remarks>
+            <response code="201">Returns the created reactionType</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to create reaction type</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.UpdateReactionType(ReactionService.Models.DTOs.ReactionTypes.ReactionTypeUpdateDto,System.Int32)">
+            <summary>
+            Updates reaction type
+            </summary>
+            <param name="reactionTypeUpdateDto">Model of reaction type for udpdate</param>
+            <param name="reactionTypeId">Reaction type id</param>
+            <returns>Confirmation of update</returns>
+            <remarks>
+            PUT 'https://localhost:44389/api/reactionTypes/' \
+            Example of a request to update product \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg' \
+             --param  'reactionTypeId = example of Guid'
+            {
+            "typeName": "UpdatedType"
+            }
+            </remarks>
+            <response code="200">Returns updated reaction type</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to update reaction type</response>
+            <response code="404">Reaction type with reactionTypeId is not found</response>
+            <response code="409">Conflict - Foreign key constraint violation</response>
+            <response code="500">Error on the server while updating</response>
+        </member>
+        <member name="M:ReactionService.Controllers.ReactionTypeController.DeleteReactionType(System.Int32)">
+            <summary>
+            Deleting reaction type with reactionTypeId
+            </summary>
+            <param name="reactionTypeId">Reaction type's Id</param>
+            <returns>Status 204 - NoContent</returns>
+            <remarks>        
+            Example of a request to delete reaction type
+            DELETE 'https://localhost:44389/api/reactionTypes' \
+              --param  'reactionTypeId = 4'
+              --param  userId 'userId = 42b70088-9dbd-4b19-8fc7-16414e94a8a6'
+                       wrong userId 'userId = 59ed7d80-39c9-42b8-a822-70ddd295914a'
+            </remarks>
+            <response code="204">Reaction type successfully deleted</response>
+            <response code="401">Unauthorized user</response>
+            <response code="403">Forbiden request - user with this userId doesn't have permission to delete reaction type</response>
+            <response code="404">Reaction type with this reactionTypeId is not found</response>
+            <response code="409">Reaction type reference in another table</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:ReactionService.Data.BlockingMock.IBlockingMockRepository.CheckDidIBlockSeller(System.Guid,System.Guid)">
+            <summary>
+            Check did I block user
+            </summary>
+            <param name="userId">Unique identifier of my (user who send the request) account</param>
+            <param name="sellerId">Unique identifier of the users for whom I check did I blocked him</param>
+            <returns></returns>
+        </member>
+        <member name="M:ReactionService.Data.FollowingMock.IFollowingMockRepository.CheckDoIFollowSeller(System.Guid,System.Guid)">
+            <summary>
+            Check do I follow user
+            </summary>
+            <param name="userId">Unique identifier of my (user who send the request) account</param>
+            <param name="sellerId">Unique identifier of the users for whom I check do I follow him</param>
+            <returns></returns>
+        </member>
+        <member name="T:ReactionService.Entities.Reaction">
+            <summary>
+            Entity class which models reactions which are added to the posts
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.ReactionId">
+            <summary>
+            Unique identifier of the reaction
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.PostId">
+            <summary>
+            PostId to which the reaction is added
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.ReactionTypeId">
+            <summary>
+            Unique identifier of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.Reaction.AccountId">
+            <summary>
+            Id of the user who adds reaction
+            </summary>
+        </member>
+        <member name="T:ReactionService.Entities.ReactionType">
+            <summary>
+            Entity class which models different types of reactions
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.ReactionType.ReactionTypeId">
+            <summary>
+            Unique identifier of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Entities.ReactionType.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.Reactions.ReactionCreationDto.PostId">
+            <summary>
+            Unique identifier of the post to which the reaction is added
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.Reactions.ReactionCreationDto.ReactionTypeId">
+            <summary>
+            Unique identifier of the reactionType 
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.Reactions.ReactionUpdateDto.ReactionTypeId">
+            <summary>
+            Unique identifier of the reactionType 
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeConfirmationDto.ReactionTypeId">
+            <summary>
+            Unique identifier of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeConfirmationDto.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeCreationDto.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.DTOs.ReactionTypes.ReactionTypeUpdateDto.TypeName">
+            <summary>
+            Name of the reaction type
+            </summary>
+        </member>
+        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.blockingId">
+            <summary>
+            Unique identifier for the blocking
+            </summary>
+        </member>
+        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.blockerId">
+            <summary>
+            Id of the user who blocked another user
+            </summary>
+        </member>
+        <member name="F:ReactionService.Models.DTOs.Mocks.BlockingDto.blockedId">
+            <summary>
+            Id of the user who are blocked by another user
+            </summary>
+        </member>
+        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.followingId">
+            <summary>
+            Unique identifier for the following
+            </summary>
+        </member>
+        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.followerId">
+            <summary>
+            Id of the user who followed another user
+            </summary>
+        </member>
+        <member name="F:ReactionService.Models.DTOs.Mocks.FollowingDto.followedId">
+            <summary>
+            Id of the user who are followed by another user
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.PostId">
+            <summary>
+            Unique identifier for the post
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.PostName">
+            <summary>
+            Name of the post
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.PostImage">
+            <summary>
+            Image of the post
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.Description">
+            <summary>
+            Description of the post
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.Price">
+            <summary>
+            Price of the post
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.Currency">
+            <summary>
+            Payment currency
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.Category">
+            <summary>
+            Category to which the post belongs
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.PostType">
+            <summary>
+            Type of the post (product or service)
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.PublicationDate">
+            <summary>
+            Date when the post was published
+            </summary>
+        </member>
+        <member name="P:ReactionService.Models.Mocks.PostDto.AccountId">
+            <summary>
+            Id of the user's account who posted the post
+            </summary>
+        </member>
+    </members>
+</doc>

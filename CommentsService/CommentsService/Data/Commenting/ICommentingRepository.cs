@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheSocialBaz.Model.Enteties;
+using CommentingService.Model.Enteties;
 
-namespace TheSocialBaz.Data
+namespace CommentingService.Data
 {
     public interface ICommentingRepository
     {
         List<Comment> GetAllComments();
 
-        List<Comment> GetCommentsByPostID(int postID, int userID);
+        List<Comment> GetCommentsByPostID(int postID);
+
+        List<Comment> GetCommentsByAccountID(int accountID);
 
         Comment GetCommentByID(Guid commentID);
 
@@ -20,10 +22,9 @@ namespace TheSocialBaz.Data
 
         void DeleteComment(Guid commentID);
 
-        bool CheckDoIFollowSeller(int userID, int sellerID); //
+        bool SaveChanges();
 
-        bool CheckDidIBlockedSeller(int userId, int sellerID); //
+        bool CheckIfUserBlocked(int accountID, int blockedAccountID);
 
-        public bool SaveChanges(); //
     }
 }

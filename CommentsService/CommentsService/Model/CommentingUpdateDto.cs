@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TheSocialBaz.Model
+namespace CommentingService.Model
 {
     /// <summary>
     /// DTO for comment modification
@@ -14,17 +14,14 @@ namespace TheSocialBaz.Model
         /// <summary>
         /// Comment ID
         /// </summary>
+        /// <example>e48da32e-f8d3-4b2e-aaff-2a3a4827188b</example>
         public Guid CommentID { get; set; }
-
-        /// <summary>
-        /// Post ID to which the comment was added
-        /// </summary>
-        public int PostID { get; set; }
 
         /// <summary>
         /// Comment content
         /// </summary>
-        [Required(ErrorMessage = "Tekst komentara je obavezno uneti!")]
+        /// <example>Good stuff.</example>
+        [Required(ErrorMessage = "Comment text is required!")]
         public String CommentText { get; set; }
     }
 }

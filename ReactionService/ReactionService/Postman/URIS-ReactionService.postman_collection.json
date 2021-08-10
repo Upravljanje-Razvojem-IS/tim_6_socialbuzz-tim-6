@@ -1,0 +1,502 @@
+{
+	"info": {
+		"_postman_id": "d9503a82-3e13-44c1-8acf-2990312a080a",
+		"name": "URIS-ReactionService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ReactionType",
+			"item": [
+				{
+					"name": "GetReactionTypes",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44389/api/reactionTypes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactionTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReactionTypeById",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44389/api/reactionTypes/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactionTypes",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateReactionType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"typeName\": \"NewType\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44389/api/reactionTypes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactionTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteReactionType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44389/api/reactionTypes/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactionTypes",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateReactionType",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"typeName\": \"UpdatedType\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44389/api/reactionTypes/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactionTypes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reaction",
+			"item": [
+				{
+					"name": "GetReactions",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44389/api/reactions",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReactionById",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44389/api/reactions/19E0ACBF-5707-49EE-8CB6-134C00B7C10B",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactions",
+								"19E0ACBF-5707-49EE-8CB6-134C00B7C10B"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReactionByReactionTypeId",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44389/api/reactions/reactionTypeId/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactions",
+								"reactionTypeId",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetReactionByPostId",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "userId",
+								"value": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44389/api/reactions/postId/8CCB1467-9F38-4164-88DA-15882FE82E58",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactions",
+								"postId",
+								"8CCB1467-9F38-4164-88DA-15882FE82E58"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateReaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "userId",
+								"value": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": \"23d2cce9-86d7-4bff-887e-f7712b16766d\",\r\n    \"reactionTypeId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44389/api/reactions",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateReaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "userId",
+								"type": "text",
+								"value": "42B70088-9DBD-4B19-8FC7-16414E94A8A6"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reactionTypeId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44389/api/reactions/3B6D0A06-E64B-4F42-8689-FC10E8E6EDF7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactions",
+								"3B6D0A06-E64B-4F42-8689-FC10E8E6EDF7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteReaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "userId",
+								"value": "42b70088-9dbd-4b19-8fc7-16414e94a8a6",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44389/api/reactions/19e0acbf-5707-49ee-8cb6-134c00b7c10b",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44389",
+							"path": [
+								"api",
+								"reactions",
+								"19e0acbf-5707-49ee-8cb6-134c00b7c10b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

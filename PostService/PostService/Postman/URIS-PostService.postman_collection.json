@@ -1,0 +1,718 @@
+{
+	"info": {
+		"_postman_id": "8ac39c27-5403-4436-a02b-5855eefe680e",
+		"name": "URIS-PostService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PostService",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "GetPosts",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:44377/api/posts",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetPostsByType",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/posts?postType=product",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "postType",
+											"value": "product"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetPostById",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/posts/23d2cce9-86d7-4bff-887e-f7712b16766d",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"posts",
+										"23d2cce9-86d7-4bff-887e-f7712b16766d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetPostsByUsername",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/posts?username=DusanK",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "DusanK"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PostHistory",
+					"item": [
+						{
+							"name": "GetPostHistoryByPostid",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/postHistories/a92c61da-1c18-4a1a-159d-08d94f9a11bc",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"postHistories",
+										"a92c61da-1c18-4a1a-159d-08d94f9a11bc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreatePostHistory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"price\": 2300,\r\n    \"postId\": \"15908a81-dcae-43e7-fecb-08d94eb2a3fe\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44377/api/postHistories",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"postHistories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetPostHistories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/postHistories",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"postHistories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeletePostHistory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/postHistories/32",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"postHistories",
+										"32"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdatePostHistory",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"price\": 2350,\r\n    \"dateFrom\": \"2021-07-24T16:52:21.3662146\",\r\n    \"dateTo\": null,\r\n    \"postId\": \"15908a81-dcae-43e7-fecb-08d94eb2a3fe\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44377/api/postHistories/26",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"postHistories",
+										"26"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "GetProducts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/products",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetProducts(byProductName)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/products?productName=Adidas sportska majica",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"products"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "Adidas sportska majica"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetProductById",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/products/23d2cce9-86d7-4bff-887e-f7712b16766d",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"products",
+										"23d2cce9-86d7-4bff-887e-f7712b16766d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"weight\": \"140g\",\r\n\"postName\": \"Nike sportska majica\",\r\n\"postImage\": \"https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg\",\r\n\"description\": \"Nike Sportswear T-Shirt je muška majica, koju odlikuje udobnost, jer je napravljena od mekog materijala.\",\r\n \"price\": 2340,\r\n\"currency\": \"Rsd\",\r\n\"category\": \"Sportska odeća\",\r\n\"accountId\": \"59ed7d80-39c9-42b8-a822-70ddd295914a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44377/api/products",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "userId",
+										"value": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:44377/api/products/15908a81-dcae-43e7-fecb-08d94eb2a3fe",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"products",
+										"15908a81-dcae-43e7-fecb-08d94eb2a3fe"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateProduct",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "userId",
+										"value": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postName\": \"Nike sportska majica\",\r\n    \"postImage\": \"https://www.intersport.rs/media/catalog/product/cache/382907d7f48ae2519bf16cd5f39b77f9/a/r/ar5004-010-phsfh001-1000.jpg\",\r\n    \"description\": \"Nike Sportswear T-Shirt je muška majica, koja je jako udobna jer je napravljena od mekog materijala.\",\r\n    \"price\": 2390,\r\n    \"currency\": \"Rsd\",\r\n    \"category\": \"Sportska odeća\",\r\n    \"accountId\": \"59ed7d80-39c9-42b8-a822-70ddd295914a\",\r\n    \"weight\": \"125g\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44377/api/products/15908a81-dcae-43e7-fecb-08d94eb2a3fe",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"products",
+										"15908a81-dcae-43e7-fecb-08d94eb2a3fe"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Service",
+					"item": [
+						{
+							"name": "GetServices",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/services",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetServiceById",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/services/54f9baf6-271e-40cb-8d80-a27980fc8b63",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"services",
+										"54f9baf6-271e-40cb-8d80-a27980fc8b63"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetServices(byServiceName)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:44377/api/services?serviceName=Muško šišanje",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"services"
+									],
+									"query": [
+										{
+											"key": "serviceName",
+											"value": "Muško šišanje"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateService",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "userId",
+										"value": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postName\": \"Masaža za sportiste\",\r\n    \"postImage\": \"https://clubfiftyone.co.uk/wp-content/uploads/2019/09/Sports-therapy.jpg\",\r\n    \"description\": \"Zakaži svoj termin za sportsku masažu i spremno dočekaj sledeći trening\",\r\n    \"price\": 2800,\r\n    \"currency\": \"Rsd\",\r\n    \"category\": \"Lepota i zdravlje\",\r\n    \"accountId\": \"59ed7d80-39c9-42b8-a822-70ddd295914a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44377/api/services/a92c61da-1c18-4a1a-159d-08d94f9a11bc",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"services",
+										"a92c61da-1c18-4a1a-159d-08d94f9a11bc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateService",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJVc2VyIn0.4cCC6M5FbRuEDgB09F_9T-3To760pEx6ZXKEqrKsKxg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postName\": \"Sportska masaža\",\r\n    \"postImage\": \"https://www.msccollege.edu/wp-content/uploads/2020/06/sports-massage-therapy-1024x683.jpg\",\r\n    \"description\": \"Zakaži svoj termin i spremno dočekaj sledeći trening\",\r\n    \"price\": 3000,\r\n    \"currency\": \"Rsd\",\r\n    \"category\": \"Lepota i zdravlje\",\r\n    \"accountId\": \"59ed7d80-39c9-42b8-a822-70ddd295914a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:44377/api/services",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteService",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJLZXkiOiJTZWNyZXRLZXlEdXNhbktyc3RpYzEyMyIsInJvbGUiOiJBZG1pbiJ9.k_usVTnJaJIckRW2FjjaVipx3PkOSJIjGWLkxrZdvEA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "userId",
+										"value": "59ed7d80-39c9-42b8-a822-70ddd295914a",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://localhost:44377/api/services/4767dabb-05ac-4db6-d37a-08d94f34a631",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "44377",
+									"path": [
+										"api",
+										"services",
+										"4767dabb-05ac-4db6-d37a-08d94f34a631"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

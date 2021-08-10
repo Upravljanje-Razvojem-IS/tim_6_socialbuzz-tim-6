@@ -2,27 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheSocialBaz.Model.Enteties;
+using CommentingService.Model.Enteties;
+using CommentsService.Data.Mocks.BlockMock;
 
-namespace TheSocialBaz.Data
+namespace CommentingService.Data
 {
     public class CommentingRepository : ICommentingRepository
     {
         private readonly DBContext context;
+        private readonly IBlockMockRepository blockRepository;
 
-        public CommentingRepository(DBContext DBcontext)
+        public CommentingRepository(DBContext DBcontext, IBlockMockRepository blockRepository)
         {
             context = DBcontext;
-        }
-
-        public bool CheckDidIBlockedSeller(int userId, int sellerID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CheckDoIFollowSeller(int userID, int sellerID)
-        {
-            throw new NotImplementedException();
+            this.blockRepository = blockRepository;
         }
 
         public void CreateComment(Comment comment)
@@ -38,13 +31,6 @@ namespace TheSocialBaz.Data
 
         public List<Comment> GetAllComments()
         {
-            if (context.Database.CanConnect())
-            {
-                Console.WriteLine("Bravo");
-            } else
-            {
-                Console.WriteLine("Sranje");
-            }
             return context.Comments.ToList();
         }
 
@@ -53,10 +39,19 @@ namespace TheSocialBaz.Data
             return context.Comments.FirstOrDefault(e => e.CommentID == commentID);
         }
 
-        public List<Comment> GetCommentsByPostID(int postID, int userID)
+        public List<Comment> GetCommentsByPostID(int postID)
         {
             var query = from comment in context.Comments
                         where comment.PostID == postID
+                        select comment;
+
+            return query.ToList();
+        }
+
+        public List<Comment> GetCommentsByAccountID(int accountID)
+        {
+            var query = from comment in context.Comments
+                        where comment.AccountID == accountID
                         select comment;
 
             return query.ToList();
@@ -69,8 +64,12 @@ namespace TheSocialBaz.Data
 
         public void UpdateComment(Comment comment)
         {
-            var a = context.Update(comment);
             context.Update(comment);
+        }
+
+        public bool CheckIfUserBlocked(int accountID, int blockedAccountID)
+        {
+            return blockRepository.CheckIfUserBlocked(accountID, blockedAccountID);
         }
     }
 }
