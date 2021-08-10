@@ -9,7 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ReportingService.Database;
 using ReportingService.Interfaces;
+using ReportingService.Logger;
 using ReportingService.Repository;
+using ReportingService.Validation;
 using System;
 using System.Text;
 
@@ -38,6 +40,11 @@ namespace ReportingService
                options.UseSqlServer(Configuration.GetConnectionString("DatabaseString"))
             );
 
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidateAttribute));
+            });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddAuthentication(options =>
@@ -63,6 +70,7 @@ namespace ReportingService
 
             services.AddScoped<IReportRepository, ReportRepository>();
 
+            services.AddScoped<LoggerMock>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

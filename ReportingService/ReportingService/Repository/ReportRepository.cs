@@ -2,7 +2,9 @@
 using ReportingService.Database;
 using ReportingService.DTOs;
 using ReportingService.Entities;
+using ReportingService.ExceptionReport;
 using ReportingService.Interfaces;
+using ReportingService.Logger;
 using ReportingService.MockData;
 using System;
 using System.Collections.Generic;
@@ -14,16 +16,20 @@ namespace ReportingService.Repository
     {
         private readonly DatabaseContext _db;
         private readonly IMapper _mapper;
+        private readonly LoggerMock _logger;
 
-        public ReportRepository(DatabaseContext db, IMapper mapper)
+        public ReportRepository(DatabaseContext db, IMapper mapper, LoggerMock logger)
         {
             _db = db;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public List<ReportGet> GetAll()
         {
             var reports = _mapper.Map<List<ReportGet>>(_db.Reports.ToList());
+
+            _logger.Log("Get all reports!");
 
             return reports;
         }
@@ -32,12 +38,17 @@ namespace ReportingService.Repository
         {
             var reports = _mapper.Map<ReportGet>(_db.Reports.FirstOrDefault(report => report.Id == id));
 
+            _logger.Log("Get report by id!");
+
             return reports;
         }
 
         public ReportConfirm PostNew(ReportCreate newReport)
         {
             var user = MockedData.Posts.FirstOrDefault(post => post.Id == newReport.PostId);
+
+            if (user == null)
+                throw new ReportException("User with given Id doesn not exist");
 
             Report report = new Report()
             {
@@ -51,6 +62,8 @@ namespace ReportingService.Repository
             _db.Add(report);
             _db.SaveChanges();
 
+            _logger.Log("Create new report!");
+
             return _mapper.Map<ReportConfirm>(report);
         }
 
@@ -58,7 +71,13 @@ namespace ReportingService.Repository
         {
             var report = _db.Reports.FirstOrDefault(r => r.Id == id);
 
+            if (report == null)
+                throw new ReportException("Report with given Id doesn not exist");
+
             var user = MockedData.Posts.FirstOrDefault(post => post.Id == updated.PostId);
+
+            if (user == null)
+                throw new ReportException("User with given Id doesn not exist");
 
             report.NumberOfComments = updated.NumberOfComments;
             report.NumberOfLikes = updated.NumberOfLikes;
@@ -67,6 +86,8 @@ namespace ReportingService.Repository
 
             _db.SaveChanges();
 
+            _logger.Log("Update report!");
+
             return _mapper.Map<ReportConfirm>(report);
         }
 
@@ -74,8 +95,13 @@ namespace ReportingService.Repository
         {
             var report = _db.Reports.FirstOrDefault(r => r.Id == id);
 
+            if (report == null)
+                throw new ReportException("Report with given Id doesn not exist");
+
             _db.Reports.Remove(report);
             _db.SaveChanges();
+
+            _logger.Log("Delete report!");
         }
 
     }
