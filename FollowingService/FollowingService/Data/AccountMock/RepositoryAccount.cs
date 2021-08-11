@@ -24,7 +24,8 @@ namespace FollowingService.Data.AccountMock
                     Account_id = Guid.Parse("eb78bf24-a3ab-48bf-a931-7b0c6e680bfd"),
                     Username = "jovana",
                     Name = "Jovana",
-                    Surname = "Bojicic"
+                    Surname = "Bojicic",
+                    Password = "jovanaa"
 
                 },
                 new Account
@@ -32,15 +33,17 @@ namespace FollowingService.Data.AccountMock
                     Account_id = Guid.Parse("34a81ef8-2831-4444-8355-859d02ae2290"),
                     Username = "marko",
                     Name = "Marko",
-                    Surname = "Markovic"
+                    Surname = "Markovic",
+                    Password = "markoo"
                 },
                 new Account
                 {
                     Account_id = Guid.Parse("7b585f96-e6df-481b-a079-64acef59bb9b"),
                     Username = "andrijana",
                     Name = "Andrijana",
-                    Surname = "Milovanovic"
-                 
+                    Surname = "Milovanovic",
+                    Password = "andrijanaa"
+
                 }
             });
         }
@@ -48,6 +51,11 @@ namespace FollowingService.Data.AccountMock
         public  Account GetAccountByUserName(string username)
         {
             return Accounts.First(e => e.Username == username);
+        }
+
+        public  Account Exists(Account account)
+        {
+            return Accounts.First(a => a.Username == account.Username && a.Password == account.Password);
         }
     }
 }

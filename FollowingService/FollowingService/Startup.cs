@@ -1,5 +1,7 @@
+using FollowingService.Auth;
 using FollowingService.Data.AccountMock;
 using FollowingService.Data.UnitOfWork;
+using FollowingService.Logger;
 using FollowingService.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,12 +34,13 @@ namespace FollowingService
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddScoped<IAuthorization, Authorization>();
             services.AddScoped<IUnitOfWork,FollowingUnitOfWork>();
             services.AddScoped<IRepositoryAccount, RepositoryAccount>();
             services.AddDbContext<FollowingContext>();
             services.AddControllers();
-
-
+            services.AddSingleton<IFakeLogger, FakeLogger>();
+            services.AddHttpContextAccessor();
 
             services.AddSwaggerGen(c =>
             {

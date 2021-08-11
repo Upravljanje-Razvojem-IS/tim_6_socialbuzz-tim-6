@@ -80,3 +80,16 @@ Reaction Service - 29/07/2021 12:59 PM - Information 80000010-0001-fb00-b63f-847
 Reaction Service - 29/07/2021 01:05 PM - Information 80000005-0001-f900-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
 Reaction Service - 29/07/2021 11:37 PM - Information 8000000b-0001-f900-b63f-84710c7967bb  Successfully created new reaction type with ID 7 in database 
 Reaction Service - 29/07/2021 11:38 PM - Information 8000000d-0001-f900-b63f-84710c7967bb  Successfully deleted reaction type with ID 7 from database 
+Following Service - 10/08/2021 11:40 PM - Error   User not authorized, authorization missing in header. 
+Following Service - 11/08/2021 12:16 AM - Error   User not authorized, authorization missing in header. 
+Following Service - 11/08/2021 12:16 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:19 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:25 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:26 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:29 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:29 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:34 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:35 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:36 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:41 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 12/08/2021 12:05 AM - Information 80000079-000c-fd00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 

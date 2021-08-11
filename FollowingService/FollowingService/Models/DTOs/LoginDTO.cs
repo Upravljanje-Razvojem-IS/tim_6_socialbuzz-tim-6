@@ -5,18 +5,15 @@ using System.Threading.Tasks;
 
 namespace FollowingService.Models.DTOs
 {
-    public class FollowingDTO
+    public class LoginDTO
     {
-
         /// <summary>
-        /// Following ID
+        /// Username of the user account who is trying to login
         /// </summary>
-        public Guid FollowingId { get; set; }
-
+        public string Username { get; set; }
         /// <summary>
-        /// Follower ID
+        /// Password of the user account who is trying to login
         /// </summary>
-        public Guid FollowerId { get; set; }
-
+        public string Password { get; set; }
     }
 }
