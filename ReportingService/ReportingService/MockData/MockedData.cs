@@ -7,7 +7,7 @@ namespace ReportingService.MockData
 {
     public static class MockedData
     {
-        public static List<PostMock> Posts = new List<PostMock>()
+        public readonly static List<PostMock> Posts = new List<PostMock>()
         {
             new PostMock()
             {
