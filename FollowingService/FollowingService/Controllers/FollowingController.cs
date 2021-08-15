@@ -6,7 +6,6 @@ using FollowingService.Logger;
 using FollowingService.Model.Entity;
 using FollowingService.Models.DTOs;
 using FollowingService.Models.Mocks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
