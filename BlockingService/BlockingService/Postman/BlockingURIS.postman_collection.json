@@ -1,25 +1,25 @@
 {
 	"info": {
-		"_postman_id": "9a2bec49-16c5-493c-83f7-bf28ca03c099",
-		"name": "FollowingUser",
+		"_postman_id": "4ad54dd3-5380-47e6-a8f5-2e44b4cb02ce",
+		"name": "BlockUser",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Follow options",
+			"name": "Block options",
 			"request": {
 				"method": "OPTIONS",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44372/api/follow",
+					"raw": "https://localhost:44304/api/block",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44372",
+					"port": "44304",
 					"path": [
 						"api",
-						"follow"
+						"block"
 					]
 				}
 			},
@@ -40,15 +40,15 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:44372/api/follow/login",
+					"raw": "https://localhost:44304/api/block/login",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44372",
+					"port": "44304",
 					"path": [
 						"api",
-						"follow",
+						"block",
 						"login"
 					]
 				}
@@ -56,81 +56,66 @@
 			"response": []
 		},
 		{
-			"name": "Get all followings",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://localhost:44372/api/follow",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44372",
-					"path": [
-						"api",
-						"follow"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get all followers for user",
+			"name": "Get all blocks",
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
-			},
-			"response": []
-		},
-		{
-			"name": "Get all followings",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
-						"type": "text"
-					}
-				],
 				"url": {
-					"raw": "https://localhost:44372/api/follow/follwings",
+					"raw": "https://localhost:44304/api/block",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44372",
+					"port": "44304",
 					"path": [
 						"api",
-						"follow",
-						"follwings"
+						"block"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Follow user",
+			"name": "Get all blocked accounts for user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyOTA1NTU1NCwiZXhwIjoxNjI5MDU5MTU0LCJpYXQiOjE2MjkwNTU1NTR9.eeX6789yEGHANyVBCmBkxau_KY4n4BpeI5NQK9689R8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44304/api/block/blocked",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44304",
+					"path": [
+						"api",
+						"block",
+						"blocked"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Block user",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyOTA1NTU1NCwiZXhwIjoxNjI5MDU5MTU0LCJpYXQiOjE2MjkwNTU1NTR9.eeX6789yEGHANyVBCmBkxau_KY4n4BpeI5NQK9689R8",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"following\":\"andrijana\"\r\n}",
+					"raw": "{\r\n    \"blocked\":\"andrijana\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -138,35 +123,35 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:44372/api/follow/followUser",
+					"raw": "https://localhost:44304/api/block/blockUser",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44372",
+					"port": "44304",
 					"path": [
 						"api",
-						"follow",
-						"followUser"
+						"block",
+						"blockUser"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Unfollow user",
+			"name": "Unblock user",
 			"request": {
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyOTA1NTU1NCwiZXhwIjoxNjI5MDU5MTU0LCJpYXQiOjE2MjkwNTU1NTR9.eeX6789yEGHANyVBCmBkxau_KY4n4BpeI5NQK9689R8",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"following\":\"andrijana\"\r\n}",
+					"raw": "{\r\n    \"blocked\":\"andrijana\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -174,16 +159,16 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:44372/api/follow/unfollowuser",
+					"raw": "https://localhost:44304/api/block/unblockUser",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "44372",
+					"port": "44304",
 					"path": [
 						"api",
-						"follow",
-						"unfollowuser"
+						"block",
+						"unblockUser"
 					]
 				}
 			},

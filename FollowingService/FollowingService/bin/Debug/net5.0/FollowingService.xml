@@ -33,14 +33,14 @@
         </member>
         <member name="M:FollowingService.Controllers.FollowingController.GetAll">
             <summary>
-            Return all followings   
+            Return all follows   
             </summary>
             <returns>List of all following relations</returns>
             <remarks>
             Example of successful request \
             GET 'https://localhost:44372/api/follow' \
             </remarks>
-            <response code="200">Return list of followings</response>
+            <response code="200">Return list of follows</response>
             <response code="404">There is no follows</response>
             <response code="401">Authorization error</response>
             <response code="500">Server error while reading</response>

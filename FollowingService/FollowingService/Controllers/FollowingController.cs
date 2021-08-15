@@ -102,14 +102,14 @@ namespace FollowingService.Controllers
 
 
         /// <summary>
-        /// Return all followings   
+        /// Return all follows   
         /// </summary>
         /// <returns>List of all following relations</returns>
         /// <remarks>
         /// Example of successful request \
         /// GET 'https://localhost:44372/api/follow' \
         /// </remarks>
-        /// <response code="200">Return list of followings</response>
+        /// <response code="200">Return list of follows</response>
         /// <response code="404">There is no follows</response>
         /// <response code="401">Authorization error</response>
         /// <response code="500">Server error while reading</response>
@@ -121,14 +121,14 @@ namespace FollowingService.Controllers
         public ActionResult<List<FollowingDTO>> GetAll()
         {
 
-            var followings = _unitOfWork.RepositoryFollowing.GetAll();
-            if (followings == null || followings.Count == 0)
+            var follows = _unitOfWork.RepositoryFollowing.GetAll();
+            if (follows == null || follows.Count == 0)
             {
                 return StatusCode(StatusCodes.Status404NotFound, "There is no follows.");
             }
             try
             {
-                return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = followings });
+                return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = follows });
             }
             catch (Exception)
             {
@@ -189,14 +189,14 @@ namespace FollowingService.Controllers
                 return StatusCode(StatusCodes.Status404NotFound, "JWT token expired. Log in again");
             }
 
-            var followings = _unitOfWork.RepositoryFollowing.GetAllFollowers(user);
-            if (followings == null || followings.Count == 0)
+            var follows = _unitOfWork.RepositoryFollowing.GetAllFollowers(user);
+            if (follows == null || follows.Count == 0)
             {
                 return StatusCode(StatusCodes.Status404NotFound, "There is no followers for this user.");
             }
             try
             {
-                return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = followings });
+                return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = follows });
             }
             catch (Exception)
             {
@@ -256,14 +256,14 @@ namespace FollowingService.Controllers
                 return StatusCode(StatusCodes.Status404NotFound, "JWT token expired. Log in again");
             }
 
-            var followings = _unitOfWork.RepositoryFollowing.GetAllFollowing(user);
-            if (followings == null || followings.Count == 0)
+            var follows = _unitOfWork.RepositoryFollowing.GetAllFollowing(user);
+            if (follows == null || follows.Count == 0)
             {
                 return StatusCode(StatusCodes.Status404NotFound, "There is no following for this user.");
             }
             try
             {
-                return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = followings });
+                return StatusCode(StatusCodes.Status200OK, new { status = "OK", content = follows });
             }
             catch (Exception)
             {
@@ -296,7 +296,6 @@ namespace FollowingService.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [AllowAnonymous]
         [HttpPost("followUser")]
         public ActionResult<List<FollowingDTO>> Follow([FromHeader(Name = "Authorization")] string key, [FromBody] FollowUserDTO followUserDTO)
         {

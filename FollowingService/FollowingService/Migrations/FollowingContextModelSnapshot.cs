@@ -29,7 +29,19 @@ namespace FollowingService.Migrations
 
                     b.HasKey("FollowerId", "FollowingId");
 
-                    b.ToTable("Followings");
+                    b.ToTable("Follows");
+
+                    b.HasData(
+                        new
+                        {
+                            FollowerId = new Guid("eb78bf24-a3ab-48bf-a931-7b0c6e680bfd"),
+                            FollowingId = new Guid("34a81ef8-2831-4444-8355-859d02ae2290")
+                        },
+                        new
+                        {
+                            FollowerId = new Guid("34a81ef8-2831-4444-8355-859d02ae2290"),
+                            FollowingId = new Guid("eb78bf24-a3ab-48bf-a931-7b0c6e680bfd")
+                        });
                 });
 #pragma warning restore 612, 618
         }

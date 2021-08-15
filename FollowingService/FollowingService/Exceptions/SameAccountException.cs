@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace FollowingService.Exceptions
 {
@@ -7,12 +6,6 @@ namespace FollowingService.Exceptions
     {
         public SameAccountException(string message)
            : base(message)
-        {
-
-        }
-
-        protected SameAccountException(SerializationInfo info, StreamingContext context)
-          : base(info, context)
         {
 
         }
