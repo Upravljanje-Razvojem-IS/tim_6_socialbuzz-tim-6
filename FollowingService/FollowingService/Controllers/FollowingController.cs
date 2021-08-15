@@ -1,21 +1,17 @@
 ﻿using AutoMapper;
+using FollowingService.Auth;
 using FollowingService.Data.UnitOfWork;
+using FollowingService.Exceptions;
+using FollowingService.Logger;
+using FollowingService.Model.Entity;
+using FollowingService.Models.DTOs;
+using FollowingService.Models.Mocks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FollowingService.Models.DTOs;
-using FollowingService.Data.AccountMock;
-using FollowingService.Model.Entity;
-using FollowingService.Exceptions;
-using FollowingService.Auth;
-using Microsoft.Extensions.Options;
-using FollowingService.Models.Mocks;
-using Microsoft.Extensions.Logging;
-using FollowingService.Logger;
 
 namespace FollowingService.Controllers
 {
@@ -26,11 +22,11 @@ namespace FollowingService.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IAuthorization _authorization;
+        private readonly IAuthentication _authorization;
         private readonly IFakeLogger _logger;
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public FollowingController(IUnitOfWork unitOfWork, IMapper mapper, IAuthorization authorization, IFakeLogger logger, IHttpContextAccessor contextAccessor)
+        public FollowingController(IUnitOfWork unitOfWork, IMapper mapper, IAuthentication authorization, IFakeLogger logger, IHttpContextAccessor contextAccessor)
         {
             _authorization = authorization;
             _unitOfWork = unitOfWork;
@@ -61,7 +57,7 @@ namespace FollowingService.Controllers
         /// <summary>
         /// User login mock - generates JWT
         /// </summary>
-        /// <param name="LoginDTO">Model of account</param>
+        /// <param name="loginDTO">Model of account</param>
         /// <remarks>
         /// POST 'https://localhost:44372/api/follow/login/' \
         /// Example of a successful request \
@@ -75,11 +71,20 @@ namespace FollowingService.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("login")]
-        public ActionResult<String> Authenticate([FromBody] LoginDTO acc)
+        public ActionResult<String> Authenticate([FromBody] LoginDTO loginDTO)
         {
-            Account account = _unitOfWork.RepositoryAccount.Exists(new Account(acc.Username, acc.Password));
-            if (account != null)
+            Account account;
+            try
             {
+                account = _unitOfWork.RepositoryAccount.Exists(new Account(loginDTO.Username, loginDTO.Password));
+            }
+            catch(System.InvalidOperationException e)
+            {
+                _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Couldn't create JWT token because user: {0} doesn't exist. Error: {1}", loginDTO.Username, e.Message), null);
+                return StatusCode(StatusCodes.Status400BadRequest, "User doesn't exist");
+            }
+           
+          
                 try
                 {
                     account.JWT = _authorization.GenerateToken(account.Username);
@@ -90,26 +95,19 @@ namespace FollowingService.Controllers
                     return StatusCode(StatusCodes.Status400BadRequest, "Error while creating token, read more in logs");
                 }
              
-                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully generated JWT token for user: {0}", acc.Username), null);
+                _logger.Log(LogLevel.Information, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Successfully generated JWT token for user: {0}", loginDTO.Username), null);
                 return StatusCode(StatusCodes.Status201Created, new { status = "OK", content = account.JWT });
-            }
-            else
-            {
-                _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Couldn't create JWT token because user: {0} doesn't exist", acc.Username), null);
-                return StatusCode(StatusCodes.Status400BadRequest, "User doesn't exist");
-            }
+           
         }
 
 
         /// <summary>
         /// Return all followings   
         /// </summary>
-        /// <param name="key">Authorization header</param>
         /// <returns>List of all following relations</returns>
         /// <remarks>
         /// Example of successful request \
         /// GET 'https://localhost:44372/api/follow' \
-        ///     --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODcxOTUzOCwiZXhwIjoxNjI4NzIzMTM4LCJpYXQiOjE2Mjg3MTk1Mzh9.327QAMSdiAmrOwQ-01Xk7kjXs4vOvbg86WbCLjFjtOk'
         /// </remarks>
         /// <response code="200">Return list of followings</response>
         /// <response code="404">There is no follows</response>
@@ -120,17 +118,8 @@ namespace FollowingService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public ActionResult<List<FollowingDTO>> GetAll([FromHeader(Name = "Authorization")] string key)
+        public ActionResult<List<FollowingDTO>> GetAll()
         {
-            String username;
-            if (!_authorization.ValidateToken(key, out username))
-            {     
-                return StatusCode(StatusCodes.Status401Unauthorized, new
-                {
-                    status = "Authorization failed",
-                    content = ""
-                });
-            }
 
             var followings = _unitOfWork.RepositoryFollowing.GetAll();
             if (followings == null || followings.Count == 0)
@@ -170,18 +159,34 @@ namespace FollowingService.Controllers
         public ActionResult<List<FollowingDTO>> GetAllFollowers([FromHeader(Name = "Authorization")] string key)
         {
             String username;
-            if (!_authorization.ValidateToken(key, out username))
+            try
+            {
+                if (!_authorization.ValidateToken(key, out username))
+                {
+                    return StatusCode(StatusCodes.Status401Unauthorized, new
+                    {
+                        status = "Authorization failed",
+                        content = ""
+                    });
+                }
+            }
+            catch (NullReferenceException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
                     status = "Authorization failed",
-                    content = ""
+                    content = e.Message
                 });
             }
+
             var user = _unitOfWork.RepositoryAccount.GetAccountByUserName(username);
             if (user == null)
             {
                 return StatusCode(StatusCodes.Status404NotFound, "User doesn't exist.");
+            }
+            if (user.JWT == null)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, "JWT token expired. Log in again");
             }
 
             var followings = _unitOfWork.RepositoryFollowing.GetAllFollowers(user);
@@ -218,21 +223,37 @@ namespace FollowingService.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("following")]
-        public ActionResult<List<FollowingDTO>> GetAllFollowing([FromHeader(Name = "Authorization")] string key)
+        public ActionResult<List<FollowingDTO>> GetAllFollowing([FromHeader(Name = "Authorization") ] string key)
         {
             String username;
-            if (!_authorization.ValidateToken(key, out username))
+            try
+            {
+                if (!_authorization.ValidateToken(key, out username))
+                {
+                    return StatusCode(StatusCodes.Status401Unauthorized, new
+                    {
+                        status = "Authorization failed",
+                        content = ""
+                    });
+                }
+            }
+            catch (NullReferenceException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
                     status = "Authorization failed",
-                    content = ""
+                    content = e.Message
                 });
             }
+
             var user = _unitOfWork.RepositoryAccount.GetAccountByUserName(username);
             if (user == null)
             {
-                return StatusCode(StatusCodes.Status404NotFound, "User doesn't exist.");
+                return StatusCode(StatusCodes.Status404NotFound, "Wrong credidentials");
+            }
+            if (user.JWT == null)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, "JWT token expired. Log in again");
             }
 
             var followings = _unitOfWork.RepositoryFollowing.GetAllFollowing(user);
@@ -255,6 +276,7 @@ namespace FollowingService.Controllers
         /// <summary>
         /// Adds given user to accounts that current user follows
         /// </summary>
+        /// <param name="key">Authorization header</param>
         /// <param name="followUserDTO">Model of account</param>
         /// <remarks>
         /// POST 'https://localhost:44372/api/follow/followUser/' \
@@ -274,24 +296,41 @@ namespace FollowingService.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [AllowAnonymous]
         [HttpPost("followUser")]
         public ActionResult<List<FollowingDTO>> Follow([FromHeader(Name = "Authorization")] string key, [FromBody] FollowUserDTO followUserDTO)
         {
             String username;
-            if (!_authorization.ValidateToken(key, out username))
+            try
+            {
+                if (!_authorization.ValidateToken(key, out username))
+                {
+                    return StatusCode(StatusCodes.Status401Unauthorized, new
+                    {
+                        status = "Authorization failed",
+                        content = ""
+                    });
+                }
+            }
+            catch (NullReferenceException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
                     status = "Authorization failed",
-                    content = ""
+                    content = e.Message
                 });
             }
+
 
             var follower = _unitOfWork.RepositoryAccount.GetAccountByUserName(username);   
             var following = _unitOfWork.RepositoryAccount.GetAccountByUserName(followUserDTO.Following);
             if (following == null)
             {
                 return StatusCode(StatusCodes.Status404NotFound, "Following account doesn't exist.");
+            }
+            if (follower.JWT == null)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, "JWT token expired. Log in again");
             }
 
             if (_unitOfWork.RepositoryFollowing.Find(follower, following))
@@ -302,7 +341,7 @@ namespace FollowingService.Controllers
             {
                 if (follower.Account_id == following.Account_id)
                 {
-                    throw new SameAccountException("One account can't unfollow itself");
+                    throw new SameAccountException("One account can't follow itself");
                 }
                 Following f = _unitOfWork.RepositoryFollowing.Follow(follower, following);
                 var follow = _mapper.Map<FollowingDTO>(f);
@@ -313,7 +352,7 @@ namespace FollowingService.Controllers
             catch (Exception e)
             {
                 _logger.Log(LogLevel.Error, _contextAccessor.HttpContext.TraceIdentifier, "", String.Format("Error while trying to follow user: {0}, message: {1}", following.Username, e.Message), null);
-                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Insert error", content = "" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { status = "Insert error", content = e.Message });
             }
         }
 
@@ -322,6 +361,7 @@ namespace FollowingService.Controllers
         /// Deletes given user from accounts that current user follows
         /// </summary>
         /// <param name="followUserDTO">Model of account</param>
+        /// <param name="key">Authorization header</param>
         /// <remarks>
         /// POST 'https://localhost:44372/api/follow/unfollowUser/' \
         /// Example of a successful request \
@@ -344,14 +384,26 @@ namespace FollowingService.Controllers
         public ActionResult<List<FollowingDTO>> Unfollow([FromHeader(Name = "Authorization")] string key, [FromBody] FollowUserDTO followUserDTO)
         {
             String username;
-            if (!_authorization.ValidateToken(key, out username))
+            try
+            {
+                if (!_authorization.ValidateToken(key, out username))
+                {
+                    return StatusCode(StatusCodes.Status401Unauthorized, new
+                    {
+                        status = "Authorization failed",
+                        content = ""
+                    });
+                }
+            }
+            catch (NullReferenceException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
                     status = "Authorization failed",
-                    content = ""
+                    content = e.Message
                 });
             }
+
             var follower = _unitOfWork.RepositoryAccount.GetAccountByUserName(username);
             if (follower == null)
             {
@@ -361,6 +413,10 @@ namespace FollowingService.Controllers
             if (following == null)
             {
                 return StatusCode(StatusCodes.Status404NotFound, "Following account doesn't exist.");
+            }
+            if (follower.JWT == null)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, "JWT token expired. Log in again");
             }
 
             if (!_unitOfWork.RepositoryFollowing.Find(follower, following))
@@ -391,4 +447,6 @@ namespace FollowingService.Controllers
 
 
     }
+
+
 }

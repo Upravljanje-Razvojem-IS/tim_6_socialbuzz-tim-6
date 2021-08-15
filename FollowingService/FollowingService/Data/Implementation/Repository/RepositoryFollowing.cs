@@ -1,13 +1,9 @@
-﻿using FollowingService.Data.AccountMock;
-using FollowingService.Data.Implementation.Interface;
+﻿using FollowingService.Data.Implementation.Interface;
 using FollowingService.Model;
 using FollowingService.Model.Entity;
 using FollowingService.Models.Mocks;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FollowingService.Data.Implementation.Repository
 {

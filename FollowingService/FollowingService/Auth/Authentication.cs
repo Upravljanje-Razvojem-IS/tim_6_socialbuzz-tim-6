@@ -6,13 +6,13 @@ using System.Security.Claims;
 
 namespace FollowingService.Auth
 {
-    public class Authorization : IAuthorization
+    public class Authentication : IAuthentication
     {
 
         private readonly IFakeLogger logger;
 
 
-        public Authorization(IFakeLogger logger)
+        public Authentication(IFakeLogger logger)
         {
 
             this.logger = logger;
@@ -52,6 +52,10 @@ namespace FollowingService.Auth
             username = null;
 
             var simplePrinciple = GetPrincipal(token);
+            if (simplePrinciple == null)
+            {
+                throw new NullReferenceException("Invalid key");
+            }
             var identity = simplePrinciple.Identity as ClaimsIdentity;
 
             if (identity == null || !identity.IsAuthenticated)

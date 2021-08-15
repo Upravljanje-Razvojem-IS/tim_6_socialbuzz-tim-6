@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "9a2bec49-16c5-493c-83f7-bf28ca03c099",
+		"name": "FollowingUser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Follow options",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44372/api/follow",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"api",
+						"follow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"jovana\",\r\n    \"password\":\"jovanaa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44372/api/follow/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"api",
+						"follow",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all followings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44372/api/follow",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"api",
+						"follow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all followers for user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get all followings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44372/api/follow/follwings",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"api",
+						"follow",
+						"follwings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Follow user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"following\":\"andrijana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44372/api/follow/followUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"api",
+						"follow",
+						"followUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODc5MTkzNCwiZXhwIjoxNjI4Nzk1NTM0LCJpYXQiOjE2Mjg3OTE5MzR9.0P6MF9q_JK_u7MqPhhhnhVUD-7NKOva9x3eNa0zKkWs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"following\":\"andrijana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44372/api/follow/unfollowuser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44372",
+					"path": [
+						"api",
+						"follow",
+						"unfollowuser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

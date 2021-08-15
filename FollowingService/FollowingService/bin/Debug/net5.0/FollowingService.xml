@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FollowingService</name>
+    </assembly>
+    <members>
+        <member name="M:FollowingService.Controllers.FollowingController.GetFollowingOptions">
+            <summary>
+            Return implemented options for API   
+            </summary>
+            <returns>Header key 'Allow' with allowed requests</returns>
+            <remarks>
+            Example of successful request \
+            OPTIONS 'https://localhost:44372/api/follow'
+            </remarks>
+            <response code="200">Return header key 'Allow' with allowed requests</response>
+        </member>
+        <member name="M:FollowingService.Controllers.FollowingController.Authenticate(FollowingService.Models.DTOs.LoginDTO)">
+            <summary>
+            User login mock - generates JWT
+            </summary>
+            <param name="loginDTO">Model of account</param>
+            <remarks>
+            POST 'https://localhost:44372/api/follow/login/' \
+            Example of a successful request \
+            {
+            "username": "jovana",
+            "password": "jovanaa"
+             }
+            </remarks>
+            <response code="201">Returns generated JWT</response>
+            <response code="400">Bad credidentials</response>
+        </member>
+        <member name="M:FollowingService.Controllers.FollowingController.GetAll">
+            <summary>
+            Return all followings   
+            </summary>
+            <returns>List of all following relations</returns>
+            <remarks>
+            Example of successful request \
+            GET 'https://localhost:44372/api/follow' \
+            </remarks>
+            <response code="200">Return list of followings</response>
+            <response code="404">There is no follows</response>
+            <response code="401">Authorization error</response>
+            <response code="500">Server error while reading</response>
+        </member>
+        <member name="M:FollowingService.Controllers.FollowingController.GetAllFollowers(System.String)">
+            <summary>
+            Return all followers   
+            </summary>
+            <param name="key">Authorization header</param>
+            <returns>List of all followers for user</returns>
+            <remarks>
+            Example of successful request \
+            GET 'https://localhost:44372/api/follow/followers' \
+                --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODcxOTUzOCwiZXhwIjoxNjI4NzIzMTM4LCJpYXQiOjE2Mjg3MTk1Mzh9.327QAMSdiAmrOwQ-01Xk7kjXs4vOvbg86WbCLjFjtOk'
+            </remarks>
+            <response code="200">Return list of all followers for user</response>
+            <response code="404">There is no follows</response>
+            <response code="401">Authorization error</response>
+            <response code="500">Server error while reading</response>
+        </member>
+        <member name="M:FollowingService.Controllers.FollowingController.GetAllFollowing(System.String)">
+            <summary>
+            Return all accounts that user follows   
+            </summary>
+            <param name="key">Authorization header</param>
+            <returns>List of all followers for user</returns>
+            <remarks>
+            Example of successful request \
+            GET 'https://localhost:44372/api/follow/followings' \
+                --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODcxOTUzOCwiZXhwIjoxNjI4NzIzMTM4LCJpYXQiOjE2Mjg3MTk1Mzh9.327QAMSdiAmrOwQ-01Xk7kjXs4vOvbg86WbCLjFjtOk'
+            </remarks>
+            <response code="200">Return list of all followers for user</response>
+            <response code="404">There is no follows</response>
+            <response code="401">Authorization error</response>
+            <response code="500">Server error while reading</response>
+        </member>
+        <member name="M:FollowingService.Controllers.FollowingController.Follow(System.String,FollowingService.Models.DTOs.FollowUserDTO)">
+            <summary>
+            Adds given user to accounts that current user follows
+            </summary>
+            <param name="key">Authorization header</param>
+            <param name="followUserDTO">Model of account</param>
+            <remarks>
+            POST 'https://localhost:44372/api/follow/followUser/' \
+            Example of a successful request \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODcxOTUzOCwiZXhwIjoxNjI4NzIzMTM4LCJpYXQiOjE2Mjg3MTk1Mzh9.327QAMSdiAmrOwQ-01Xk7kjXs4vOvbg86WbCLjFjtOk'
+            {
+            "Following": "andrijana",
+             }
+            </remarks>
+            <response code="201">Returns the created following entity</response>
+            <response code="400">Current user already follow given user</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Given user account doesn't exist</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="M:FollowingService.Controllers.FollowingController.Unfollow(System.String,FollowingService.Models.DTOs.FollowUserDTO)">
+            <summary>
+            Deletes given user from accounts that current user follows
+            </summary>
+            <param name="followUserDTO">Model of account</param>
+            <param name="key">Authorization header</param>
+            <remarks>
+            POST 'https://localhost:44372/api/follow/unfollowUser/' \
+            Example of a successful request \
+             --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyODcxOTUzOCwiZXhwIjoxNjI4NzIzMTM4LCJpYXQiOjE2Mjg3MTk1Mzh9.327QAMSdiAmrOwQ-01Xk7kjXs4vOvbg86WbCLjFjtOk'
+            {
+            "Following": "andrijana",
+             }
+            </remarks>
+            <response code="201">Returns the deleted following entity</response>
+            <response code="400">Current user doesn't follow given user</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Given user account doesn't exist</response>
+            <response code="500">There was an error on the server</response>
+        </member>
+        <member name="P:FollowingService.Models.DTOs.FollowingDTO.FollowingId">
+            <summary>
+            Following ID
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.DTOs.FollowingDTO.FollowerId">
+            <summary>
+            Follower ID
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.DTOs.FollowUserDTO.Following">
+            <summary>
+            Account Id of the user that will be followed/unfollowed
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.DTOs.LoginDTO.Username">
+            <summary>
+            Username of the user account who is trying to login
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.DTOs.LoginDTO.Password">
+            <summary>
+            Password of the user account who is trying to login
+            </summary>
+        </member>
+        <member name="T:FollowingService.Models.Mocks.Account">
+            <summary>
+            Account DTO
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.Mocks.Account.Account_id">
+            <summary>
+            Account ID
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.Mocks.Account.Username">
+            <summary>
+            Username of the user account
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.Mocks.Account.Name">
+            <summary>
+            Name of the user 
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.Mocks.Account.Surname">
+            <summary>
+            Surname of the user
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.Mocks.Account.Password">
+            <summary>
+            Password of the user account
+            </summary>
+        </member>
+        <member name="P:FollowingService.Models.Mocks.Account.JWT">
+            <summary>
+            Generated JWT for authorization
+            </summary>
+        </member>
+        <member name="T:FollowingService.Model.Entity.Following">
+            <summary>
+            Following model
+            </summary>
+        </member>
+        <member name="P:FollowingService.Model.Entity.Following.FollowingId">
+            <summary>
+            Following ID
+            </summary>
+        </member>
+        <member name="P:FollowingService.Model.Entity.Following.FollowerId">
+            <summary>
+            Follower ID
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -126,3 +126,5 @@ C:\Users\pejci\Desktop\tim6\tim_6_socialbuzz-tim-6\FollowingService\FollowingSer
 C:\Users\pejci\Desktop\tim6\tim_6_socialbuzz-tim-6\FollowingService\FollowingService\obj\Debug\net5.0\FollowingService.RazorTargetAssemblyInfo.cache
 C:\Users\pejci\Desktop\tim6\tim_6_socialbuzz-tim-6\FollowingService\FollowingService\obj\Debug\net5.0\FollowingService.csproj.CopyComplete
 C:\Users\pejci\Desktop\tim6\tim_6_socialbuzz-tim-6\FollowingService\FollowingService\obj\Debug\net5.0\FollowingService.genruntimeconfig.cache
+C:\Users\pejci\Desktop\tim6\tim_6_socialbuzz-tim-6\FollowingService\FollowingService\bin\Debug\net5.0\FollowingService.xml
+C:\Users\pejci\Desktop\tim6\tim_6_socialbuzz-tim-6\FollowingService\FollowingService\bin\Debug\net5.0\Postman\FollowingUser.postman_collection.json

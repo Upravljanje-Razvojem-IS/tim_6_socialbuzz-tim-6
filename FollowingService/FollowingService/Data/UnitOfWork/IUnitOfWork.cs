@@ -1,9 +1,6 @@
 ﻿using FollowingService.Data.AccountMock;
 using FollowingService.Data.Implementation.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FollowingService.Data.UnitOfWork
 {

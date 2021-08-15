@@ -3,9 +3,6 @@ using FollowingService.Data.Implementation.Interface;
 using FollowingService.Data.Implementation.Repository;
 using FollowingService.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FollowingService.Data.UnitOfWork
 {
