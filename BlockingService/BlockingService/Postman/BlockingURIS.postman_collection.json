@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "4ad54dd3-5380-47e6-a8f5-2e44b4cb02ce",
+		"name": "BlockUser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Block options",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44304/api/block",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44304",
+					"path": [
+						"api",
+						"block"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"jovana\",\r\n    \"password\":\"jovanaa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44304/api/block/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44304",
+					"path": [
+						"api",
+						"block",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all blocks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44304/api/block",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44304",
+					"path": [
+						"api",
+						"block"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all blocked accounts for user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyOTA1NTU1NCwiZXhwIjoxNjI5MDU5MTU0LCJpYXQiOjE2MjkwNTU1NTR9.eeX6789yEGHANyVBCmBkxau_KY4n4BpeI5NQK9689R8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:44304/api/block/blocked",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44304",
+					"path": [
+						"api",
+						"block",
+						"blocked"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Block user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyOTA1NTU1NCwiZXhwIjoxNjI5MDU5MTU0LCJpYXQiOjE2MjkwNTU1NTR9.eeX6789yEGHANyVBCmBkxau_KY4n4BpeI5NQK9689R8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"blocked\":\"andrijana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44304/api/block/blockUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44304",
+					"path": [
+						"api",
+						"block",
+						"blockUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unblock user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImpvdmFuYSIsIm5iZiI6MTYyOTA1NTU1NCwiZXhwIjoxNjI5MDU5MTU0LCJpYXQiOjE2MjkwNTU1NTR9.eeX6789yEGHANyVBCmBkxau_KY4n4BpeI5NQK9689R8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"blocked\":\"andrijana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44304/api/block/unblockUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44304",
+					"path": [
+						"api",
+						"block",
+						"unblockUser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

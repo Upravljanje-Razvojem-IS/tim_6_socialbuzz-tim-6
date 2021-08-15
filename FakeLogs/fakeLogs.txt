@@ -80,3 +80,63 @@ Reaction Service - 29/07/2021 12:59 PM - Information 80000010-0001-fb00-b63f-847
 Reaction Service - 29/07/2021 01:05 PM - Information 80000005-0001-f900-b63f-84710c7967bb  Successfully updated reaction with ID 3b6d0a06-e64b-4f42-8689-fc10e8e6edf7 
 Reaction Service - 29/07/2021 11:37 PM - Information 8000000b-0001-f900-b63f-84710c7967bb  Successfully created new reaction type with ID 7 in database 
 Reaction Service - 29/07/2021 11:38 PM - Information 8000000d-0001-f900-b63f-84710c7967bb  Successfully deleted reaction type with ID 7 from database 
+Following Service - 10/08/2021 11:40 PM - Error   User not authorized, authorization missing in header. 
+Following Service - 11/08/2021 12:16 AM - Error   User not authorized, authorization missing in header. 
+Following Service - 11/08/2021 12:16 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:19 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:25 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:26 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:29 AM - Error   User not authorized, wrong credentials. 
+Following Service - 11/08/2021 12:29 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:34 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:35 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:36 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 11/08/2021 12:41 AM - Error   User not authorized, message: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters. 
+Following Service - 12/08/2021 12:05 AM - Information 80000079-000c-fd00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 12/08/2021 07:11 PM - Information 8000002a-000a-fe00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 12/08/2021 08:12 PM - Error 80000038-0001-ff00-b63f-84710c7967bb  Couldn't create JWT token because user: jovana doesn't exist 
+Following Service - 12/08/2021 08:12 PM - Information 80000039-0001-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 12/08/2021 08:27 PM - Information 80000049-000e-fc00-b63f-84710c7967bb  Successfully followed user: andrijana  
+Following Service - 12/08/2021 08:29 PM - Information 8000004a-000e-fc00-b63f-84710c7967bb  Successfully unfollowed user: andrijana  
+Following Service - 12/08/2021 08:58 PM - Information 80000012-0000-fc00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 12/08/2021 09:03 PM - Information 80000057-0000-fd00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 14/08/2021 05:48 PM - Information 80000002-000e-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 14/08/2021 06:00 PM - Information 80000004-000a-fc00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 14/08/2021 06:25 PM - Information 8000000b-0008-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 14/08/2021 06:30 PM - Information 80000005-0006-fe00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 14/08/2021 06:30 PM - Information 80000006-0006-fe00-b63f-84710c7967bb  Successfully followed user: andrijana  
+Following Service - 14/08/2021 06:30 PM - Information 80000007-0006-fe00-b63f-84710c7967bb  Successfully unfollowed user: andrijana  
+Following Service - 14/08/2021 06:37 PM - Information 80000003-0004-fb00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 14/08/2021 06:38 PM - Error 80000006-0009-ff00-b63f-84710c7967bb  Couldn't create JWT token because user: string doesn't exist. Error: Sequence contains no matching element 
+Following Service - 15/08/2021 09:41 AM - Error 80000003-0007-fe00-b63f-84710c7967bb  Couldn't create JWT token because user: string doesn't exist. Error: Sequence contains no matching element 
+Following Service - 15/08/2021 09:59 AM - Information 80000035-0000-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 15/08/2021 09:59 AM - Information 80000036-0000-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 15/08/2021 09:59 AM - Error 80000037-0000-ff00-b63f-84710c7967bb  Couldn't create JWT token because user: jovana doesn't exist. Error: Sequence contains no matching element 
+Following Service - 15/08/2021 09:59 AM - Information 80000038-0000-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 15/08/2021 10:09 AM - Information 8000000b-0005-fe00-b63f-84710c7967bb  Successfully followed user: marko  
+Following Service - 15/08/2021 10:10 AM - Error 8000000d-0005-fe00-b63f-84710c7967bb  Error while trying to follow user: jovana, message: One account can't unfollow itself 
+Following Service - 15/08/2021 10:11 AM - Information 80000010-0002-fe00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 15/08/2021 10:12 AM - Error 80000011-0002-fe00-b63f-84710c7967bb  Error while trying to follow user: jovana, message: One account can't unfollow itself 
+Blocking Service - 15/08/2021 09:25 PM - Information 80000025-000e-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 09:27 PM - Information 80000027-000e-ff00-b63f-84710c7967bb  Successfully blocked user: andrijana  
+Blocking Service - 15/08/2021 09:28 PM - Information 80000028-000e-ff00-b63f-84710c7967bb  Successfully unblocked user: andrijana  
+Blocking Service - 15/08/2021 11:17 PM - Information 80000033-0008-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:17 PM - Information 80000036-0008-ff00-b63f-84710c7967bb  Successfully blocked user: andrijana  
+Blocking Service - 15/08/2021 11:17 PM - Information 80000037-0008-ff00-b63f-84710c7967bb  Successfully unblocked user: andrijana  
+Blocking Service - 15/08/2021 11:20 PM - Information 8000003e-0008-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:20 PM - Information 8000003f-0008-ff00-b63f-84710c7967bb  Successfully blocked user: andrijana  
+Blocking Service - 15/08/2021 11:20 PM - Information 80000044-0008-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:28 PM - Information 80000007-0004-fc00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:36 PM - Information 80000013-0000-fd00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:38 PM - Information 80000008-0000-fc00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:38 PM - Information 80000009-0000-fc00-b63f-84710c7967bb  Successfully unblocked user: andrijana  
+Blocking Service - 15/08/2021 11:43 PM - Information 80000009-0003-fe00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:43 PM - Information 80000006-000b-fd00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:45 PM - Information 8000002c-0006-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:46 PM - Information 80000031-0002-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 15/08/2021 11:46 PM - Information 80000032-0002-ff00-b63f-84710c7967bb  Successfully blocked user: andrijana  
+Blocking Service - 15/08/2021 11:46 PM - Information 80000033-0002-ff00-b63f-84710c7967bb  Successfully unblocked user: andrijana  
+Blocking Service - 15/08/2021 11:49 PM - Error 8000001f-0001-ff00-b63f-84710c7967bb  Couldn't create JWT token because user: string doesn't exist. Error: Sequence contains no matching element 
+Following Service - 15/08/2021 11:55 PM - Information 80000015-000f-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 15/08/2021 11:56 PM - Information 80000019-000f-ff00-b63f-84710c7967bb  Successfully followed user: andrijana  
+Following Service - 15/08/2021 11:56 PM - Information 8000001a-000f-ff00-b63f-84710c7967bb  Successfully unfollowed user: andrijana  
