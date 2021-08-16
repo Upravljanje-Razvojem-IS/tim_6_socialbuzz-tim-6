@@ -14,7 +14,7 @@ namespace BlockingService.Data.AccountMock
             SeedData();
         }
 
-        private void SeedData()
+        private static void SeedData()
         {
             Accounts.AddRange(new List<Account>
             {

@@ -9,7 +9,7 @@ namespace FollowingService.Data.Implementation.Repository
 {
     public class RepositoryFollowing : IRepositoryFollowing
     {
-        private FollowingContext context;
+        private readonly FollowingContext context;
 
         public RepositoryFollowing(FollowingContext context)
         {
@@ -18,7 +18,7 @@ namespace FollowingService.Data.Implementation.Repository
 
         public bool Find(Account follower, Account following)
         {
-            if(context.Follows.Where(f=>f.FollowingId== following.Account_id  && f.FollowerId == follower.Account_id).Count()>0)
+            if(context.Follows.Any(f=>f.FollowingId== following.Account_id  && f.FollowerId == follower.Account_id))
             {
                 return true;
             }

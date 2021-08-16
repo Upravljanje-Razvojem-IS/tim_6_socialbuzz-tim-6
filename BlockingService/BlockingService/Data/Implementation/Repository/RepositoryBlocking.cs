@@ -9,7 +9,7 @@ namespace BlockingService.Data.Implementation.Repository
 {
     public class RepositoryBlocking : IRepositoryBlocking
     {
-        private BlockingContext context;
+        private readonly BlockingContext context;
 
         public RepositoryBlocking(BlockingContext context)
         {
@@ -22,7 +22,7 @@ namespace BlockingService.Data.Implementation.Repository
 
         public bool Find(Account blocker, Account blocked)
         {
-            if (context.Blocks.Where(f => f.BlockerId == blocker.Account_id && f.BlockedId == blocked.Account_id).Count() > 0)
+            if (context.Blocks.Any(f => f.BlockerId == blocker.Account_id && f.BlockedId == blocked.Account_id))
             {
                 return true;
             }

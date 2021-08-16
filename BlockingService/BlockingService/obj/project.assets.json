@@ -5627,11 +5627,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\BlockingService.csproj",
+      "projectUniqueName": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\BlockingService.csproj",
       "projectName": "BlockingService",
-      "projectPath": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\BlockingService.csproj",
+      "projectPath": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\BlockingService.csproj",
       "packagesPath": "C:\\Users\\pejci\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\obj\\",
+      "outputPath": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pejci\\AppData\\Roaming\\NuGet\\NuGet.Config",

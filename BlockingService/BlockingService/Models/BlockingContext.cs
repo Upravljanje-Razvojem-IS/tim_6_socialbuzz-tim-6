@@ -19,7 +19,7 @@ namespace BlockingService.Models
             Seed(modelBuilder);
         }
 
-        private void Seed(ModelBuilder modelBuilder)
+        private static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Blocking>().HasData(new Blocking { BlockerId = Guid.Parse("eb78bf24-a3ab-48bf-a931-7b0c6e680bfd"), BlockedId  = Guid.Parse("34a81ef8-2831-4444-8355-859d02ae2290") },
                new Blocking { BlockerId = Guid.Parse("34a81ef8-2831-4444-8355-859d02ae2290"), BlockedId = Guid.Parse("eb78bf24-a3ab-48bf-a931-7b0c6e680bfd") });

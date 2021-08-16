@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cj6ANY1rScIatE0PwpPkIJ2hI8M6B3fC6JNe5+y2DY2umNqzIlReF4GBw1xY23YanwrOdeVb5NGJuMCWZdEviQ==",
+  "dgSpecHash": "nzMEAyUqbZGYeLqYvIMF8AOu/y08FIv9P4Nq63Y1eSTj92rof5W1Vkd9mHkIQZKs6jYq+Ir7whbwi4e8zOt3nA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\FollowingService.csproj",
+  "projectFilePath": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\FollowingService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pejci\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\pejci\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

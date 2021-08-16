@@ -5665,11 +5665,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\FollowingService.csproj",
+      "projectUniqueName": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\FollowingService.csproj",
       "projectName": "FollowingService",
-      "projectPath": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\FollowingService.csproj",
+      "projectPath": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\FollowingService.csproj",
       "packagesPath": "C:\\Users\\pejci\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\obj\\",
+      "outputPath": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\FollowingService\\FollowingService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pejci\\AppData\\Roaming\\NuGet\\NuGet.Config",

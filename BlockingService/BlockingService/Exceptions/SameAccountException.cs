@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Runtime.Serialization;
+
 namespace BlockingService.Exceptions
 {
+    [Serializable]
     public class SameAccountException :Exception
     {
         public SameAccountException(string message)
@@ -11,6 +14,17 @@ namespace BlockingService.Exceptions
         public SameAccountException()
         {
 
+        }
+
+        public SameAccountException(string message, Exception innerException)
+           : base(message, innerException)
+        {
+        }
+
+        // Without this constructor, deserialization will fail
+        protected SameAccountException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
         }
     }
 }

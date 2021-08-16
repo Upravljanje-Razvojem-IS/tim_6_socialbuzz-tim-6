@@ -168,7 +168,7 @@ namespace BlockingService.Controller
                     });
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -240,7 +240,7 @@ namespace BlockingService.Controller
                     });
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -320,7 +320,7 @@ namespace BlockingService.Controller
                     });
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {

@@ -6,9 +6,9 @@ using System;
 
 namespace BlockingService.Data.UnitOfWork
 {
-    public class BlockingUnitOfWork : IUnitOfWork, IDisposable
+    public class BlockingUnitOfWork : IUnitOfWork
     {
-        private BlockingContext context;
+        private readonly BlockingContext context;
         public IRepositoryBlocking RepositoryBlocking { get; set; }
         public IRepositoryAccount RepositoryAccount { get; set; }
 
@@ -24,9 +24,24 @@ namespace BlockingService.Data.UnitOfWork
             context.SaveChanges();
         }
 
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
         public void Dispose()
         {
-            context.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

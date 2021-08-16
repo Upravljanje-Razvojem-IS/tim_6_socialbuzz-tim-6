@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o22XsrpQCGc06b7GMP1/Xheeumb/GM6zZ3qIUv043jM6OGPlHZg2Rt2D4K2v2M3pqvbXjSBxqXLFBMOD4oiOrw==",
+  "dgSpecHash": "kaQtqBmsAIELTBdHTZVkPvjZS2fq8A7+gpm4wTSDmY/+6Ry4l0od6BoUQ5xlGNQ0TTazaSHYJWRDMF/zjjPyjA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pejci\\Desktop\\tim6\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\BlockingService.csproj",
+  "projectFilePath": "C:\\Users\\pejci\\Desktop\\New folder\\tim_6_socialbuzz-tim-6\\BlockingService\\BlockingService\\BlockingService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pejci\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\pejci\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

@@ -6,9 +6,9 @@ using System;
 
 namespace FollowingService.Data.UnitOfWork
 {
-    public class FollowingUnitOfWork : IUnitOfWork, IDisposable
+    public class FollowingUnitOfWork : IUnitOfWork
     {
-        private FollowingContext context;
+        private readonly FollowingContext context;
         public IRepositoryFollowing RepositoryFollowing { get; set; }
         public IRepositoryAccount RepositoryAccount { get; set; }
 
@@ -23,9 +23,24 @@ namespace FollowingService.Data.UnitOfWork
             context.SaveChanges();
         }
 
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
         public void Dispose()
         {
-            context.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

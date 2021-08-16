@@ -19,7 +19,7 @@ namespace FollowingService.Model
             Seed(modelBuilder);
         }
 
-        private void Seed(ModelBuilder modelBuilder)
+        private static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Following>().HasData(new Following { FollowerId = Guid.Parse("eb78bf24-a3ab-48bf-a931-7b0c6e680bfd"), FollowingId = Guid.Parse("34a81ef8-2831-4444-8355-859d02ae2290") },
               new Following { FollowerId = Guid.Parse("34a81ef8-2831-4444-8355-859d02ae2290"), FollowingId = Guid.Parse("eb78bf24-a3ab-48bf-a931-7b0c6e680bfd") });

@@ -169,7 +169,7 @@ namespace FollowingService.Controllers
                     });
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -236,7 +236,7 @@ namespace FollowingService.Controllers
                     });
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -310,7 +310,7 @@ namespace FollowingService.Controllers
                     });
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {
@@ -393,7 +393,7 @@ namespace FollowingService.Controllers
                     });
                 }
             }
-            catch (NullReferenceException e)
+            catch (ArgumentException e)
             {
                 return StatusCode(StatusCodes.Status401Unauthorized, new
                 {

@@ -140,3 +140,9 @@ Blocking Service - 15/08/2021 11:49 PM - Error 8000001f-0001-ff00-b63f-84710c796
 Following Service - 15/08/2021 11:55 PM - Information 80000015-000f-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
 Following Service - 15/08/2021 11:56 PM - Information 80000019-000f-ff00-b63f-84710c7967bb  Successfully followed user: andrijana  
 Following Service - 15/08/2021 11:56 PM - Information 8000001a-000f-ff00-b63f-84710c7967bb  Successfully unfollowed user: andrijana  
+Blocking Service - 16/08/2021 08:44 PM - Information 80000025-0001-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Blocking Service - 16/08/2021 08:44 PM - Information 80000029-0001-ff00-b63f-84710c7967bb  Successfully blocked user: andrijana  
+Blocking Service - 16/08/2021 08:44 PM - Information 8000002a-0001-ff00-b63f-84710c7967bb  Successfully unblocked user: andrijana  
+Following Service - 16/08/2021 08:45 PM - Information 80000055-0008-ff00-b63f-84710c7967bb  Successfully generated JWT token for user: jovana 
+Following Service - 16/08/2021 08:46 PM - Information 80000059-0008-ff00-b63f-84710c7967bb  Successfully followed user: andrijana  
+Following Service - 16/08/2021 08:46 PM - Information 8000005b-0008-ff00-b63f-84710c7967bb  Successfully unfollowed user: andrijana  

@@ -43,7 +43,7 @@ namespace FollowingService.Auth
             var simplePrinciple = GetPrincipal(token);
             if (simplePrinciple == null)
             {
-                throw new NullReferenceException("Invalid key");
+                throw new ArgumentException("Invalid key");
             }
             var identity = simplePrinciple.Identity as ClaimsIdentity;
 
