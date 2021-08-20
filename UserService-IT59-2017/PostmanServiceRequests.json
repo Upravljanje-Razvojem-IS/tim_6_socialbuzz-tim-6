@@ -1,0 +1,537 @@
+{
+	"info": {
+		"_postman_id": "44d78c84-00a8-4676-b450-16f0d38651ec",
+		"name": "UserServicePostmanCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentification",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "teodora@app.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "TeodoraGrubor.98",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/Token",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"Token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Email\": \"teodora@app.com\",\r\n  \"Password\": \"TeodoraGrubor.98\",\r\n  \"ConfirmPassword\": \"TeodoraGrubor.98\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/api/Account/Register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"Account",
+								"Register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "AxnBiAkIBOFuAuJH7Hszn8nPq-diHSxuSissrhRe2FGlZm7lWI5xM21m8B-xOw7oCNvJlYPVCJuVrF-iPTxstCi0G1HCFWVNh5LrbQP_HF-VjWMEvxoX1zK1It8EvgC3_coofGiWUqBJYE8PcCw8lAa45NqtVnVAy7bHZNQYgi5fu9FL5sO77ZpWuJqgQeVd7e58ykY_ePK6lFeXuubta1NQTX5hbMmkRCTqfk0tvT3hcARdiU7GO_PgsFMZ9LrENOd2LhDb6ltr9vkkGHMNbVi9w9vOSbT5x-HZ3Kxi7z9nQh1KG3ueVEqGUZ9mHb8xtcs0UnFgDs6jycXcwLLjx10PlMnFocOgzRvG8f92fbKP_Nc7neiqj3rbsa6zp-fdtRBaOJsJ6-Sc7y2e7DmlOalKXLdCaSoW3ket6tnpqHYohm0OUWZVOtj_6Ip3aYq_ytr6Xbw2JLSYT1__FlLRafDT03aDU1dBTwN40E-Udso",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/Account/Logout",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"Account",
+								"Logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "GetRoles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/Roles",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"Roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRoleById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "AxnBiAkIBOFuAuJH7Hszn8nPq-diHSxuSissrhRe2FGlZm7lWI5xM21m8B-xOw7oCNvJlYPVCJuVrF-iPTxstCi0G1HCFWVNh5LrbQP_HF-VjWMEvxoX1zK1It8EvgC3_coofGiWUqBJYE8PcCw8lAa45NqtVnVAy7bHZNQYgi5fu9FL5sO77ZpWuJqgQeVd7e58ykY_ePK6lFeXuubta1NQTX5hbMmkRCTqfk0tvT3hcARdiU7GO_PgsFMZ9LrENOd2LhDb6ltr9vkkGHMNbVi9w9vOSbT5x-HZ3Kxi7z9nQh1KG3ueVEqGUZ9mHb8xtcs0UnFgDs6jycXcwLLjx10PlMnFocOgzRvG8f92fbKP_Nc7neiqj3rbsa6zp-fdtRBaOJsJ6-Sc7y2e7DmlOalKXLdCaSoW3ket6tnpqHYohm0OUWZVOtj_6Ip3aYq_ytr6Xbw2JLSYT1__FlLRafDT03aDU1dBTwN40E-Udso",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/Roles/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"Roles",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "AxnBiAkIBOFuAuJH7Hszn8nPq-diHSxuSissrhRe2FGlZm7lWI5xM21m8B-xOw7oCNvJlYPVCJuVrF-iPTxstCi0G1HCFWVNh5LrbQP_HF-VjWMEvxoX1zK1It8EvgC3_coofGiWUqBJYE8PcCw8lAa45NqtVnVAy7bHZNQYgi5fu9FL5sO77ZpWuJqgQeVd7e58ykY_ePK6lFeXuubta1NQTX5hbMmkRCTqfk0tvT3hcARdiU7GO_PgsFMZ9LrENOd2LhDb6ltr9vkkGHMNbVi9w9vOSbT5x-HZ3Kxi7z9nQh1KG3ueVEqGUZ9mHb8xtcs0UnFgDs6jycXcwLLjx10PlMnFocOgzRvG8f92fbKP_Nc7neiqj3rbsa6zp-fdtRBaOJsJ6-Sc7y2e7DmlOalKXLdCaSoW3ket6tnpqHYohm0OUWZVOtj_6Ip3aYq_ytr6Xbw2JLSYT1__FlLRafDT03aDU1dBTwN40E-Udso",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Role_Name\": \"Worker\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/api/Roles",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"Roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutRole (Update)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "AxnBiAkIBOFuAuJH7Hszn8nPq-diHSxuSissrhRe2FGlZm7lWI5xM21m8B-xOw7oCNvJlYPVCJuVrF-iPTxstCi0G1HCFWVNh5LrbQP_HF-VjWMEvxoX1zK1It8EvgC3_coofGiWUqBJYE8PcCw8lAa45NqtVnVAy7bHZNQYgi5fu9FL5sO77ZpWuJqgQeVd7e58ykY_ePK6lFeXuubta1NQTX5hbMmkRCTqfk0tvT3hcARdiU7GO_PgsFMZ9LrENOd2LhDb6ltr9vkkGHMNbVi9w9vOSbT5x-HZ3Kxi7z9nQh1KG3ueVEqGUZ9mHb8xtcs0UnFgDs6jycXcwLLjx10PlMnFocOgzRvG8f92fbKP_Nc7neiqj3rbsa6zp-fdtRBaOJsJ6-Sc7y2e7DmlOalKXLdCaSoW3ket6tnpqHYohm0OUWZVOtj_6Ip3aYq_ytr6Xbw2JLSYT1__FlLRafDT03aDU1dBTwN40E-Udso",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\" : 4,\r\n    \"Role_Name\": \"No role\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/api/Roles/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"Roles",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRole",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "AxnBiAkIBOFuAuJH7Hszn8nPq-diHSxuSissrhRe2FGlZm7lWI5xM21m8B-xOw7oCNvJlYPVCJuVrF-iPTxstCi0G1HCFWVNh5LrbQP_HF-VjWMEvxoX1zK1It8EvgC3_coofGiWUqBJYE8PcCw8lAa45NqtVnVAy7bHZNQYgi5fu9FL5sO77ZpWuJqgQeVd7e58ykY_ePK6lFeXuubta1NQTX5hbMmkRCTqfk0tvT3hcARdiU7GO_PgsFMZ9LrENOd2LhDb6ltr9vkkGHMNbVi9w9vOSbT5x-HZ3Kxi7z9nQh1KG3ueVEqGUZ9mHb8xtcs0UnFgDs6jycXcwLLjx10PlMnFocOgzRvG8f92fbKP_Nc7neiqj3rbsa6zp-fdtRBaOJsJ6-Sc7y2e7DmlOalKXLdCaSoW3ket6tnpqHYohm0OUWZVOtj_6Ip3aYq_ytr6Xbw2JLSYT1__FlLRafDT03aDU1dBTwN40E-Udso",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/Roles/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"Roles",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PersonalAccount",
+			"item": [
+				{
+					"name": "GetPersonalAccounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/PersonalAccount",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"PersonalAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersonalAccountById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/PersonalAccount/11",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"PersonalAccount",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostPersonalAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"acc13SVK\",\r\n    \"Name\": \"Svetlana\",\r\n    \"Surname\": \"Panic\",\r\n    \"Email\": \"sp@app.com\",\r\n    \"PhoneNumber\": \"+381696775158\",\r\n    \"Address\": \"Hopovska 27\",\r\n    \"RolaId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/api/PersonalAccount",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"PersonalAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutPersonalAccount",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\" : 11,\r\n    \"Username\": \"acc13SVK\",\r\n    \"Name\": \"Mirka\",\r\n    \"Surname\": \"Panic\",\r\n    \"Email\": \"sp@app.com\",\r\n    \"PhoneNumber\": \"+381696775158\",\r\n    \"Address\": \"Hopovska 27\",\r\n    \"RolaId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/api/PersonalAccount/11",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"PersonalAccount",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePersonalAccount",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/PersonalAccount/11",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"PersonalAccount",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CorporateAccount",
+			"item": [
+				{
+					"name": "GetCorporateAccounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/CorporateAccount",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"CorporateAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCorporateAccountById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/CorporateAccount/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"CorporateAccount",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostCorporateAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"acc13SVK\",\r\n    \"Name\": \"Svetlana\",\r\n    \"Surname\": \"Panic\",\r\n    \"Email\": \"sp@app.com\",\r\n    \"PhoneNumber\": \"+381696775158\",\r\n    \"Address\": \"Hopovska 27\",\r\n    \"CorporationName\" : \"CSS Company\",\r\n    \"RolaId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/api/CorporateAccount",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"CorporateAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutCorporateAccount",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\" : 14,\r\n    \"Username\": \"acc13SVK\",\r\n    \"Name\": \"Svetlana\",\r\n    \"Surname\": \"Panic\",\r\n    \"Email\": \"sp@app.com\",\r\n    \"PhoneNumber\": \"+381696775158\",\r\n    \"Address\": \"Hopovska 217\",\r\n    \"CorporationName\" : \"CSS Company\",\r\n    \"RolaId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44368/api/CorporateAccount/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"CorporateAccount",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCorporateAccount",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44368/api/CorporateAccount/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44368",
+							"path": [
+								"api",
+								"CorporateAccount",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
