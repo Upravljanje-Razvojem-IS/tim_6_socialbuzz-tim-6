@@ -10,8 +10,8 @@ using SasaMessagingService.Database;
 namespace SasaMessagingService.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210826171422_FIrst migration")]
-    partial class FIrstmigration
+    [Migration("20210826195226_First Migration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
